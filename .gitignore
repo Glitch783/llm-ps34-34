@@ -1,0 +1,23 @@
+# Environment variables & API keys
+.env
+.env.*
+
+# Python virtual environment & cache
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ChromaDB vector store local artifacts
+chroma_db/
+*.sqlite3
+
+# Agent & telemetry cache
+.codemeter/
+scratch/
+submission/
+
+# OS generated files
+.DS_Store
+Thumbs.db
