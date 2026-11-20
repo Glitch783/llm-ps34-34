@@ -21,7 +21,7 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-    :root {
+    :root, [data-theme="light"], [data-theme="dark"], .stApp {
         --stitch-primary: #002e27;
         --stitch-primary-container: #14453d;
         --stitch-primary-fixed: #bbece1;
@@ -37,12 +37,17 @@ st.markdown("""
         --stitch-outline-variant: #c0c8c5;
         --stitch-secondary: #a73a1a;
         --stitch-secondary-container: #fe7954;
+        --text-color: #1b1c1e !important;
+        --background-color: #faf9fb !important;
+        --secondary-background-color: #efedf0 !important;
     }
 
     /* Base Body Reset */
-    html, body, [data-testid="stAppViewContainer"] {
+    html, body, [data-testid="stAppViewContainer"], .stApp {
         background-color: var(--stitch-surface) !important;
+        background: var(--stitch-surface) !important;
         color: var(--stitch-on-surface) !important;
+        -webkit-text-fill-color: var(--stitch-on-surface) !important;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
     }
 
@@ -239,6 +244,7 @@ st.markdown("""
 
     /* Chat Messages - Publication Brief */
     div[data-testid="stChatMessage"] {
+        background-color: var(--stitch-surface-container-lowest) !important;
         background: var(--stitch-surface-container-lowest) !important;
         border: 1px solid var(--stitch-outline-variant) !important;
         border-radius: 16px !important;
@@ -248,19 +254,34 @@ st.markdown("""
     }
 
     div[data-testid="stChatMessage"]:has([aria-label="Chat message from user"]) {
+        background-color: var(--stitch-surface-container-low) !important;
         background: var(--stitch-surface-container-low) !important;
         border-color: var(--stitch-surface-container-high) !important;
     }
 
-    /* Strict Dark Ink text */
+    /* Strict High-Contrast Dark Ink text across all messages & markdown */
     div[data-testid="stChatMessage"],
     div[data-testid="stChatMessage"] p,
     div[data-testid="stChatMessage"] span,
     div[data-testid="stChatMessage"] div,
     div[data-testid="stChatMessage"] li,
     div[data-testid="stChatMessage"] strong,
-    div[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] * {
-        color: var(--stitch-on-surface) !important;
+    div[data-testid="stChatMessage"] em,
+    div[data-testid="stChatMessage"] h1,
+    div[data-testid="stChatMessage"] h2,
+    div[data-testid="stChatMessage"] h3,
+    div[data-testid="stChatMessage"] h4,
+    div[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"],
+    div[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] *,
+    div[data-testid="stChatMessageContent"],
+    div[data-testid="stChatMessageContent"] *,
+    .stMarkdown,
+    .stMarkdown p,
+    .stMarkdown span,
+    .stMarkdown div,
+    .stMarkdown * {
+        color: #1b1c1e !important;
+        -webkit-text-fill-color: #1b1c1e !important;
     }
 
     /* Policy Executive Callout */
@@ -276,7 +297,7 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 0.1em;
         font-weight: 700;
-        color: var(--stitch-primary);
+        color: var(--stitch-primary) !important;
         display: block;
         margin-bottom: 4px;
     }
@@ -284,7 +305,8 @@ st.markdown("""
         font-family: 'Newsreader', serif;
         font-size: 1.15rem;
         line-height: 1.55;
-        color: var(--stitch-on-surface);
+        color: var(--stitch-on-surface) !important;
+        -webkit-text-fill-color: var(--stitch-on-surface) !important;
     }
 
     /* Citation Tray (Academic Footnotes) */
@@ -311,27 +333,42 @@ st.markdown("""
         font-style: italic;
         font-size: 0.95rem;
         line-height: 1.5;
-        color: var(--stitch-on-surface);
+        color: var(--stitch-on-surface) !important;
+        -webkit-text-fill-color: var(--stitch-on-surface) !important;
     }
 
-    /* Bottom Input Dock Reset - No Black Bar */
+    /* Bottom Input Dock Reset - Complete eradication of dark/black bar */
     [data-testid="stBottom"],
     [data-testid="stBottom"] > div,
-    footer {
-        background-color: transparent !important;
+    [data-testid="stBottom"] > div > div,
+    [data-testid="stBottomBlockContainer"],
+    [data-testid="stBottomBlockContainer"] > div,
+    .stBottom,
+    .stBottom > div,
+    .stChatFloatingInputContainer,
+    [data-testid="stChatFloatingInputContainer"],
+    footer,
+    footer * {
         background: transparent !important;
+        background-color: transparent !important;
         border: none !important;
         box-shadow: none !important;
     }
 
-    /* Floating Dock Input */
+    [data-testid="stBottom"]::before,
+    [data-testid="stBottom"]::after {
+        display: none !important;
+        background: transparent !important;
+    }
+
+    /* Floating Dock Input - Crisp light surface with clear dark text */
     div[data-testid="stChatInput"] {
-        background: rgba(255, 255, 255, 0.96) !important;
-        backdrop-filter: blur(16px) !important;
-        border: 1px solid var(--stitch-outline-variant) !important;
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        border: 1.5px solid var(--stitch-outline-variant) !important;
         border-radius: 16px !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
-        padding: 6px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+        padding: 6px 10px !important;
     }
 
     div[data-testid="stChatInput"]:focus-within {
@@ -340,21 +377,40 @@ st.markdown("""
     }
 
     div[data-testid="stChatInput"] textarea {
-        background: transparent !important;
-        color: var(--stitch-on-surface) !important;
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        color: #1b1c1e !important;
+        -webkit-text-fill-color: #1b1c1e !important;
         font-size: 0.95rem !important;
+        font-family: 'Inter', sans-serif !important;
         border: none !important;
     }
 
+    div[data-testid="stChatInput"] textarea::placeholder,
+    div[data-testid="stChatInput"] textarea::-webkit-input-placeholder {
+        color: #5f6368 !important;
+        -webkit-text-fill-color: #5f6368 !important;
+        opacity: 1 !important;
+        font-weight: 400 !important;
+    }
+
     div[data-testid="stChatInput"] button {
+        background-color: var(--stitch-primary-container) !important;
         background: var(--stitch-primary-container) !important;
         color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
         border-radius: 10px !important;
         border: none !important;
         transition: background 0.2s ease !important;
     }
     div[data-testid="stChatInput"] button:hover {
+        background-color: var(--stitch-primary) !important;
         background: var(--stitch-primary) !important;
+    }
+    div[data-testid="stChatInput"] button svg {
+        fill: #ffffff !important;
+        stroke: #ffffff !important;
+        color: #ffffff !important;
     }
 
     /* Custom Buttons */
