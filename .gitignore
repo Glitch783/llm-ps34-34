@@ -26,6 +26,8 @@ demo_video.mp4
 *.webm
 Report.pdf
 github_link.txt
+screenshots/
+stitch_design/
 
 # Submission / automation helper scripts
 create_report_pdf.py

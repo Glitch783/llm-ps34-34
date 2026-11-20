@@ -67,11 +67,10 @@ llm-ps34-34/
 ├── requirements.txt         # Project dependencies
 ├── .gitignore               # Excludes .env, venv/, and chroma_db/
 ├── README.md                # Project documentation
-├── policies/                # HR Policy PDFs
-│   ├── Leave_Policy.pdf
-│   ├── Travel_Policy.pdf
-│   └── Reimbursement_Policy.pdf
-└── screenshots/             # Output test screenshots for submission
+└── policies/                # Official corporate policy PDFs
+    ├── Leave_Policy.pdf
+    ├── Travel_Policy.pdf
+    └── Reimbursement_Policy.pdf
 ```
 
 ---
