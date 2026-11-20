@@ -16,7 +16,24 @@ chroma_db/
 # Agent & telemetry cache
 .codemeter/
 scratch/
+
+# Submission deliverables (managed separately for evaluation / Google Drive)
 submission/
+Code.zip
+*.zip
+demo_video.mp4
+*.mp4
+*.webm
+Report.pdf
+github_link.txt
+
+# Submission / automation helper scripts
+create_report_pdf.py
+create_screenshots.py
+create_submission_zip.py
+generate_demo_video.py
+generate_working_demo_video.py
+record_live_localhost.py
 
 # OS generated files
 .DS_Store
