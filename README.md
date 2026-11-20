@@ -61,12 +61,18 @@ streamlit run app.py
 ## 📂 Project Structure
 ```text
 llm-ps34-34/
-├── app.py                   # Streamlit web application & chat UI
+├── app.py                   # Streamlit web application & Lexicon consultation UI
 ├── rag_pipeline.py          # ChromaDB indexing, embedding & RAG retrieval engine
-├── generate_policies.py     # Script to generate sample policy PDFs
+├── generate_policies.py     # Script to generate official sample policy PDFs
 ├── requirements.txt         # Project dependencies
-├── .gitignore               # Excludes .env, venv/, and chroma_db/
+├── .gitignore               # Excludes secrets (.env), venv/, and build artifacts
 ├── README.md                # Project documentation
+├── assets/                  # Application interface screenshots for documentation
+│   ├── screenshot_1_leave_carryforward.png
+│   ├── screenshot_2_travel_perdiem.png
+│   ├── screenshot_3_wfh_reimbursement.png
+│   ├── screenshot_4_maternity_paternity.png
+│   └── screenshot_5_expense_deadlines.png
 └── policies/                # Official corporate policy PDFs
     ├── Leave_Policy.pdf
     ├── Travel_Policy.pdf
@@ -75,10 +81,47 @@ llm-ps34-34/
 
 ---
 
-## 📸 Sample Outputs & Citations
-* **Query:** *"How many days of paid leave can I carry forward to next year?"*
-  * **Answer:** Employees can carry forward a maximum of 10 unused paid leaves to the next year.
-  * **Citation:** `Leave_Policy.pdf` (Page 1)
-* **Query:** *"What is the daily per diem allowance for domestic business travel?"*
-  * **Answer:** The daily per diem is \$45 (INR 1,800) for domestic travel covering meals and incidentals without requiring itemized receipts.
-  * **Citation:** `Travel_Policy.pdf` (Page 1)
+## 📸 Screenshots & Live System Interface
+
+### 1. Annual Paid Leave & Carry-Forward Limit
+*Query: "How many days of paid leave can I carry forward to next year?"*
+* **Grounding:** Vectors retrieved from `Leave_Policy.pdf` (Section 2, Page 1).
+* **Finding:** Employees can carry forward a maximum of 10 unused paid leaves to the next calendar year. Any excess automatically lapses on December 31.
+
+![Paid Leave Carry-Forward](assets/screenshot_1_leave_carryforward.png)
+
+---
+
+### 2. Business Travel Daily Per Diem & Lodging Caps
+*Query: "What is the daily per diem allowance for domestic business travel?"*
+* **Grounding:** Vectors retrieved from `Travel_Policy.pdf` (Section 4, Page 1).
+* **Finding:** Domestic per diem is \$45 (INR 1,800)/day for meals and incidentals without itemized receipts. Domestic lodging is capped at \$150/night for Metro Tier-1 cities.
+
+![Travel Per Diem](assets/screenshot_2_travel_perdiem.png)
+
+---
+
+### 3. Work From Home (WFH) Equipment Grant
+*Query: "What is the WFH equipment allowance for new employees?"*
+* **Grounding:** Vectors retrieved from `Reimbursement_Policy.pdf` (Section 4, Page 1).
+* **Finding:** Eligible remote/hybrid employees receive a one-time reimbursement of up to \$400 (INR 25,000) for ergonomic office equipment.
+
+![WFH Equipment Allowance](assets/screenshot_3_wfh_reimbursement.png)
+
+---
+
+### 4. Statutory Maternity & Paternity Provisions
+*Query: "What are the provisions for maternity and paternity leave?"*
+* **Grounding:** Vectors retrieved from `Leave_Policy.pdf` (Section 4, Page 1).
+* **Finding:** Female employees receive 26 weeks of fully paid maternity leave; fathers receive 2 weeks of paid paternity leave.
+
+![Maternity & Paternity Leave](assets/screenshot_4_maternity_paternity.png)
+
+---
+
+### 5. Travel Expense Claim Submission Deadlines
+*Query: "What is the deadline for submitting business travel expense claims?"*
+* **Grounding:** Vectors retrieved from `Travel_Policy.pdf` (Section 6, Page 1).
+* **Finding:** All expense reports must be submitted within 30 calendar days of trip completion via Oracle ERP.
+
+![Expense Submission Deadlines](assets/screenshot_5_expense_deadlines.png)
