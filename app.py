@@ -227,7 +227,7 @@ st.markdown("""
         color: var(--stitch-primary);
     }
 
-    /* Curated Inquiries Cards */
+    /* Curated Inquiries & Active Dossiers Cards (Stitch Design) */
     .stitch-section-heading {
         display: flex;
         align-items: center;
@@ -239,6 +239,104 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: var(--stitch-outline);
+        font-weight: 600;
+    }
+
+    .stitch-dossier-card {
+        background-color: var(--stitch-surface-container-lowest) !important;
+        background: var(--stitch-surface-container-lowest) !important;
+        border: 1px solid var(--stitch-outline-variant);
+        border-radius: 16px;
+        padding: 24px 22px 18px 22px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 250px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 10px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .stitch-dossier-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        border-color: var(--stitch-primary-container);
+    }
+    .stitch-dossier-card.featured {
+        border-top: 4px solid var(--stitch-primary-container) !important;
+        box-shadow: 0 4px 18px rgba(20, 69, 61, 0.08);
+    }
+    .stitch-dossier-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    .stitch-dossier-ref {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--stitch-outline) !important;
+        -webkit-text-fill-color: var(--stitch-outline) !important;
+    }
+    .stitch-dossier-ref.featured {
+        color: var(--stitch-primary-container) !important;
+        -webkit-text-fill-color: var(--stitch-primary-container) !important;
+    }
+    .stitch-dossier-badges {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+    }
+    .stitch-dossier-badge {
+        font-size: 0.68rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 6px;
+        background: var(--stitch-surface-container);
+        color: var(--stitch-on-surface-variant) !important;
+        -webkit-text-fill-color: var(--stitch-on-surface-variant) !important;
+        letter-spacing: 0.04em;
+    }
+    .stitch-dossier-badge.active {
+        background: rgba(20, 69, 61, 0.12) !important;
+        color: var(--stitch-primary-container) !important;
+        -webkit-text-fill-color: var(--stitch-primary-container) !important;
+    }
+    .stitch-dossier-badge.secondary {
+        background: rgba(167, 58, 26, 0.12) !important;
+        color: var(--stitch-secondary) !important;
+        -webkit-text-fill-color: var(--stitch-secondary) !important;
+    }
+    .stitch-dossier-title {
+        font-family: 'Newsreader', Georgia, serif !important;
+        font-size: 1.25rem !important;
+        font-weight: 500 !important;
+        line-height: 1.35 !important;
+        color: var(--stitch-on-surface) !important;
+        -webkit-text-fill-color: var(--stitch-on-surface) !important;
+        margin-bottom: 10px;
+    }
+    .stitch-dossier-desc {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.85rem !important;
+        line-height: 1.55 !important;
+        color: var(--stitch-on-surface-variant) !important;
+        -webkit-text-fill-color: var(--stitch-on-surface-variant) !important;
+        margin-bottom: 16px;
+        flex-grow: 1;
+    }
+    .stitch-dossier-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        font-size: 0.72rem;
+        color: var(--stitch-outline) !important;
+        -webkit-text-fill-color: var(--stitch-outline) !important;
         font-weight: 600;
     }
 
@@ -645,22 +743,34 @@ st.markdown("""
 preset_cols = st.columns(3)
 quick_queries = [
     {
-        "ref": "REF: ARCH-4011 • HR FOLIO",
+        "ref": "REF: ARCH-4011",
+        "badges": [{"text": "HR FOLIO", "cls": ""}],
         "title": "I. Annual Paid Leave & Carry-Forward Limits",
-        "desc": "Accrual caps, statutory mandatory rollover deadlines, and executive exception waivers.",
-        "query": "How many days of paid leave can I carry forward to next year?"
+        "desc": "Section 4.1.2 — Accrual caps, statutory mandatory rollover deadlines, and executive exception waivers.",
+        "footer_stat": "📜 14 Precedents • Statutory Codex",
+        "query": "How many days of paid leave can I carry forward to next year?",
+        "featured": False
     },
     {
-        "ref": "REF: ARCH-7300 • ACTIVE CONSULTATION",
+        "ref": "REF: ARCH-7300",
+        "badges": [
+            {"text": "ACTIVE CONSULTATION", "cls": "active"},
+            {"text": "AUDITED 2025", "cls": "secondary"}
+        ],
         "title": "II. Daily Per Diem & Corporate Lodging Caps",
-        "desc": "Tier-1 metropolitan lodging allowances, per diem meals, and entertainment thresholds.",
-        "query": "What is the daily per diem allowance for domestic business travel?"
+        "desc": "Section 7.3.0 — Tier-1 metro lodging limits ($380/nt), transatlantic flight tiers, and client entertainment thresholds.",
+        "footer_stat": "📍 Section 7.3.4 In-Scope • Active in Workspace",
+        "query": "What is the daily per diem allowance for domestic business travel?",
+        "featured": True
     },
     {
-        "ref": "REF: ARCH-9840 • REMOTE WORK",
+        "ref": "REF: ARCH-9840",
+        "badges": [{"text": "REMOTE WORK", "cls": ""}],
         "title": "III. Home Office Infrastructure Stipend",
-        "desc": "Annual ergonomic allocation ($1,500), hardware depreciation, and dual-monitor subsidies.",
-        "query": "What is the WFH equipment allowance for new employees?"
+        "desc": "Section 9.8.4 — Annual ergonomic allocation ($1,500), hardware depreciation schedules, and dual-monitor subsidies.",
+        "footer_stat": "🛡️ Verified Q1 • Institutional Grant",
+        "query": "What is the WFH equipment allowance for new employees?",
+        "featured": False
     }
 ]
 
@@ -668,8 +778,28 @@ selected_query = None
 for idx, col in enumerate(preset_cols):
     q = quick_queries[idx]
     with col:
+        badges_html = "".join([f'<span class="stitch-dossier-badge {b["cls"]}">{b["text"]}</span>' for b in q["badges"]])
+        featured_card = " featured" if q["featured"] else ""
+        featured_ref = " featured" if q["featured"] else ""
+        
+        st.markdown(f"""
+        <div class="stitch-dossier-card{featured_card}">
+            <div>
+                <div class="stitch-dossier-top">
+                    <span class="stitch-dossier-ref{featured_ref}">{q['ref']}</span>
+                    <div class="stitch-dossier-badges">{badges_html}</div>
+                </div>
+                <div class="stitch-dossier-title">{q['title']}</div>
+                <div class="stitch-dossier-desc">{q['desc']}</div>
+            </div>
+            <div class="stitch-dossier-footer">
+                <span>{q['footer_stat']}</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
         card_btn = st.button(
-            f"**{q['ref']}**\n\n### {q['title']}\n\n{q['desc']}\n\n👉 *Load Brief*",
+            "⚡ Load Brief & Consult →",
             use_container_width=True,
             key=f"dossier_btn_{idx}"
         )
