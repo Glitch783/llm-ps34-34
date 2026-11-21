@@ -7,31 +7,35 @@ from rag_pipeline import RAGPipeline
 # Page Configuration - Full Width, No Sidebar
 # ---------------------------------------------------------
 st.set_page_config(
-    page_title="Lexicon | Corporate Policy Intelligence",
+    page_title="LEXICON // CODEX — Zero-Hallucination Policy Engine",
     page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
 # ---------------------------------------------------------
-# Styling: Floating Capsule Header + Serein Luxury Aesthetics
+# Stitch Warm Alabaster Design System (Screen ID: 60a56b78165a45ffb092e733f39b23cb)
+# Palette: Parchment (#F5F2EB), Vellum White (#FFFFFF), Cognac (#8B4513), Hairline (#D8D2C5), Spruce (#24614A)
+# Typography: 'Newsreader' Serif, 'Plus Jakarta Sans', 'JetBrains Mono'
 # ---------------------------------------------------------
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
     :root, [data-theme="light"], [data-theme="dark"], .stApp {
-        --konk-ink: #0B0B0C;
-        --konk-surface: #121214;
-        --konk-surface-elevated: #18181B;
-        --konk-bone: #F2F0EB;
-        --konk-bone-muted: #D1CFCA;
-        --konk-steel: #8C8A84;
-        --konk-border: #26262A;
-        --konk-gold: #E7B96F;
-        --konk-bronze: #C89446;
-        --text-color: #F2F0EB !important;
-        --background-color: #0B0B0C !important;
+        --parchment: #F5F2EB;
+        --ink: #1C1A18;
+        --charcoal: #3D3A36;
+        --cognac: #8B4513;
+        --cognac-hover: #73380F;
+        --cognac-accent: #9E5A38;
+        --cognac-light: #F8EFEA;
+        --vellum: #FFFFFF;
+        --hairline: #D8D2C5;
+        --spruce: #24614A;
+        --muted: #6E6961;
+        --text-color: #1C1A18 !important;
+        --background-color: #F5F2EB !important;
     }
 
     /* COMPLETE ERADICATION OF SIDEBAR */
@@ -44,18 +48,22 @@ st.markdown("""
         height: 0 !important;
     }
 
-    /* Canvas Reset */
+    /* Canvas Reset & Subtle Architectural Grid */
     html, body, [data-testid="stAppViewContainer"], .stApp {
-        background-color: var(--konk-ink) !important;
-        background: var(--konk-ink) !important;
-        color: var(--konk-bone) !important;
-        -webkit-text-fill-color: var(--konk-bone) !important;
-        font-family: 'Archivo', system-ui, -apple-system, sans-serif !important;
+        background-color: var(--parchment) !important;
+        background: var(--parchment) !important;
+        background-size: 40px 40px !important;
+        background-image: 
+            linear-gradient(to right, rgba(28, 26, 24, 0.035) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(28, 26, 24, 0.035) 1px, transparent 1px) !important;
+        color: var(--ink) !important;
+        -webkit-text-fill-color: var(--ink) !important;
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
     }
 
     .main .block-container {
-        max-width: 1140px !important;
-        padding-top: 1rem !important;
+        max-width: 1120px !important;
+        padding-top: 1.5rem !important;
         padding-bottom: 6rem !important;
         margin: 0 auto !important;
     }
@@ -65,60 +73,82 @@ st.markdown("""
     }
 
     /* TOP BRAND BAR */
-    .top-brand-bar {
+    .stitch-top-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 8px 0 16px 0;
-        margin-bottom: 8px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 6px 0 16px 0;
+        margin-bottom: 10px;
+        border-bottom: 1px solid var(--hairline);
     }
-    .top-brand-title {
-        font-family: 'Newsreader', Georgia, serif;
-        font-size: 1.6rem;
-        font-weight: 500;
-        letter-spacing: 0.12em;
-        color: var(--konk-bone);
+    .stitch-brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+    .stitch-brand-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: var(--ink);
         text-transform: uppercase;
     }
-    .top-brand-badge {
+    .stitch-brand-sub {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.72rem;
-        font-weight: 600;
+        font-size: 0.70rem;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        text-transform: uppercase;
+    }
+    .stitch-status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         padding: 4px 12px;
         border-radius: 9999px;
-        background: rgba(231, 185, 111, 0.1);
-        border: 1px solid rgba(231, 185, 111, 0.3);
-        color: var(--konk-gold);
-        letter-spacing: 0.08em;
+        background: #EFECE4;
+        border: 1px solid var(--hairline);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.70rem;
+        color: var(--charcoal);
+    }
+    .stitch-pulse-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--spruce);
+        box-shadow: 0 0 6px var(--spruce);
+        display: inline-block;
     }
 
-    /* FUNCTIONAL TOP CAPSULE TABS */
+    /* FUNCTIONAL FLOATING TOP TABS CAPSULE */
     [data-testid="stTabs"] {
-        margin-top: 0.4rem !important;
-        margin-bottom: 2rem !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 2.2rem !important;
     }
     [role="tablist"] {
-        background: rgba(18, 18, 20, 0.95) !important;
+        background: rgba(255, 255, 255, 0.90) !important;
         backdrop-filter: blur(16px) !important;
         -webkit-backdrop-filter: blur(16px) !important;
-        border: 1px solid var(--konk-border) !important;
+        border: 1px solid var(--hairline) !important;
         border-radius: 9999px !important;
         padding: 6px !important;
-        gap: 6px !important;
+        gap: 8px !important;
         max-width: 780px !important;
         margin: 0 auto !important;
         display: flex !important;
         justify-content: center !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+        box-shadow: 0 16px 40px rgba(28, 26, 24, 0.06) !important;
     }
     button[role="tab"] {
-        font-family: 'Archivo', sans-serif !important;
-        font-size: 0.88rem !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.04em !important;
-        color: var(--konk-steel) !important;
-        -webkit-text-fill-color: var(--konk-steel) !important;
+        font-family: 'JetBrains Mono', monospace !important;
+        font-size: 0.82rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.06em !important;
+        color: var(--muted) !important;
+        -webkit-text-fill-color: var(--muted) !important;
         padding: 9px 24px !important;
         border-radius: 9999px !important;
         background: transparent !important;
@@ -128,123 +158,95 @@ st.markdown("""
         cursor: pointer !important;
     }
     button[role="tab"]:hover {
-        color: var(--konk-bone) !important;
-        -webkit-text-fill-color: var(--konk-bone) !important;
-        background: rgba(255, 255, 255, 0.06) !important;
+        color: var(--cognac) !important;
+        -webkit-text-fill-color: var(--cognac) !important;
+        background: var(--cognac-light) !important;
     }
     button[role="tab"][aria-selected="true"] {
-        color: #0B0B0C !important;
-        -webkit-text-fill-color: #0B0B0C !important;
-        background: var(--konk-gold) !important;
-        box-shadow: 0 2px 10px rgba(231, 185, 111, 0.35) !important;
+        color: #FFFFFF !important;
+        -webkit-text-fill-color: #FFFFFF !important;
+        background: var(--cognac) !important;
+        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.25) !important;
     }
     div[data-baseweb="tab-highlight"] {
         display: none !important;
     }
 
-    /* HERO SECTION */
-    .serein-hero {
+    /* HERO SECTION (STITCH WARM ALABASTER EDITION) */
+    .stitch-hero {
         text-align: center;
-        padding: 2rem 1rem 2.8rem 1rem;
-        max-width: 840px;
+        padding: 2.5rem 1rem 3rem 1rem;
+        max-width: 860px;
         margin: 0 auto;
     }
-    .serein-hero-tracker {
+    .stitch-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 14px;
+        border-radius: 9999px;
+        background: #E8E3DA;
+        border: 1px solid var(--hairline);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        margin-bottom: 1.5rem;
+    }
+    .stitch-eyebrow-text {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.70rem;
         font-weight: 600;
-        letter-spacing: 0.16em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--konk-gold);
-        margin-bottom: 1rem;
-        display: inline-block;
+        color: var(--charcoal);
     }
-    .serein-hero-headline {
+    .stitch-headline {
         font-family: 'Newsreader', Georgia, serif !important;
-        font-size: 3.4rem !important;
-        font-weight: 400 !important;
-        line-height: 1.15 !important;
-        letter-spacing: -0.015em !important;
-        color: var(--konk-bone) !important;
-        -webkit-text-fill-color: var(--konk-bone) !important;
-        margin-bottom: 1.2rem;
+        font-size: 3.8rem !important;
+        font-weight: 500 !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.02em !important;
+        color: var(--ink) !important;
+        -webkit-text-fill-color: var(--ink) !important;
+        margin-bottom: 1.4rem;
     }
-    .serein-hero-lede {
-        font-family: 'Archivo', sans-serif;
-        font-size: 1.05rem;
+    .stitch-headline-accent {
+        font-style: italic;
+        color: var(--cognac) !important;
+        -webkit-text-fill-color: var(--cognac) !important;
         font-weight: 400;
-        line-height: 1.65;
-        color: var(--konk-steel) !important;
-        -webkit-text-fill-color: var(--konk-steel) !important;
-        max-width: 660px;
-        margin: 0 auto 1.8rem auto;
     }
-
-    /* PICTORIAL HOW-IT-WORKS STEP CARDS */
-    .step-card {
-        background: var(--konk-surface);
-        border: 1px solid var(--konk-border);
-        border-radius: 14px;
-        padding: 22px;
-        height: 100%;
+    .stitch-lede {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.08rem;
+        font-weight: 400;
+        line-height: 1.7;
+        color: var(--charcoal) !important;
+        -webkit-text-fill-color: var(--charcoal) !important;
+        max-width: 680px;
+        margin: 0 auto 2rem auto;
+    }
+    .stitch-telemetry {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-        transition: all 0.25s ease;
-        position: relative;
-    }
-    .step-card:hover {
-        transform: translateY(-3px);
-        border-color: var(--konk-gold);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-    }
-    .step-icon-badge {
-        width: 48px;
-        height: 48px;
-        border-radius: 10px;
-        background: var(--konk-surface-elevated);
-        border: 1px solid rgba(231, 185, 111, 0.3);
-        display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        font-size: 24px;
-        margin-bottom: 14px;
-    }
-    .step-number {
+        gap: 8px;
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.70rem;
-        font-weight: 700;
-        color: var(--konk-gold);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        margin-bottom: 6px;
-    }
-    .step-title {
-        font-family: 'Archivo', sans-serif;
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: var(--konk-bone);
-        margin-bottom: 8px;
-    }
-    .step-desc {
-        font-family: 'Archivo', sans-serif;
-        font-size: 0.86rem;
-        line-height: 1.6;
-        color: var(--konk-steel);
+        font-size: 0.72rem;
+        color: var(--muted);
     }
 
-    /* VISUAL CONNECTOR ARROWS */
-    .flow-diagram-strip {
-        background: var(--konk-surface);
-        border: 1px solid var(--konk-border);
+    /* PICTORIAL STEP FLOW CARDS */
+    .flow-strip {
+        background: var(--vellum);
+        border: 1px solid var(--hairline);
         border-radius: 14px;
-        padding: 20px 24px;
+        padding: 18px 24px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 24px;
-        gap: 12px;
+        gap: 10px;
+        box-shadow: 0 4px 16px rgba(28, 26, 24, 0.03);
         overflow-x: auto;
     }
     .flow-node {
@@ -253,39 +255,121 @@ st.markdown("""
         gap: 10px;
         white-space: nowrap;
     }
-    .flow-node-icon {
-        font-size: 22px;
-    }
-    .flow-node-text {
-        font-family: 'Archivo', sans-serif;
-        font-size: 0.82rem;
-        font-weight: 700;
-        color: var(--konk-bone);
-    }
     .flow-arrow {
-        color: var(--konk-gold);
+        color: var(--cognac);
         font-size: 18px;
         font-weight: 700;
-        opacity: 0.7;
     }
 
-    /* CARDS & CONTAINERS */
-    .konk-card {
-        background: var(--konk-surface);
-        border: 1px solid var(--konk-border);
+    .step-card {
+        background: var(--vellum);
+        border: 1px solid var(--hairline);
         border-radius: 14px;
         padding: 24px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-        margin-bottom: 20px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 20px rgba(28, 26, 24, 0.04);
+        transition: all 0.25s ease;
+    }
+    .step-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--cognac);
+        box-shadow: 0 8px 25px rgba(28, 26, 24, 0.08);
+    }
+    .step-badge-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        background: var(--cognac-light);
+        border: 1px solid var(--hairline);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 14px;
+    }
+    .step-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.70rem;
+        font-weight: 700;
+        color: var(--cognac);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+    .step-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.22rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 8px;
+    }
+    .step-desc {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.88rem;
+        line-height: 1.6;
+        color: var(--charcoal);
     }
 
-    /* DOSSIER CARDS (3-COLUMN EQUAL HEIGHT) */
-    .konk-dossier-card {
-        background: var(--konk-surface) !important;
-        border: 1px solid var(--konk-border);
+    /* PREVIEW PRECEDENT CARDS */
+    .stitch-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin-top: 2rem;
+        padding-top: 1.8rem;
+        border-top: 1px solid var(--hairline);
+    }
+    .stitch-preview-card {
+        border: 1px solid var(--hairline);
+        background: var(--vellum);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(28, 26, 24, 0.04);
+        transition: all 0.2s ease;
+    }
+    .stitch-preview-card:hover {
+        border-color: rgba(139, 69, 19, 0.4);
+        box-shadow: 0 8px 25px rgba(28, 26, 24, 0.08);
+    }
+    .stitch-preview-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .stitch-preview-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--cognac);
+        letter-spacing: 0.08em;
+    }
+    .stitch-preview-pill {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        background: #F5F2EB;
+        border: 1px solid var(--hairline);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: var(--muted);
+    }
+    .stitch-preview-desc {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.82rem;
+        color: var(--charcoal);
+        line-height: 1.55;
+    }
+
+    /* DOSSIER CARDS (CONSULTATION) */
+    .dossier-card {
+        background: var(--vellum);
+        border: 1px solid var(--hairline);
         border-radius: 14px;
         padding: 24px 22px 18px 22px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 16px rgba(28, 26, 24, 0.04);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -296,173 +380,99 @@ st.markdown("""
         margin-bottom: 12px;
         transition: all 0.25s ease;
     }
-    .konk-dossier-card:hover {
-        transform: translateY(-3px);
-        border-color: var(--konk-gold);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    .dossier-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--cognac);
+        box-shadow: 0 8px 25px rgba(28, 26, 24, 0.08);
     }
-    .konk-dossier-card.featured {
-        border-top: 3px solid var(--konk-gold) !important;
-    }
-    .konk-dossier-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-        height: 24px;
-    }
-    .konk-dossier-ref {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.72rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--konk-steel) !important;
-    }
-    .konk-dossier-ref.featured {
-        color: var(--konk-gold) !important;
-    }
-    .konk-dossier-badge {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.66rem;
-        font-weight: 600;
-        padding: 3px 8px;
-        border-radius: 4px;
-        background: var(--konk-surface-elevated);
-        border: 1px solid var(--konk-border);
-        color: var(--konk-steel) !important;
-    }
-    .konk-dossier-badge.active {
-        background: rgba(231, 185, 111, 0.12) !important;
-        border-color: rgba(231, 185, 111, 0.4) !important;
-        color: var(--konk-gold) !important;
-    }
-    .konk-dossier-badge.secondary {
-        background: rgba(200, 148, 70, 0.12) !important;
-        border-color: rgba(200, 148, 70, 0.4) !important;
-        color: var(--konk-bronze) !important;
-    }
-    .konk-dossier-title {
-        font-family: 'Archivo', sans-serif !important;
-        font-size: 1.25rem !important;
-        font-weight: 700 !important;
-        line-height: 1.3 !important;
-        color: var(--konk-bone) !important;
-        margin-bottom: 10px;
-        height: 56px !important;
-        min-height: 56px !important;
-        max-height: 56px !important;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-    }
-    .konk-dossier-desc {
-        font-family: 'Archivo', sans-serif !important;
-        font-size: 0.86rem !important;
-        line-height: 1.55 !important;
-        color: var(--konk-steel) !important;
-        margin-bottom: 12px;
-        flex-grow: 1;
-        overflow: hidden;
-    }
-    .konk-dossier-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 10px;
-        border-top: 1px solid var(--konk-border);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.72rem;
-        color: var(--konk-steel) !important;
-        font-weight: 500;
-        height: 24px;
+    .dossier-card.featured {
+        border-top: 3px solid var(--cognac);
     }
 
-    /* METRIC STRIP */
-    .konk-ledger-grid {
+    /* LEDGER STRIP */
+    .ledger-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
         gap: 14px;
         margin-bottom: 2rem;
     }
-    .konk-ledger-card {
+    .ledger-card {
         padding: 16px 18px;
-        border-radius: 10px;
-        background: var(--konk-surface);
-        border: 1px solid var(--konk-border);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        background: var(--vellum);
+        border: 1px solid var(--hairline);
+        box-shadow: 0 4px 16px rgba(28, 26, 24, 0.04);
         display: flex;
         justify-content: space-between;
         align-items: center;
         transition: all 0.2s ease;
     }
-    .konk-ledger-card:hover {
-        border-color: var(--konk-gold);
-        transform: translateY(-2px);
+    .ledger-card:hover {
+        border-color: var(--cognac);
     }
-    .konk-ledger-label {
+    .ledger-label {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.68rem;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: var(--konk-steel);
+        color: var(--muted);
         font-weight: 600;
         margin-bottom: 4px;
     }
-    .konk-ledger-value {
-        font-family: 'Archivo', sans-serif;
-        font-size: 1.4rem;
-        font-weight: 800;
-        color: var(--konk-gold);
+    .ledger-value {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--cognac);
     }
 
     /* CHAT STREAM */
     div[data-testid="stChatMessage"] {
-        background-color: var(--konk-surface) !important;
-        border: 1px solid var(--konk-border) !important;
+        background-color: var(--vellum) !important;
+        border: 1px solid var(--hairline) !important;
         border-radius: 12px !important;
         padding: 1.6rem !important;
         margin-bottom: 1.4rem !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0 4px 16px rgba(28, 26, 24, 0.04) !important;
     }
     div[data-testid="stChatMessage"]:has([aria-label="Chat message from user"]) {
-        background-color: var(--konk-surface-elevated) !important;
+        background-color: #FAF8F5 !important;
     }
     div[data-testid="stChatMessage"]:has([aria-label="Chat message from assistant"]) {
-        border-left: 3px solid var(--konk-gold) !important;
+        border-left: 3px solid var(--cognac) !important;
     }
     div[data-testid="stChatMessage"],
     div[data-testid="stChatMessage"] *,
     .stMarkdown,
     .stMarkdown * {
-        color: var(--konk-bone) !important;
+        color: var(--ink) !important;
     }
 
     /* CITATION FOOTNOTE */
-    .konk-footnote-card {
+    .footnote-card {
         padding: 16px 20px;
         border-radius: 8px;
-        background: var(--konk-surface-elevated);
+        background: #FAF8F5;
         margin-top: 14px;
-        border: 1px solid var(--konk-border);
+        border: 1px solid var(--hairline);
     }
-    .konk-footnote-header {
+    .footnote-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding-bottom: 8px;
-        border-bottom: 1px solid var(--konk-border);
+        border-bottom: 1px solid var(--hairline);
         margin-bottom: 10px;
     }
-    .konk-footnote-quote {
-        border-left: 3px solid var(--konk-gold);
+    .footnote-quote {
+        border-left: 3px solid var(--cognac);
         padding-left: 14px;
         margin: 8px 0;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.88rem;
+        font-family: 'Newsreader', serif;
+        font-style: italic;
+        font-size: 0.95rem;
         line-height: 1.55;
-        color: var(--konk-bone-muted) !important;
+        color: var(--ink) !important;
     }
 
     /* CHAT FLOATING DOCK */
@@ -475,54 +485,68 @@ st.markdown("""
         border: none !important;
     }
     div[data-testid="stChatInput"] {
-        background-color: var(--konk-surface) !important;
-        border: 1.5px solid var(--konk-border) !important;
-        border-radius: 14px !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
-        padding: 6px 12px !important;
+        background-color: var(--vellum) !important;
+        border: 1.5px solid var(--hairline) !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 8px 30px rgba(28, 26, 24, 0.08) !important;
+        padding: 6px 14px !important;
         max-width: 900px !important;
         margin: 0 auto !important;
     }
     div[data-testid="stChatInput"]:focus-within {
-        border-color: var(--konk-gold) !important;
-        box-shadow: 0 0 0 3px rgba(231, 185, 111, 0.25) !important;
+        border-color: var(--cognac) !important;
+        box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.15) !important;
     }
     div[data-testid="stChatInput"] textarea {
-        background-color: var(--konk-surface) !important;
-        color: var(--konk-bone) !important;
-        font-family: 'Archivo', sans-serif !important;
+        background-color: var(--vellum) !important;
+        color: var(--ink) !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
     div[data-testid="stChatInput"] button {
-        background-color: var(--konk-gold) !important;
-        color: #0B0B0C !important;
-        border-radius: 8px !important;
+        background-color: var(--cognac) !important;
+        color: #FFFFFF !important;
+        border-radius: 9999px !important;
     }
 
     /* BUTTONS */
     .stButton button {
-        background: var(--konk-surface-elevated) !important;
-        color: var(--konk-bone) !important;
-        border: 1px solid var(--konk-border) !important;
-        border-radius: 8px !important;
-        font-weight: 700 !important;
+        background: var(--vellum) !important;
+        color: var(--ink) !important;
+        border: 1px solid var(--hairline) !important;
+        border-radius: 9999px !important;
+        font-weight: 600 !important;
         font-size: 0.85rem !important;
         transition: all 0.2s ease !important;
     }
     .stButton button:hover {
-        background: var(--konk-gold) !important;
-        color: #0B0B0C !important;
-        border-color: var(--konk-gold) !important;
+        background: var(--cognac) !important;
+        color: #FFFFFF !important;
+        border-color: var(--cognac) !important;
     }
     div[data-testid="stDownloadButton"] button {
-        background: var(--konk-surface-elevated) !important;
-        color: var(--konk-gold) !important;
-        border: 1px solid var(--konk-gold) !important;
-        border-radius: 8px !important;
-        font-weight: 700 !important;
+        background: var(--vellum) !important;
+        color: var(--cognac) !important;
+        border: 1px solid var(--cognac) !important;
+        border-radius: 9999px !important;
+        font-weight: 600 !important;
     }
     div[data-testid="stDownloadButton"] button:hover {
-        background: var(--konk-gold) !important;
-        color: #0B0B0C !important;
+        background: var(--cognac) !important;
+        color: #FFFFFF !important;
+    }
+
+    /* FOLIO LIBRARY CARD */
+    .folio-card {
+        background: var(--vellum);
+        border: 1px solid var(--hairline);
+        border-radius: 14px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 16px rgba(28, 26, 24, 0.04);
+        transition: all 0.2s ease;
+    }
+    .folio-card:hover {
+        border-color: var(--cognac);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -539,7 +563,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "assistant",
-            "content": "Welcome to **Lexicon: Corporate Policy Intelligence**. Inquire regarding statutory findings over **Leave**, **Business Travel**, and **Expense Reimbursement** guidelines.\n\nEvery response is backed by zero-hallucination vector grounding and primary source attributions.",
+            "content": "Welcome to **LEXICON // CODEX**. I provide verified statutory findings over corporate **Leave**, **Business Travel**, and **Expense Reimbursement** guidelines.\n\nEvery response is backed by zero-hallucination vector grounding and primary source attributions.",
             "sources": []
         }
     ]
@@ -559,76 +583,94 @@ if "pipeline" not in st.session_state:
         st.session_state.pipeline = pipeline
 
 # ---------------------------------------------------------
-# TOP BRAND BAR
+# TOP BRAND BAR (Stitch Style)
 # ---------------------------------------------------------
 st.markdown("""
-<div class="top-brand-bar">
-    <div class="top-brand-title">L E X I C O N</div>
-    <div class="top-brand-badge">PS 34 &bull; ZERO-HALLUCINATION &bull; ROLL NO: 34</div>
+<div class="stitch-top-bar">
+    <div class="stitch-brand-logo">
+        <span style="font-size: 1.2rem;">⚖️</span>
+        <div>
+            <span class="stitch-brand-title">LEXICON // CODEX</span>
+            <span style="color: #D8D2C5; margin: 0 4px;">•</span>
+            <span class="stitch-brand-sub">VOL. XXIV</span>
+        </div>
+    </div>
+    <div class="stitch-status-pill">
+        <span class="stitch-pulse-dot"></span>
+        <span>ChromaDB Active &bull; PS 34 &bull; Roll No: 34</span>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# FUNCTIONAL FLOATING TOP HEADER TABS (Short Abbreviations)
+# FUNCTIONAL FLOATING TOP TABS CAPSULE (Short Abbreviations)
 # ---------------------------------------------------------
 tab_guide, tab_dashboard, tab_library, tab_settings = st.tabs([
-    "⚙️ Guide",
-    "🏛️ Consult",
-    "📚 Library",
-    "🔧 Settings"
+    "01 // Architecture",
+    "02 // Consultation",
+    "03 // Folios",
+    "04 // Settings"
 ])
 
 # ---------------------------------------------------------
-# TAB 1: HOW IT WORKS (Simple, Pictorial & Client-Centric)
+# TAB 1: 01 // ARCHITECTURE (How It Works - Simple, Pictorial & Client Workflow)
 # ---------------------------------------------------------
 with tab_guide:
-    # Centered Serein-Style Hero
+    # Stitch Hero Section
     st.markdown("""
-    <div class="serein-hero">
-        <div class="serein-hero-tracker">
-            INSTITUTIONAL AI POLICY ASSISTANT &bull; HOW IT WORKS
+    <div class="stitch-hero">
+        <div class="stitch-eyebrow">
+            <span class="stitch-pulse-dot"></span>
+            <span class="stitch-eyebrow-text">Problem Statement 34 &bull; Zero-Hallucination Policy Engine</span>
         </div>
-        <h1 class="serein-hero-headline">
-            Corporate policy intelligence, built around you.
+        <h1 class="stitch-headline">
+            Corporate policy intelligence, codified <span class="stitch-headline-accent">without error.</span>
         </h1>
-        <p class="serein-hero-lede">
-            Here is how you use the platform: upload or browse official company manuals, let our vector engine index every clause, and receive instant, audited answers with verbatim page citations.
+        <p class="stitch-lede">
+            Here is how you use the platform: upload your official policy manuals, let our vector engine index every clause, and receive instant, audited findings with primary source citations.
         </p>
+        <div class="stitch-telemetry">
+            <span style="color: #24614A; font-weight: 600;">🟢 3 Verified Folios (HR • Travel • Expense)</span>
+            <span style="color: #D8D2C5;">•</span>
+            <span>Latency: ≤ 42ms</span>
+            <span style="color: #D8D2C5;">•</span>
+            <span style="color: #8B4513; font-weight: 600;">Zero Extrapolation Guardrails Active</span>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Visual Flow Diagram Strip (Pictorial Overview)
+    # Pictorial Flowchart Strip (Client Workflow)
     st.markdown("""
-    <div class="flow-diagram-strip">
+    <div class="flow-strip">
         <div class="flow-node">
-            <span class="flow-node-icon">📄</span>
+            <span style="font-size: 24px;">📄</span>
             <div>
-                <div class="flow-node-text">1. Upload Policy PDFs</div>
-                <div style="font-size: 0.70rem; color: #8C8A84;">Official Company Manuals</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">1. Upload Policy PDFs</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">Official Company Manuals</div>
             </div>
         </div>
         <span class="flow-arrow">&rarr;</span>
         <div class="flow-node">
-            <span class="flow-node-icon">⚙️</span>
+            <span style="font-size: 24px;">⚙️</span>
             <div>
-                <div class="flow-node-text">2. AI Vector Indexing</div>
-                <div style="font-size: 0.70rem; color: #8C8A84;">ChromaDB Semantic Memory</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">2. AI Vector Indexing</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">ChromaDB Semantic Memory</div>
             </div>
         </div>
         <span class="flow-arrow">&rarr;</span>
         <div class="flow-node">
-            <span class="flow-node-icon">💬</span>
+            <span style="font-size: 24px;">💬</span>
             <div>
-                <div class="flow-node-text">3. Inquire in Plain English</div>
-                <div style="font-size: 0.70rem; color: #8C8A84;">Ask About Leave &amp; Per Diems</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">3. Inquire in Plain English</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">Ask About Leave &amp; Allowances</div>
             </div>
         </div>
         <span class="flow-arrow">&rarr;</span>
         <div class="flow-node">
-            <span class="flow-node-icon">⚖️</span>
+            <span style="font-size: 24px;">⚖️</span>
             <div>
-                <div class="flow-node-text">4. Audited Findings</div>
-                <div style="font-size: 0.70rem; color: #8C8A84;">Zero-Hallucination Citations</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">4. Audited Findings</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">Zero-Hallucination Citations</div>
             </div>
         </div>
     </div>
@@ -641,14 +683,14 @@ with tab_guide:
         st.markdown("""
         <div class="step-card">
             <div>
-                <div class="step-icon-badge">📤</div>
-                <div class="step-number">STEP 01 // CLIENT ACTION</div>
+                <div class="step-badge-icon">📤</div>
+                <div class="step-tag">STEP 01 // CLIENT ACTION</div>
                 <div class="step-title">Upload or Browse Policy Manuals</div>
                 <div class="step-desc">
-                    As a user or HR administrator, you provide the policy PDF (e.g. Leave, Business Travel, Reimbursement). The application accepts official manuals and stores them securely in the policy repository.
+                    As an employee or HR officer, you supply your official company policy PDFs (Leave, Business Travel, or Reimbursement). The system safely reads and validates every manuscript.
                 </div>
             </div>
-            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #26262A; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #E7B96F;">
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #D8D2C5; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8B4513;">
                 📁 Supported Formats: Multi-page PDF
             </div>
         </div>
@@ -659,15 +701,15 @@ with tab_guide:
         st.markdown("""
         <div class="step-card">
             <div>
-                <div class="step-icon-badge">💬</div>
-                <div class="step-number">STEP 03 // CLIENT ACTION</div>
+                <div class="step-badge-icon">💬</div>
+                <div class="step-tag">STEP 03 // CLIENT ACTION</div>
                 <div class="step-title">Ask Inquiries in Plain English</div>
                 <div class="step-desc">
-                    Type your question naturally—such as <em>"How many days of paid leave can I carry forward?"</em> or <em>"What is the daily meal per diem for domestic travel?"</em> The system finds the exact statutory section automatically.
+                    Enter any statutory question naturally—such as <em>"How many days of paid leave can I carry forward?"</em> or <em>"What is the daily meal allowance?"</em> Semantic cosine matching finds the exact clause in milliseconds.
                 </div>
             </div>
-            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #26262A; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #E7B96F;">
-                🔍 Cosine Semantic Search: Top-3 relevant chunks
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #D8D2C5; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8B4513;">
+                🔍 Cosine Distance Search: Top-3 relevant context chunks
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -676,15 +718,15 @@ with tab_guide:
         st.markdown("""
         <div class="step-card">
             <div>
-                <div class="step-icon-badge">🧠</div>
-                <div class="step-number">STEP 02 // SYSTEM WORKFLOW</div>
+                <div class="step-badge-icon">🧠</div>
+                <div class="step-tag">STEP 02 // SYSTEM WORKFLOW</div>
                 <div class="step-title">AI Reads &amp; Understands the Clauses</div>
                 <div class="step-desc">
                     The model extracts text using <code>pypdf</code>, splits it into 300-word sliding semantic windows, and generates high-dimensional embeddings via Google <code>text-embedding-004</code>. Every clause is indexed in local ChromaDB memory.
                 </div>
             </div>
-            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #26262A; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #E7B96F;">
-                ⚡ Vector Engine: ChromaDB (Local SQLite3)
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #D8D2C5; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8B4513;">
+                ⚡ Vector Engine: ChromaDB (Local SQLite3 Persistence)
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -694,14 +736,14 @@ with tab_guide:
         st.markdown("""
         <div class="step-card">
             <div>
-                <div class="step-icon-badge">⚖️</div>
-                <div class="step-number">STEP 04 // FINAL OUTPUT</div>
+                <div class="step-badge-icon">⚖️</div>
+                <div class="step-tag">STEP 04 // FINAL OUTPUT</div>
                 <div class="step-title">Get Audited Answers with Citations</div>
                 <div class="step-desc">
-                    Google Gemini synthesizes a direct answer restricted strictly to the verified document text. Every answer includes expandable <strong>Judicial Precedent Footnotes</strong> displaying the source PDF name, page number, and quote preview.
+                    Google Gemini synthesizes a direct finding restricted strictly to the verified document text. Every answer includes expandable <strong>Judicial Precedent Footnotes</strong> displaying the source PDF name, page number, and quote preview.
                 </div>
             </div>
-            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #26262A; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #E7B96F;">
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #D8D2C5; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8B4513;">
                 🛡️ Zero Hallucinations: 100% Verifiable Source Links
             </div>
         </div>
@@ -710,15 +752,15 @@ with tab_guide:
     # Interactive Client PDF Uploader Section
     st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
     st.markdown("""
-    <div class="konk-card" style="border-left: 3px solid #E7B96F;">
-        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: #E7B96F; letter-spacing: 0.08em; margin-bottom: 6px;">
-            // TRY IT OUT: UPLOAD A NEW POLICY PDF
+    <div style="background: #FFFFFF; border: 1px solid #D8D2C5; border-left: 4px solid #8B4513; border-radius: 12px; padding: 20px; box-shadow: 0 4px 16px rgba(28,26,24,0.04); margin-bottom: 20px;">
+        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: #8B4513; letter-spacing: 0.08em; margin-bottom: 4px;">
+            // TEST LIVE: UPLOAD A NEW POLICY PDF
         </div>
-        <div style="font-family: 'Archivo'; font-size: 1.2rem; font-weight: 800; color: #F2F0EB; margin-bottom: 6px;">
-            Add Your Company Policy Manual
+        <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.15rem; font-weight: 700; color: #1C1A18; margin-bottom: 4px;">
+            Ingest Your Custom Company Manual
         </div>
-        <div style="font-family: 'Archivo'; font-size: 0.88rem; color: #8C8A84; line-height: 1.5; margin-bottom: 14px;">
-            Upload a company policy PDF to test the workflow live. The system will parse its clauses, vectorize the text, and make it instantly queryable in the <strong>🏛️ Consult</strong> tab.
+        <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; color: #3D3A36; line-height: 1.5; margin-bottom: 12px;">
+            Upload an official company policy PDF to test the workflow live. The system will parse its clauses, vectorize the text, and make it instantly queryable in the <strong>02 // Consultation</strong> tab.
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -735,44 +777,77 @@ with tab_guide:
             f.write(uploaded_pdf.getbuffer())
         with st.spinner(f"Ingesting {uploaded_pdf.name} into ChromaDB vector index..."):
             chunks_indexed = st.session_state.pipeline.index_pdf(save_path)
-            st.success(f"Successfully ingested '{uploaded_pdf.name}' ({chunks_indexed} semantic chunks indexed)! Switch to the **🏛️ Consult** tab to inquire on it.")
+            st.success(f"Successfully ingested '{uploaded_pdf.name}' ({chunks_indexed} semantic chunks indexed)! Switch to the **02 // Consultation** tab to query it.")
+
+    # 3 Architectural Preview Cards (From Stitch Screen)
+    st.markdown("""
+    <div class="stitch-preview-grid">
+        <div class="stitch-preview-card">
+            <div class="stitch-preview-header">
+                <span class="stitch-preview-title">01 // STATUTORY CORPUS</span>
+                <span class="stitch-preview-pill">FOLIO</span>
+            </div>
+            <p class="stitch-preview-desc">
+                3 Master Folios ingested: HR Leave, Travel &amp; Per Diem, Discretionary Reimbursement.
+            </p>
+        </div>
+        <div class="stitch-preview-card">
+            <div class="stitch-preview-header">
+                <span class="stitch-preview-title">02 // VECTORIZATION ENGINE</span>
+                <span class="stitch-preview-pill">CHROMA</span>
+            </div>
+            <p class="stitch-preview-desc">
+                text-embedding-004 indexed in ChromaDB SQLite3 persistence tier.
+            </p>
+        </div>
+        <div class="stitch-preview-card">
+            <div class="stitch-preview-header">
+                <span class="stitch-preview-title">03 // DUAL-HASH INTEGRITY</span>
+                <span class="stitch-preview-pill" style="color: #24614A; background: #E8F3EE; border-color: #B8D7C9;">SHA-256</span>
+            </div>
+            <p class="stitch-preview-desc">
+                SHA-256 cryptographic parity ensuring zero parametric fabrication.
+            </p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# TAB 2: CONSULT (Policy Dashboard & Live Consultation)
+# TAB 2: 02 // CONSULTATION (Dashboard & Live Consultation Stream)
 # ---------------------------------------------------------
 with tab_dashboard:
     # Statutory Ledger Metrics Strip
     total_policies = len([f for f in os.listdir(POLICIES_DIR) if f.endswith(".pdf")])
     status_label = "100% Certified" if st.session_state.api_key else "Key Configured"
-    status_color = "#E7B96F" if st.session_state.api_key else "#C89446"
+    status_color = "#8B4513" if st.session_state.api_key else "#9E5A38"
 
     st.markdown(f"""
-    <div class="konk-ledger-grid">
-        <div class="konk-ledger-card">
+    <div class="ledger-grid">
+        <div class="ledger-card">
             <div>
-                <div class="konk-ledger-label">Statutory Corpus</div>
-                <div class="konk-ledger-value">{total_policies} Active Folios</div>
+                <div class="ledger-label">Statutory Corpus</div>
+                <div class="ledger-value">{total_policies} Active Folios</div>
             </div>
             <div style="font-size: 24px; opacity: 0.6;">📖</div>
         </div>
-        <div class="konk-ledger-card">
+        <div class="ledger-card">
             <div>
-                <div class="konk-ledger-label">Vector Repository</div>
-                <div class="konk-ledger-value">ChromaDB</div>
+                <div class="ledger-label">Vector Repository</div>
+                <div class="ledger-value">ChromaDB</div>
             </div>
             <div style="font-size: 24px; opacity: 0.6;">⚡</div>
         </div>
-        <div class="konk-ledger-card">
+        <div class="ledger-card">
             <div>
-                <div class="konk-ledger-label">Governance Mode</div>
-                <div class="konk-ledger-value">Zero-Hallucination</div>
+                <div class="ledger-label">Governance Mode</div>
+                <div class="ledger-value">Zero-Hallucination</div>
             </div>
             <div style="font-size: 24px; opacity: 0.6;">⚖️</div>
         </div>
-        <div class="konk-ledger-card">
+        <div class="ledger-card">
             <div>
-                <div class="konk-ledger-label">Audit Integrity</div>
-                <div class="konk-ledger-value" style="color: {status_color};">{status_label}</div>
+                <div class="ledger-label">Audit Integrity</div>
+                <div class="ledger-value" style="color: {status_color};">{status_label}</div>
             </div>
             <div style="font-size: 24px; opacity: 0.6;">🛡️</div>
         </div>
@@ -794,16 +869,16 @@ with tab_dashboard:
                     doc_bytes = f.read()
 
                 st.markdown(f"""
-                <div class="konk-card" style="border: 1.5px solid #E7B96F;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #26262A; padding-bottom: 12px; margin-bottom: 14px;">
+                <div style="background: #FFFFFF; border: 1.5px solid #8B4513; border-radius: 12px; padding: 22px; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(28,26,24,0.06);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #D8D2C5; padding-bottom: 12px; margin-bottom: 14px;">
                         <div>
-                            <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #E7B96F; font-weight: 700;">
+                            <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8B4513; font-weight: 700;">
                                 // OFFICIAL INSTITUTIONAL FOLIO INSPECTOR
                             </span>
-                            <h2 style="font-family: 'Archivo'; font-size: 1.6rem; font-weight: 800; margin: 4px 0; color: #F2F0EB;">
+                            <h2 style="font-family: 'Newsreader', serif; font-size: 1.6rem; font-weight: 500; margin: 4px 0; color: #1C1A18;">
                                 {doc_name.replace('_Policy.pdf', '').replace('_', ' ')} Policy Manual
                             </h2>
-                            <span style="font-family: 'JetBrains Mono'; font-size: 0.76rem; color: #8C8A84;">
+                            <span style="font-family: 'JetBrains Mono'; font-size: 0.76rem; color: #6E6961;">
                                 Source File: <code>{doc_name}</code> &bull; {total_pages} Page(s) &bull; Audited Statutory Copy
                             </span>
                         </div>
@@ -827,7 +902,7 @@ with tab_dashboard:
                     )
                 
                 st.markdown(f"""
-                <div style="background: #18181B; border: 1px solid #26262A; border-radius: 8px; padding: 20px; font-family: 'JetBrains Mono'; font-size: 0.88rem; line-height: 1.65; color: #F2F0EB; max-height: 400px; overflow-y: auto; white-space: pre-wrap;">{full_text}</div>
+                <div style="background: #FAF8F5; border: 1px solid #D8D2C5; border-radius: 8px; padding: 20px; font-family: 'JetBrains Mono'; font-size: 0.88rem; line-height: 1.65; color: #1C1A18; max-height: 400px; overflow-y: auto; white-space: pre-wrap;">{full_text}</div>
                 <div style="margin-bottom: 2rem;"></div>
                 """, unsafe_allow_html=True)
             except Exception as e:
@@ -835,11 +910,11 @@ with tab_dashboard:
 
     # Curated Inquiries & Active Dossiers
     st.markdown("""
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 8px; border-bottom: 1px solid #1C1C1F;">
-        <span style="font-family: 'Archivo'; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: #F2F0EB; font-weight: 800;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 8px; border-bottom: 1px solid #D8D2C5;">
+        <span style="font-family: 'Plus Jakarta Sans'; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: #1C1A18; font-weight: 800;">
             CURATED INQUIRIES &amp; ACTIVE DOSSIERS
         </span>
-        <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8C8A84; letter-spacing: 0.08em;">CATALOGUE VOL. XXIV</span>
+        <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #6E6961; letter-spacing: 0.08em;">CATALOGUE VOL. XXIV</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -887,21 +962,20 @@ with tab_dashboard:
     for idx, col in enumerate(preset_cols):
         q = quick_queries[idx]
         with col:
-            badges_html = "".join([f'<span class="konk-dossier-badge {b["cls"]}">{b["text"]}</span>' for b in q["badges"]])
+            badges_html = "".join([f'<span style="font-family: monospace; font-size: 0.66rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: #EFECE4; border: 1px solid #D8D2C5; color: #6E6961;">{b["text"]}</span> ' for b in q["badges"]])
             featured_card = " featured" if q["featured"] else ""
-            featured_ref = " featured" if q["featured"] else ""
             
             st.markdown(f"""
-            <div class="konk-dossier-card{featured_card}">
+            <div class="dossier-card{featured_card}">
                 <div>
-                    <div class="konk-dossier-top">
-                        <span class="konk-dossier-ref{featured_ref}">{q['ref']}</span>
-                        <div style="display: flex; gap: 6px; align-items: center;">{badges_html}</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; height: 24px;">
+                        <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; color: #8B4513;">{q['ref']}</span>
+                        <div>{badges_html}</div>
                     </div>
-                    <div class="konk-dossier-title">{q['title']}</div>
-                    <div class="konk-dossier-desc">{q['desc']}</div>
+                    <div style="font-family: 'Newsreader', serif; font-size: 1.25rem; font-weight: 500; color: #1C1A18; margin-bottom: 10px; height: 56px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{q['title']}</div>
+                    <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.86rem; line-height: 1.55; color: #3D3A36; margin-bottom: 12px; flex-grow: 1; overflow: hidden;">{q['desc']}</div>
                 </div>
-                <div class="konk-dossier-footer">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid #D8D2C5; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #6E6961; height: 24px;">
                     <span>{q['footer_stat']}</span>
                 </div>
             </div>
@@ -915,18 +989,17 @@ with tab_dashboard:
             if card_btn:
                 selected_query = q["query"]
 
-    # Consultation Stream Anchor
+    # Consultation Stream
     st.markdown("""
     <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin: 2.2rem 0 1.4rem 0;">
-        <div style="height: 1px; background: #26262A; flex: 1;"></div>
-        <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #8C8A84;">
+        <div style="height: 1px; background: #D8D2C5; flex: 1;"></div>
+        <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #6E6961;">
             📜 CONSULTATION RECORD &bull; VECTOR-GROUNDING VAULT ACTIVE
         </span>
-        <div style="height: 1px; background: #26262A; flex: 1;"></div>
+        <div style="height: 1px; background: #D8D2C5; flex: 1;"></div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Chat Messages
     for msg in st.session_state.messages:
         role_icon = "⚖️" if msg["role"] == "assistant" else "👤"
         with st.chat_message(msg["role"], avatar=role_icon):
@@ -935,14 +1008,14 @@ with tab_dashboard:
                 with st.expander("📌 Judicial Precedent & Primary Source Attributions", expanded=False):
                     for s in msg["sources"]:
                         st.markdown(f"""
-                        <div class="konk-footnote-card">
-                            <div class="konk-footnote-header">
-                                <span style="font-family: 'JetBrains Mono'; font-size: 0.76rem; font-weight: 700; color: #E7B96F; text-transform: uppercase;">
+                        <div class="footnote-card">
+                            <div class="footnote-header">
+                                <span style="font-family: 'JetBrains Mono'; font-size: 0.76rem; font-weight: 700; color: #8B4513; text-transform: uppercase;">
                                     📜 {s['source_file']} &bull; PAGE {s['page']}
                                 </span>
-                                <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; color: #8C8A84;">Audited Precedent</span>
+                                <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; color: #6E6961;">Audited Precedent</span>
                             </div>
-                            <div class="konk-footnote-quote">
+                            <div class="footnote-quote">
                                 "{s['content_preview']}"
                             </div>
                         </div>
@@ -961,18 +1034,18 @@ with tab_dashboard:
             st.rerun()
 
 # ---------------------------------------------------------
-# TAB 3: LIBRARY (Policy PDF Folios & Document Repository)
+# TAB 3: 03 // FOLIOS (Document Library & Original PDF Downloads)
 # ---------------------------------------------------------
 with tab_library:
     st.markdown("""
     <div style="margin-bottom: 1.8rem;">
-        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #E7B96F; font-weight: 700; margin-bottom: 4px;">
+        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #8B4513; font-weight: 700; margin-bottom: 4px;">
             // STATUTORY DOCUMENT REPOSITORY
         </div>
-        <h2 style="font-family: 'Newsreader', serif; font-size: 2.2rem; font-weight: 400; color: #F2F0EB; margin: 0 0 8px 0;">
+        <h2 style="font-family: 'Newsreader', serif; font-size: 2.2rem; font-weight: 500; color: #1C1A18; margin: 0 0 8px 0;">
             Official Policy PDF Folios &amp; Regulatory Manuals
         </h2>
-        <p style="font-family: 'Archivo'; font-size: 0.95rem; color: #8C8A84; line-height: 1.6; margin: 0;">
+        <p style="font-family: 'Plus Jakarta Sans'; font-size: 0.95rem; color: #3D3A36; line-height: 1.6; margin: 0;">
             Directly access official policy folios, inspect full text page-by-page without an external viewer, and download certified original PDF copies.
         </p>
     </div>
@@ -1026,24 +1099,24 @@ with tab_library:
                 num_pages = 1
                 full_text_content = "Document text could not be extracted."
 
-            clauses_html = "".join([f'<span style="display: inline-block; background: #18181B; border: 1px solid #26262A; color: #D1CFCA; font-family: monospace; font-size: 0.72rem; font-weight: 500; padding: 4px 8px; border-radius: 4px; margin: 3px 4px 3px 0;">{c}</span>' for c in p_info["clauses"]])
+            clauses_html = "".join([f'<span style="display: inline-block; background: #EFECE4; border: 1px solid #D8D2C5; color: #1C1A18; font-family: monospace; font-size: 0.72rem; font-weight: 500; padding: 4px 8px; border-radius: 4px; margin: 3px 4px 3px 0;">{c}</span>' for c in p_info["clauses"]])
 
             st.markdown(f"""
-            <div class="konk-card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; border-bottom: 1px solid #26262A; padding-bottom: 14px;">
+            <div class="folio-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; border-bottom: 1px solid #D8D2C5; padding-bottom: 14px;">
                     <div>
                         <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
-                            <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #E7B96F;">FOLIO {roman}</span>
-                            <span style="font-family: 'JetBrains Mono'; font-size: 0.68rem; font-weight: 600; background: rgba(231,185,111,0.12); border: 1px solid rgba(231,185,111,0.3); color: #E7B96F; padding: 2px 6px; border-radius: 4px;">{p_info['code']}</span>
-                            <span style="font-family: 'JetBrains Mono'; font-size: 0.68rem; font-weight: 600; background: #18181B; border: 1px solid #26262A; color: #8C8A84; padding: 2px 6px; border-radius: 4px;">Audited 2026</span>
+                            <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #8B4513;">FOLIO {roman}</span>
+                            <span style="font-family: 'JetBrains Mono'; font-size: 0.68rem; font-weight: 600; background: #F8EFEA; border: 1px solid #D8D2C5; color: #8B4513; padding: 2px 6px; border-radius: 4px;">{p_info['code']}</span>
+                            <span style="font-family: 'JetBrains Mono'; font-size: 0.68rem; font-weight: 600; background: #EFECE4; border: 1px solid #D8D2C5; color: #6E6961; padding: 2px 6px; border-radius: 4px;">Audited 2026</span>
                         </div>
-                        <h3 style="font-family: 'Archivo'; font-size: 1.5rem; font-weight: 800; color: #F2F0EB; margin: 4px 0;">{p_info['title']}</h3>
-                        <div style="font-family: 'JetBrains Mono'; font-size: 0.76rem; color: #8C8A84;">File: <code>{pf}</code> &bull; Size: {file_size_kb} KB &bull; Extent: {num_pages} Page(s) &bull; Format: Certified PDF</div>
+                        <h3 style="font-family: 'Newsreader', serif; font-size: 1.5rem; font-weight: 500; color: #1C1A18; margin: 4px 0;">{p_info['title']}</h3>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 0.76rem; color: #6E6961;">File: <code>{pf}</code> &bull; Size: {file_size_kb} KB &bull; Extent: {num_pages} Page(s) &bull; Format: Certified PDF</div>
                     </div>
                 </div>
-                <div style="font-family: 'Archivo'; font-size: 0.90rem; line-height: 1.6; color: #8C8A84; margin-bottom: 16px;">{p_info['desc']}</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.90rem; line-height: 1.6; color: #3D3A36; margin-bottom: 16px;">{p_info['desc']}</div>
                 <div style="margin-bottom: 16px;">
-                    <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; text-transform: uppercase; font-weight: 700; color: #8C8A84; letter-spacing: 0.08em; display: block; margin-bottom: 6px;">// Key Statutory Clauses:</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; text-transform: uppercase; font-weight: 700; color: #6E6961; letter-spacing: 0.08em; display: block; margin-bottom: 6px;">// Key Statutory Clauses:</span>
                     <div>{clauses_html}</div>
                 </div>
             </div>
@@ -1066,18 +1139,18 @@ with tab_library:
             st.markdown("<div style='margin-bottom: 1.5rem;'></div>", unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# TAB 4: SETTINGS (Vector Engine Credentials & Model Selection)
+# TAB 4: 04 // SETTINGS (Credentials, Reasoning Model & Health)
 # ---------------------------------------------------------
 with tab_settings:
     st.markdown("""
     <div style="margin-bottom: 1.8rem;">
-        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #E7B96F; font-weight: 700; margin-bottom: 4px;">
+        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #8B4513; font-weight: 700; margin-bottom: 4px;">
             // SYSTEM CONFIGURATION &amp; AUDIT SETTINGS
         </div>
-        <h2 style="font-family: 'Newsreader', serif; font-size: 2.2rem; font-weight: 400; color: #F2F0EB; margin: 0 0 8px 0;">
+        <h2 style="font-family: 'Newsreader', serif; font-size: 2.2rem; font-weight: 500; color: #1C1A18; margin: 0 0 8px 0;">
             Vector Engine Credentials &amp; Model Selection
         </h2>
-        <p style="font-family: 'Archivo'; font-size: 0.95rem; color: #8C8A84; line-height: 1.6; margin: 0;">
+        <p style="font-family: 'Plus Jakarta Sans'; font-size: 0.95rem; color: #3D3A36; line-height: 1.6; margin: 0;">
             Configure your institutional Google Gemini API credentials and select the reasoning model for statutory synthesis.
         </p>
     </div>
@@ -1085,8 +1158,8 @@ with tab_settings:
 
     set_col1, set_col2 = st.columns([1, 1])
     with set_col1:
-        st.markdown('<div class="konk-card">', unsafe_allow_html=True)
-        st.markdown("<div style='font-family: monospace; font-size: 0.75rem; text-transform: uppercase; color: #E7B96F; font-weight: 700; margin-bottom: 8px;'>API KEY SETTINGS</div>", unsafe_allow_html=True)
+        st.markdown('<div class="folio-card">', unsafe_allow_html=True)
+        st.markdown("<div style='font-family: monospace; font-size: 0.75rem; text-transform: uppercase; color: #8B4513; font-weight: 700; margin-bottom: 8px;'>API KEY SETTINGS</div>", unsafe_allow_html=True)
         new_key = st.text_input(
             "Google Gemini API Key",
             value=st.session_state.api_key,
@@ -1111,23 +1184,23 @@ with tab_settings:
 
     with set_col2:
         st.markdown(f"""
-        <div class="konk-card">
-            <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; text-transform: uppercase; color: #E7B96F; font-weight: 700; margin-bottom: 12px;">REPOSITORY HEALTH LEDGER</div>
-            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #26262A; font-size: 0.82rem;">
-                <span style="color: #8C8A84;">Vector Store</span>
-                <span style="color: #F2F0EB; font-family: 'JetBrains Mono'; font-weight: 600;">ChromaDB (Local SQLite3)</span>
+        <div class="folio-card">
+            <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; text-transform: uppercase; color: #8B4513; font-weight: 700; margin-bottom: 12px;">REPOSITORY HEALTH LEDGER</div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #D8D2C5; font-size: 0.82rem;">
+                <span style="color: #6E6961;">Vector Store</span>
+                <span style="color: #1C1A18; font-family: 'JetBrains Mono'; font-weight: 600;">ChromaDB (Local SQLite3)</span>
             </div>
-            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #26262A; font-size: 0.82rem;">
-                <span style="color: #8C8A84;">Embedding Model</span>
-                <span style="color: #F2F0EB; font-family: 'JetBrains Mono'; font-weight: 600;">text-embedding-004</span>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #D8D2C5; font-size: 0.82rem;">
+                <span style="color: #6E6961;">Embedding Model</span>
+                <span style="color: #1C1A18; font-family: 'JetBrains Mono'; font-weight: 600;">text-embedding-004</span>
             </div>
-            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #26262A; font-size: 0.82rem;">
-                <span style="color: #8C8A84;">Ingested Manuscripts</span>
-                <span style="color: #E7B96F; font-family: 'JetBrains Mono'; font-weight: 600;">{len(policy_files)} Official PDFs</span>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #D8D2C5; font-size: 0.82rem;">
+                <span style="color: #6E6961;">Ingested Manuscripts</span>
+                <span style="color: #8B4513; font-family: 'JetBrains Mono'; font-weight: 600;">{len(policy_files)} Official PDFs</span>
             </div>
             <div style="display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.82rem;">
-                <span style="color: #8C8A84;">Academic Roll No</span>
-                <span style="color: #F2F0EB; font-family: 'JetBrains Mono'; font-weight: 600;">34 (Problem Statement 34)</span>
+                <span style="color: #6E6961;">Academic Roll No</span>
+                <span style="color: #1C1A18; font-family: 'JetBrains Mono'; font-weight: 600;">34 (Problem Statement 34)</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -1160,14 +1233,14 @@ if final_query:
                 with st.expander("📌 Judicial Precedent & Primary Source Attributions", expanded=True):
                     for s in result["sources"]:
                         st.markdown(f"""
-                        <div class="konk-footnote-card">
-                            <div class="konk-footnote-header">
-                                <span style="font-family: 'JetBrains Mono'; font-size: 0.76rem; font-weight: 700; color: #E7B96F; text-transform: uppercase;">
+                        <div class="footnote-card">
+                            <div class="footnote-header">
+                                <span style="font-family: 'JetBrains Mono'; font-size: 0.76rem; font-weight: 700; color: #8B4513; text-transform: uppercase;">
                                     📜 {s['source_file']} &bull; PAGE {s['page']}
                                 </span>
-                                <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; color: #8C8A84;">Audited Precedent</span>
+                                <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; color: #6E6961;">Audited Precedent</span>
                             </div>
-                            <div class="konk-footnote-quote">
+                            <div class="footnote-quote">
                                 "{s['content_preview']}"
                             </div>
                         </div>
