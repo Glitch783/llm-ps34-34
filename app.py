@@ -446,27 +446,45 @@ st.markdown("""
         border: none !important;
     }
     div[data-testid="stChatInput"] {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 900px !important;
+        margin: 0 auto !important;
+    }
+    div[data-testid="stChatInput"] > div {
         background-color: var(--vellum) !important;
         border: 1.5px solid var(--hairline) !important;
         border-radius: 9999px !important;
         box-shadow: 0 8px 30px rgba(28, 26, 24, 0.08) !important;
         padding: 6px 14px !important;
-        max-width: 900px !important;
-        margin: 0 auto !important;
+        transition: all 0.2s ease !important;
     }
-    div[data-testid="stChatInput"]:focus-within {
+    div[data-testid="stChatInput"] > div:focus-within {
         border-color: var(--cognac) !important;
         box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.15) !important;
     }
     div[data-testid="stChatInput"] textarea {
-        background-color: var(--vellum) !important;
+        background-color: transparent !important;
         color: var(--ink) !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    div[data-testid="stChatInput"] textarea:focus {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
     }
     div[data-testid="stChatInput"] button {
         background-color: var(--cognac) !important;
         color: #FFFFFF !important;
         border-radius: 9999px !important;
+        border: none !important;
+    }
+    div[data-testid="stChatInput"] button:hover {
+        background-color: var(--cognac-hover) !important;
     }
 
     /* BUTTONS */
