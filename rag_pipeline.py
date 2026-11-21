@@ -192,7 +192,41 @@ class RAGPipeline:
                 })
         return retrieved_docs
 
+    def is_conversational(self, text: str) -> bool:
+        """Detects whether a query is a greeting, pleasantry, or general conversational remark."""
+        cleaned = text.strip().lower().rstrip("!?. ,")
+        greetings = {
+            "hi", "hello", "hallo", "hey", "heya", "greetings", "good morning", 
+            "good afternoon", "good evening", "howdy", "sup", "yo",
+            "how are you", "how are you doing", "what's up", "whats up",
+            "who are you", "what can you do", "what are you", "help",
+            "thank you", "thanks", "thx", "appreciate it", "cool", "great",
+            "ok", "okay", "bye", "goodbye", "see ya"
+        }
+        if cleaned in greetings:
+            return True
+        words = cleaned.split()
+        if len(words) <= 3 and any(g in words for g in ["hi", "hello", "hallo", "hey", "thanks", "thank"]):
+            return True
+        return False
+
     def generate_answer(self, query: str, top_k=3, model="gemini-2.5-flash"):
+        if self.is_conversational(query):
+            cleaned = query.strip().lower()
+            if any(w in cleaned for w in ["thank", "thx", "appreciate"]):
+                reply = "You're very welcome! Feel free to ask if you have any questions regarding company leave rules, business travel, per diem rates, or expense reimbursements."
+            elif any(w in cleaned for w in ["who are you", "what are you", "what can you do", "help"]):
+                reply = "I am the **Company Policy Assistant**. I can help you with questions about corporate **Paid Leave & Rollover**, **Business Travel & Lodging Caps**, and **Expense Reimbursements**. What would you like to know?"
+            elif any(w in cleaned for w in ["bye", "goodbye", "see ya"]):
+                reply = "Goodbye! Reach out whenever you need clarification on company policies."
+            else:
+                reply = "Hello! I am your AI Company Policy Assistant. How can I assist you with questions regarding company leave, business travel, or expense reimbursements today?"
+            return {
+                "answer": reply,
+                "sources": [],
+                "model_used": "Conversational Greeting Handler"
+            }
+
         retrieved = self.retrieve(query, top_k=top_k)
         
         if not retrieved:
@@ -303,9 +337,13 @@ Answer:"""
                     contents=prompt
                 )
                 if response and hasattr(response, "text") and response.text:
+                    ans_text = response.text
+                    active_sources = sources
+                    if "could not find specific guidance" in ans_text.lower() or "contact hr" in ans_text.lower():
+                        active_sources = []
                     return {
-                        "answer": response.text,
-                        "sources": sources,
+                        "answer": ans_text,
+                        "sources": active_sources,
                         "model_used": attempt_model,
                         "prompt_used": prompt
                     }

@@ -1160,7 +1160,7 @@ Model: {st.session_state.model_choice}
         with st.chat_message(msg["role"], avatar=role_icon):
             st.markdown(msg["content"])
             if msg.get("sources"):
-                with st.expander("📌 Judicial Precedent & Primary Source Attributions", expanded=False):
+                with st.expander("📄 Source Citations & Policy Excerpts", expanded=False):
                     for s in msg["sources"]:
                         st.markdown(f"""
                         <div style="padding: 16px 20px; border-radius: 8px; background: #FAF8F5; margin-top: 14px; border: 1px solid #D8D2C5;">
@@ -1210,7 +1210,7 @@ Model: {st.session_state.model_choice}
                 st.markdown(result["answer"])
                 
                 if result.get("sources"):
-                    with st.expander("📌 Judicial Precedent & Primary Source Attributions", expanded=True):
+                    with st.expander("📄 Source Citations & Policy Excerpts", expanded=False):
                         for s in result["sources"]:
                             st.markdown(f"""
                             <div style="padding: 16px 20px; border-radius: 8px; background: #FAF8F5; margin-top: 14px; border: 1px solid #D8D2C5;">
