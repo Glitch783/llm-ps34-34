@@ -671,8 +671,39 @@ if "messages" not in st.session_state:
         }
     ]
 
-if "api_key" not in st.session_state:
-    st.session_state.api_key = os.getenv("GEMINI_API_KEY", "")
+ENV_FILE = os.path.join(BASE_DIR, ".env")
+
+def get_persisted_api_key():
+    k = os.getenv("GEMINI_API_KEY", "").strip()
+    if k:
+        return k
+    if os.path.exists(ENV_FILE):
+        try:
+            with open(ENV_FILE, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith("GEMINI_API_KEY="):
+                        val = line.split("=", 1)[1].strip().strip('"').strip("'")
+                        if val:
+                            return val
+        except Exception:
+            pass
+    return ""
+
+def persist_api_key(api_key: str):
+    api_key = (api_key or "").strip()
+    os.environ["GEMINI_API_KEY"] = api_key
+    st.session_state.api_key = api_key
+    try:
+        with open(ENV_FILE, "w", encoding="utf-8") as f:
+            f.write(f"GEMINI_API_KEY={api_key}\n")
+    except Exception as e:
+        print(f"Error persisting API key: {e}")
+    if "pipeline" in st.session_state and st.session_state.pipeline:
+        st.session_state.pipeline.set_api_key(api_key)
+
+if "api_key" not in st.session_state or not st.session_state.api_key:
+    st.session_state.api_key = get_persisted_api_key()
 
 if "model_choice" not in st.session_state:
     st.session_state.model_choice = "gemini-2.5-flash"
@@ -900,8 +931,8 @@ elif active_tab == "consultation":
 
     # Statutory Ledger Metrics Strip
     total_policies = len([f for f in os.listdir(POLICIES_DIR) if f.endswith(".pdf")])
-    status_label = "100% Certified" if st.session_state.api_key else "Key Configured"
-    status_color = "#8B4513" if st.session_state.api_key else "#9E5A38"
+    status_label = "100% Certified" if st.session_state.api_key else "Key Required"
+    status_color = "#24614A" if st.session_state.api_key else "#8B4513"
 
     st.markdown(f"""
     <div class="ledger-grid">
@@ -935,6 +966,48 @@ elif active_tab == "consultation":
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+    # Inline API Key Manager on Consultation Tab
+    if not st.session_state.api_key:
+        st.markdown("""<div style="background: #FFFFFF; border: 1px solid #D8D2C5; border-left: 4px solid #8B4513; border-radius: 12px; padding: 18px 22px; margin-top: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 14px rgba(28,26,24,0.03);">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+<div style="display: flex; align-items: center; gap: 8px;">
+<span style="font-size: 1.2rem;">🔑</span>
+<span style="font-family: 'Plus Jakarta Sans'; font-size: 1.02rem; font-weight: 700; color: #1C1A18;">Activate Google Gemini API Key</span>
+</div>
+<span style="font-family: 'JetBrains Mono'; font-size: 0.68rem; font-weight: 700; color: #8B4513; background: #F8EFEA; padding: 3px 8px; border-radius: 4px;">KEY REQUIRED FOR LIVE LLM</span>
+</div>
+<div style="font-family: 'Plus Jakarta Sans'; font-size: 0.86rem; color: #4A4640; line-height: 1.5; margin-bottom: 12px;">
+Paste your Google Gemini API key below to unlock live AI synthesis. The key will be saved automatically so you won't need to enter it again.
+</div>
+</div>""", unsafe_allow_html=True)
+        col_key_input, col_key_btn = st.columns([5, 1])
+        with col_key_input:
+            entered_key = st.text_input(
+                "Gemini API Key",
+                type="password",
+                placeholder="Paste Gemini API key (AIzaSy...)",
+                label_visibility="collapsed",
+                key="consult_key_input"
+            )
+        with col_key_btn:
+            if st.button("Activate Key ➔", key="btn_activate_key_consult", use_container_width=True):
+                if entered_key.strip():
+                    persist_api_key(entered_key.strip())
+                    st.success("API Key activated and permanently saved!")
+                    st.rerun()
+                else:
+                    st.warning("Please paste a valid key.")
+    else:
+        st.markdown(f"""<div style="display: flex; align-items: center; justify-content: space-between; background: #F8FAF7; border: 1px solid #D8D2C5; border-radius: 10px; padding: 10px 18px; margin-top: 1.5rem; margin-bottom: 1.2rem;">
+<div style="display: flex; align-items: center; gap: 8px; font-family: 'Plus Jakarta Sans'; font-size: 0.85rem; color: #24614A; font-weight: 600;">
+<span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #24614A;"></span>
+<span>Gemini API Connected &bull; Live Synthesis Active</span>
+</div>
+<div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8B4513; font-weight: 600;">
+Model: {st.session_state.model_choice}
+</div>
+</div>""", unsafe_allow_html=True)
 
     # In-App Folio Inspector if active
     if st.session_state.get("active_doc_preview"):
@@ -1292,14 +1365,25 @@ elif active_tab == "settings":
             type="password",
             help="Enter your Gemini API key from Google AI Studio."
         )
-        if new_key != st.session_state.api_key:
-            st.session_state.api_key = new_key
-            st.session_state.pipeline.set_api_key(new_key)
-            st.success("API Key updated successfully!")
+        col_s1, col_s2 = st.columns([1, 1])
+        with col_s1:
+            if st.button("💾 Save Key", key="save_settings_key", use_container_width=True):
+                if new_key.strip():
+                    persist_api_key(new_key.strip())
+                    st.success("API Key permanently saved!")
+                    st.rerun()
+                else:
+                    st.warning("Please enter a valid key.")
+        with col_s2:
+            if st.button("🗑️ Clear Key", key="clear_settings_key", use_container_width=True):
+                persist_api_key("")
+                st.info("API Key cleared.")
+                st.rerun()
 
+        st.markdown("<div style='height: 14px;'></div>", unsafe_allow_html=True)
         new_model = st.selectbox(
             "Reasoning Kernel",
-            ["gemini-2.5-flash", "gemini-1.5-pro"],
+            ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"],
             index=0 if st.session_state.model_choice == "gemini-2.5-flash" else 1,
             help="Select audited reasoning model for statutory synthesis."
         )

@@ -7,24 +7,28 @@ from google.genai import types
 class GeminiEmbeddingFunction(chromadb.EmbeddingFunction):
     """Generates embeddings using Google Gemini API or fallback vectorizer."""
     def __init__(self, api_key: str = None):
-        self.api_key = api_key or os.getenv("GEMINI_API_KEY", "")
-        self.client = (
-            genai.Client(api_key=self.api_key, http_options=types.HttpOptions(api_version="v1beta"))
-            if self.api_key
-            else None
-        )
+        self.api_key = (api_key or os.getenv("GEMINI_API_KEY", "")).strip()
+        if self.api_key:
+            try:
+                self.client = genai.Client(api_key=self.api_key)
+            except Exception:
+                self.client = None
+        else:
+            self.client = None
 
     @staticmethod
     def name() -> str:
         return "gemini_embedding_function"
 
     def update_key(self, api_key: str):
-        self.api_key = api_key
+        self.api_key = (api_key or "").strip()
         if self.api_key:
-            self.client = genai.Client(
-                api_key=self.api_key,
-                http_options=types.HttpOptions(api_version="v1beta")
-            )
+            try:
+                self.client = genai.Client(api_key=self.api_key)
+            except Exception:
+                self.client = None
+        else:
+            self.client = None
 
     def __call__(self, input: chromadb.Documents) -> chromadb.Embeddings:
         # If API key is present, use Google's official text-embedding-004
@@ -58,7 +62,7 @@ class RAGPipeline:
     def __init__(self, persist_directory=None, gemini_api_key=None):
         self.persist_directory = persist_directory or os.path.join(os.path.dirname(__file__), "chroma_db")
         os.makedirs(self.persist_directory, exist_ok=True)
-        self.gemini_api_key = gemini_api_key or os.getenv("GEMINI_API_KEY", "")
+        self.gemini_api_key = (gemini_api_key or os.getenv("GEMINI_API_KEY", "")).strip()
         
         # Persistent ChromaDB client
         self.chroma_client = chromadb.PersistentClient(path=self.persist_directory)
@@ -69,20 +73,26 @@ class RAGPipeline:
             embedding_function=self.embed_fn
         )
         
-        self.genai_client = (
-            genai.Client(api_key=self.gemini_api_key, http_options=types.HttpOptions(api_version="v1beta"))
-            if self.gemini_api_key
-            else None
-        )
+        if self.gemini_api_key:
+            try:
+                self.genai_client = genai.Client(api_key=self.gemini_api_key)
+            except Exception as e:
+                print(f"Error creating genai.Client: {e}")
+                self.genai_client = None
+        else:
+            self.genai_client = None
 
     def set_api_key(self, api_key: str):
-        self.gemini_api_key = api_key
-        self.embed_fn.update_key(api_key)
+        self.gemini_api_key = (api_key or "").strip()
+        self.embed_fn.update_key(self.gemini_api_key)
         if self.gemini_api_key:
-            self.genai_client = genai.Client(
-                api_key=self.gemini_api_key,
-                http_options=types.HttpOptions(api_version="v1beta")
-            )
+            try:
+                self.genai_client = genai.Client(api_key=self.gemini_api_key)
+            except Exception as e:
+                print(f"Error creating genai.Client: {e}")
+                self.genai_client = None
+        else:
+            self.genai_client = None
 
     def get_available_models(self):
         """Discovers the exact models available for this API key from Google AI Studio."""
