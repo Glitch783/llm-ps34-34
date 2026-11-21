@@ -629,6 +629,116 @@ st.markdown("""
         border-color: var(--stitch-primary-container) !important;
         transform: translateY(-1px) !important;
     }
+
+    /* Top Navigation Tabs (Stitch Editorial Tabs) */
+    [data-testid="stTabs"] {
+        margin-top: 0.8rem !important;
+        margin-bottom: 2rem !important;
+    }
+    button[data-baseweb="tab"] {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        color: var(--stitch-on-surface-variant) !important;
+        -webkit-text-fill-color: var(--stitch-on-surface-variant) !important;
+        padding: 12px 26px !important;
+        border-radius: 10px 10px 0 0 !important;
+        background: transparent !important;
+        border: none !important;
+        transition: all 0.2s ease !important;
+    }
+    button[data-baseweb="tab"]:hover {
+        color: var(--stitch-primary) !important;
+        -webkit-text-fill-color: var(--stitch-primary) !important;
+        background: var(--stitch-surface-container-high) !important;
+    }
+    button[data-baseweb="tab"][aria-selected="true"] {
+        color: var(--stitch-primary) !important;
+        -webkit-text-fill-color: var(--stitch-primary) !important;
+        border-bottom: 3px solid var(--stitch-primary-container) !important;
+        background: var(--stitch-surface-container-lowest) !important;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.02) !important;
+    }
+    div[data-baseweb="tab-highlight"] {
+        background-color: var(--stitch-primary-container) !important;
+    }
+
+    /* Library Cards */
+    .stitch-lib-card {
+        background: var(--stitch-surface-container-lowest);
+        border: 1px solid var(--stitch-outline-variant);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        transition: all 0.2s ease;
+    }
+    .stitch-lib-card:hover {
+        border-color: var(--stitch-primary-container);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+    .stitch-lib-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        padding-bottom: 12px;
+    }
+    .stitch-lib-title {
+        font-family: 'Newsreader', Georgia, serif;
+        font-size: 1.45rem;
+        font-weight: 500;
+        color: var(--stitch-on-surface);
+        margin: 4px 0;
+    }
+    .stitch-lib-desc {
+        font-size: 0.88rem;
+        line-height: 1.6;
+        color: var(--stitch-on-surface-variant);
+        margin-bottom: 16px;
+    }
+
+    /* Guide Workflow Cards */
+    .stitch-guide-card {
+        background: var(--stitch-surface-container-lowest);
+        border: 1px solid var(--stitch-outline-variant);
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        transition: transform 0.2s ease;
+    }
+    .stitch-guide-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--stitch-primary-container);
+    }
+    .stitch-guide-step-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--stitch-surface-container);
+        color: var(--stitch-primary);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 4px 10px;
+        border-radius: 6px;
+        margin-bottom: 8px;
+    }
+    .stitch-guide-title {
+        font-family: 'Newsreader', serif;
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--stitch-on-surface);
+        margin-bottom: 6px;
+    }
+    .stitch-guide-desc {
+        font-size: 0.86rem;
+        line-height: 1.6;
+        color: var(--stitch-on-surface-variant);
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -832,218 +942,412 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Live Metadata Ledger (Stitch 4-column Strip)
-total_policies = len(policy_files)
-status_label = "100% Certified" if api_key else "Key Required"
-status_color = "#14453d" if api_key else "#a73a1a"
-
-st.markdown(f"""
-<div class="stitch-ledger-grid">
-    <div class="stitch-ledger-card">
-        <div>
-            <div class="stitch-ledger-label">Statutory Corpus</div>
-            <div class="stitch-ledger-value">{total_policies} Active Folios</div>
-        </div>
-        <div style="font-size: 24px; opacity: 0.4;">📖</div>
-    </div>
-    <div class="stitch-ledger-card">
-        <div>
-            <div class="stitch-ledger-label">Vector Repository</div>
-            <div class="stitch-ledger-value">ChromaDB</div>
-        </div>
-        <div style="font-size: 24px; opacity: 0.4;">⚡</div>
-    </div>
-    <div class="stitch-ledger-card">
-        <div>
-            <div class="stitch-ledger-label">Governance Mode</div>
-            <div class="stitch-ledger-value">Zero-Hallucination</div>
-        </div>
-        <div style="font-size: 24px; opacity: 0.4;">⚖️</div>
-    </div>
-    <div class="stitch-ledger-card">
-        <div>
-            <div class="stitch-ledger-label">Audit Integrity</div>
-            <div class="stitch-ledger-value" style="color: {status_color};">{status_label}</div>
-        </div>
-        <div style="font-size: 24px; opacity: 0.4;">🛡️</div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
 # ---------------------------------------------------------
-# In-App Folio Document Inspector (Activated via Sidebar "Read")
+# Top Navigation Tabs
 # ---------------------------------------------------------
-if st.session_state.get("active_doc_preview"):
-    doc_name = st.session_state.active_doc_preview
-    doc_path = os.path.join(POLICIES_DIR, doc_name)
-    if os.path.exists(doc_path):
-        try:
-            reader = pypdf.PdfReader(doc_path)
-            total_pages = len(reader.pages)
-            pages_text = [page.extract_text() for page in reader.pages]
-            full_text = "\n\n--- PAGE BREAK ---\n\n".join(pages_text)
-            
-            with open(doc_path, "rb") as f:
-                doc_bytes = f.read()
+tab_dashboard, tab_library, tab_guide = st.tabs([
+    "🏛️ Policy Dashboard & Consultation",
+    "📚 Policy PDF Folios & Document Library",
+    "⚙️ How It Works & Architecture Guide"
+])
 
-            st.markdown(f"""
-            <div class="stitch-inspector-card">
-                <div class="stitch-inspector-header">
-                    <div>
-                        <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #14453d; font-weight: 700;">
-                            📖 Official Institutional Folio Inspector
-                        </span>
-                        <h2 style="font-family: 'Newsreader', serif; font-size: 1.6rem; margin: 4px 0; color: #1b1c1e;">
-                            {doc_name.replace('_Policy.pdf', '').replace('_', ' ')} Policy Manual
-                        </h2>
-                        <span style="font-size: 0.78rem; color: #707976;">
-                            Source File: <code>{doc_name}</code> &bull; {total_pages} Page(s) &bull; Audited Statutory Copy
-                        </span>
+with tab_dashboard:
+    # Live Metadata Ledger (Stitch 4-column Strip)
+    total_policies = len(policy_files)
+    status_label = "100% Certified" if api_key else "Key Required"
+    status_color = "#14453d" if api_key else "#a73a1a"
+
+    st.markdown(f"""
+    <div class="stitch-ledger-grid">
+        <div class="stitch-ledger-card">
+            <div>
+                <div class="stitch-ledger-label">Statutory Corpus</div>
+                <div class="stitch-ledger-value">{total_policies} Active Folios</div>
+            </div>
+            <div style="font-size: 24px; opacity: 0.4;">📖</div>
+        </div>
+        <div class="stitch-ledger-card">
+            <div>
+                <div class="stitch-ledger-label">Vector Repository</div>
+                <div class="stitch-ledger-value">ChromaDB</div>
+            </div>
+            <div style="font-size: 24px; opacity: 0.4;">⚡</div>
+        </div>
+        <div class="stitch-ledger-card">
+            <div>
+                <div class="stitch-ledger-label">Governance Mode</div>
+                <div class="stitch-ledger-value">Zero-Hallucination</div>
+            </div>
+            <div style="font-size: 24px; opacity: 0.4;">⚖️</div>
+        </div>
+        <div class="stitch-ledger-card">
+            <div>
+                <div class="stitch-ledger-label">Audit Integrity</div>
+                <div class="stitch-ledger-value" style="color: {status_color};">{status_label}</div>
+            </div>
+            <div style="font-size: 24px; opacity: 0.4;">🛡️</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # In-App Folio Document Inspector (Activated via Sidebar or Library "Read")
+    if st.session_state.get("active_doc_preview"):
+        doc_name = st.session_state.active_doc_preview
+        doc_path = os.path.join(POLICIES_DIR, doc_name)
+        if os.path.exists(doc_path):
+            try:
+                reader = pypdf.PdfReader(doc_path)
+                total_pages = len(reader.pages)
+                pages_text = [page.extract_text() for page in reader.pages]
+                full_text = "\n\n--- PAGE BREAK ---\n\n".join(pages_text)
+                
+                with open(doc_path, "rb") as f:
+                    doc_bytes = f.read()
+
+                st.markdown(f"""
+                <div class="stitch-inspector-card">
+                    <div class="stitch-inspector-header">
+                        <div>
+                            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #14453d; font-weight: 700;">
+                                📖 Official Institutional Folio Inspector
+                            </span>
+                            <h2 style="font-family: 'Newsreader', serif; font-size: 1.6rem; margin: 4px 0; color: #1b1c1e;">
+                                {doc_name.replace('_Policy.pdf', '').replace('_', ' ')} Policy Manual
+                            </h2>
+                            <span style="font-size: 0.78rem; color: #707976;">
+                                Source File: <code>{doc_name}</code> &bull; {total_pages} Page(s) &bull; Audited Statutory Copy
+                            </span>
+                        </div>
                     </div>
                 </div>
+                """, unsafe_allow_html=True)
+                
+                c_close, c_dl = st.columns([1, 1])
+                with c_close:
+                    if st.button("❌ Close Document Inspector", key="close_inspector", use_container_width=True):
+                        st.session_state.active_doc_preview = None
+                        st.rerun()
+                with c_dl:
+                    st.download_button(
+                        label=f"📥 Download PDF ({doc_name})",
+                        data=doc_bytes,
+                        file_name=doc_name,
+                        mime="application/pdf",
+                        key="dl_from_inspector",
+                        use_container_width=True
+                    )
+                
+                st.markdown(f"""
+                <div class="stitch-inspector-body">{full_text}</div>
+                <div style="margin-bottom: 2rem;"></div>
+                """, unsafe_allow_html=True)
+            except Exception as e:
+                st.error(f"Error inspecting document: {e}")
+
+    # Curated Inquiries & Active Dossiers (Stitch Card I, II, III)
+    st.markdown("""
+    <div class="stitch-section-heading">
+        <span class="stitch-section-label">Curated Inquiries &amp; Active Dossiers</span>
+        <span style="font-size: 0.72rem; color: #707976; letter-spacing: 0.06em;">CATALOGUE VOL. XXIV</span>
+    </div>
+    """, unsafe_allow_html=True)
+
+    preset_cols = st.columns(3)
+    quick_queries = [
+        {
+            "ref": "REF: ARCH-4011",
+            "badges": [
+                {"text": "HR FOLIO", "cls": ""},
+                {"text": "AUDITED 2025", "cls": "secondary"}
+            ],
+            "title": "I. Annual Paid Leave & Carry-Forward Limits",
+            "desc": "Section 4.1.2 — Accrual caps, statutory mandatory rollover deadlines, and executive exception waivers.",
+            "footer_stat": "📜 14 Precedents • Statutory Codex",
+            "query": "How many days of paid leave can I carry forward to next year?",
+            "featured": False
+        },
+        {
+            "ref": "REF: ARCH-7300",
+            "badges": [
+                {"text": "ACTIVE CONSULTATION", "cls": "active"},
+                {"text": "AUDITED 2025", "cls": "secondary"}
+            ],
+            "title": "II. Daily Per Diem & Corporate Lodging Caps",
+            "desc": "Section 7.3.0 — Tier-1 metro lodging limits ($380/nt), transatlantic flight tiers, and client entertainment thresholds.",
+            "footer_stat": "📍 Section 7.3.4 In-Scope • Active in Workspace",
+            "query": "What is the daily per diem allowance for domestic business travel?",
+            "featured": True
+        },
+        {
+            "ref": "REF: ARCH-9840",
+            "badges": [
+                {"text": "REMOTE WORK", "cls": ""},
+                {"text": "AUDITED 2025", "cls": "secondary"}
+            ],
+            "title": "III. Home Office Infrastructure Stipend",
+            "desc": "Section 9.8.4 — Annual ergonomic allocation ($1,500), hardware depreciation schedules, and dual-monitor subsidies.",
+            "footer_stat": "🛡️ Verified Q1 • Institutional Grant",
+            "query": "What is the WFH equipment allowance for new employees?",
+            "featured": False
+        }
+    ]
+
+    selected_query = None
+    for idx, col in enumerate(preset_cols):
+        q = quick_queries[idx]
+        with col:
+            badges_html = "".join([f'<span class="stitch-dossier-badge {b["cls"]}">{b["text"]}</span>' for b in q["badges"]])
+            featured_card = " featured" if q["featured"] else ""
+            featured_ref = " featured" if q["featured"] else ""
+            
+            st.markdown(f"""
+            <div class="stitch-dossier-card{featured_card}">
+                <div>
+                    <div class="stitch-dossier-top">
+                        <span class="stitch-dossier-ref{featured_ref}">{q['ref']}</span>
+                        <div class="stitch-dossier-badges">{badges_html}</div>
+                    </div>
+                    <div class="stitch-dossier-title">{q['title']}</div>
+                    <div class="stitch-dossier-desc">{q['desc']}</div>
+                </div>
+                <div class="stitch-dossier-footer">
+                    <span>{q['footer_stat']}</span>
+                </div>
             </div>
             """, unsafe_allow_html=True)
             
-            # Action controls inside inspector
-            c_close, c_dl = st.columns([1, 1])
-            with c_close:
-                if st.button("❌ Close Document Inspector", key="close_inspector", use_container_width=True):
-                    st.session_state.active_doc_preview = None
-                    st.rerun()
-            with c_dl:
+            card_btn = st.button(
+                "⚡ Load Brief & Consult →",
+                use_container_width=True,
+                key=f"dossier_btn_{idx}"
+            )
+            if card_btn:
+                selected_query = q["query"]
+
+    # Archival Consultation Divider
+    st.markdown("""
+    <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 2rem 0 1.2rem 0;">
+        <div style="height: 1px; background: #e3e2e4; flex: 1;"></div>
+        <span style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #707976;">
+            📜 Consultation Record • Vector-Grounding Vault Active
+        </span>
+        <div style="height: 1px; background: #e3e2e4; flex: 1;"></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Consultation Stream
+    for msg in st.session_state.messages:
+        role_icon = "⚖️" if msg["role"] == "assistant" else "👤"
+        with st.chat_message(msg["role"], avatar=role_icon):
+            st.markdown(msg["content"])
+            if msg.get("sources"):
+                with st.expander("📌 Judicial Precedent & Primary Source Attributions", expanded=False):
+                    for s in msg["sources"]:
+                        st.markdown(f"""
+                        <div class="stitch-footnote-card">
+                            <div class="stitch-footnote-header">
+                                <span style="font-size: 0.75rem; font-weight: 700; color: #002e27; text-transform: uppercase;">
+                                    📜 {s['source_file']} &bull; PAGE {s['page']}
+                                </span>
+                                <span style="font-size: 0.7rem; color: #707976;">Audited Precedent</span>
+                            </div>
+                            <div class="stitch-footnote-quote">
+                                "{s['content_preview']}"
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# Tab 2: Policy PDF Folios & Document Library
+# ---------------------------------------------------------
+with tab_library:
+    st.markdown("""
+    <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #14453d; font-weight: 700; margin-bottom: 4px;">
+            Statutory Document Repository
+        </div>
+        <h2 style="font-family: 'Newsreader', serif; font-size: 2rem; color: #1b1c1e; margin: 0 0 8px 0;">
+            Official Policy PDF Folios &amp; Regulatory Manuals
+        </h2>
+        <p style="font-size: 0.95rem; color: #5f6368; line-height: 1.6; margin: 0;">
+            Browse official company policy folios, inspect codified clauses page-by-page, and download certified original PDF copies for your records.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    policy_summaries = {
+        "Leave_Policy.pdf": {
+            "title": "Leave & Attendance Policy Manual",
+            "code": "HR-POL-001",
+            "desc": "Governs statutory privilege leave, sick leave, mandatory annual carry-forward limits (max 10 days), 26 weeks paid maternity leave, 2 weeks paternity leave, and bereavement guidelines.",
+            "clauses": ["Sec 1: Attendance & Hours", "Sec 2: Annual Privilege Leave", "Sec 3: Sick Leave", "Sec 4: Parental Leave", "Sec 5: Encashment Rules"]
+        },
+        "Travel_Policy.pdf": {
+            "title": "Corporate Business Travel Guidelines",
+            "code": "HR-POL-002",
+            "desc": "Defines domestic & international booking procedures, economy/business flight tiers, Tier-1 Metro Lodging limits ($150/night), daily per diem allowances ($45/day domestic), and mileage reimbursements.",
+            "clauses": ["Sec 1: Travel Authorizations", "Sec 2: Flight Bookings", "Sec 3: Lodging Limits", "Sec 4: Per Diem Meals ($45/day)", "Sec 5: 30-Day Expense Deadlines"]
+        },
+        "Reimbursement_Policy.pdf": {
+            "title": "Expense Reimbursement & WFH Benefits",
+            "code": "HR-POL-003",
+            "desc": "Outlines remote work equipment grants ($400 setup stipend within 60 days of joining), monthly broadband ($40/mo), cellular subsidies ($30/mo), certification allowances, and non-reimbursable personal claims.",
+            "clauses": ["Sec 1: Eligible Expenditures", "Sec 2: Broadband & Cellular", "Sec 3: Professional Certifications", "Sec 4: WFH Equipment Grant ($400)", "Sec 5: Ineligible Claims"]
+        }
+    }
+
+    if policy_files:
+        for p_idx, pf in enumerate(policy_files):
+            filepath = os.path.join(POLICIES_DIR, pf)
+            file_size_kb = round(os.path.getsize(filepath) / 1024, 1)
+            roman_nums = ["I", "II", "III", "IV", "V", "VI"]
+            roman = roman_nums[p_idx] if p_idx < len(roman_nums) else str(p_idx+1)
+            
+            p_info = policy_summaries.get(pf, {
+                "title": pf.replace("_Policy.pdf", "").replace("_", " ") + " Policy Manual",
+                "code": f"DOC-POL-00{p_idx+1}",
+                "desc": "Official institutional compliance document verified and indexed in ChromaDB vector repository.",
+                "clauses": ["General Compliance", "Statutory Provisions", "Audited Clauses"]
+            })
+
+            with open(filepath, "rb") as f:
+                pdf_data = f.read()
+
+            try:
+                reader = pypdf.PdfReader(filepath)
+                num_pages = len(reader.pages)
+                extracted_pages = [f"### Page {p_num + 1}\n\n{p.extract_text()}" for p_num, p in enumerate(reader.pages)]
+                full_text_content = "\n\n---\n\n".join(extracted_pages)
+            except Exception:
+                num_pages = 1
+                full_text_content = "Document text could not be extracted."
+
+            clauses_html = "".join([f'<span style="display: inline-block; background: #efedf0; color: #404846; font-size: 0.72rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; margin: 3px 4px 3px 0;">{c}</span>' for c in p_info["clauses"]])
+
+            st.markdown(f"""
+            <div class="stitch-lib-card">
+                <div class="stitch-lib-header">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #14453d;">FOLIO {roman}</span>
+                            <span style="font-size: 0.68rem; font-weight: 600; background: rgba(20,69,61,0.1); color: #14453d; padding: 2px 6px; border-radius: 4px;">{p_info['code']}</span>
+                            <span style="font-size: 0.68rem; font-weight: 600; background: #efedf0; color: #707976; padding: 2px 6px; border-radius: 4px;">Audited 2025</span>
+                        </div>
+                        <h3 class="stitch-lib-title">{p_info['title']}</h3>
+                        <div style="font-size: 0.78rem; color: #707976;">File: <code>{pf}</code> &bull; Size: {file_size_kb} KB &bull; Extent: {num_pages} Page(s) &bull; Format: Certified PDF</div>
+                    </div>
+                </div>
+                <div class="stitch-lib-desc">{p_info['desc']}</div>
+                <div style="margin-bottom: 16px;">
+                    <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: #707976; letter-spacing: 0.08em; display: block; margin-bottom: 6px;">Key Statutory Clauses:</span>
+                    <div>{clauses_html}</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            col_act1, col_act2 = st.columns([1, 2])
+            with col_act1:
                 st.download_button(
-                    label=f"📥 Download PDF ({doc_name})",
-                    data=doc_bytes,
-                    file_name=doc_name,
+                    label=f"📥 Download Original PDF",
+                    data=pdf_data,
+                    file_name=pf,
                     mime="application/pdf",
-                    key="dl_from_inspector",
+                    key=f"lib_dl_{p_idx}",
                     use_container_width=True
                 )
+            with col_act2:
+                with st.expander(f"📖 Read Codified Full Text ({pf} &bull; {num_pages} Pages)", expanded=False):
+                    st.markdown(full_text_content)
             
-            # Formatted text viewer
-            st.markdown(f"""
-            <div class="stitch-inspector-body">{full_text}</div>
-            <div style="margin-bottom: 2rem;"></div>
-            """, unsafe_allow_html=True)
-        except Exception as e:
-            st.error(f"Error inspecting document: {e}")
+            st.markdown("<div style='margin-bottom: 1.5rem;'></div>", unsafe_allow_html=True)
+    else:
+        st.warning("No policy folios found in repository.")
 
 # ---------------------------------------------------------
-# Curated Inquiries & Active Dossiers (Stitch Card I, II, III)
+# Tab 3: How It Works & Architecture Guide
 # ---------------------------------------------------------
-st.markdown("""
-<div class="stitch-section-heading">
-    <span class="stitch-section-label">Curated Inquiries &amp; Active Dossiers</span>
-    <span style="font-size: 0.72rem; color: #707976; letter-spacing: 0.06em;">CATALOGUE VOL. XXIV</span>
-</div>
-""", unsafe_allow_html=True)
+with tab_guide:
+    st.markdown("""
+    <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #14453d; font-weight: 700; margin-bottom: 4px;">
+            System Architecture &amp; Methodology
+        </div>
+        <h2 style="font-family: 'Newsreader', serif; font-size: 2rem; color: #1b1c1e; margin: 0 0 8px 0;">
+            How the Zero-Hallucination Policy Assistant Works
+        </h2>
+        <p style="font-size: 0.95rem; color: #5f6368; line-height: 1.6; margin: 0;">
+            Technical implementation overview of Problem Statement 34 (Company Policy Assistant) built with Multi-PDF Ingestion, ChromaDB, and Google Gemini.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-preset_cols = st.columns(3)
-quick_queries = [
-    {
-        "ref": "REF: ARCH-4011",
-        "badges": [
-            {"text": "HR FOLIO", "cls": ""},
-            {"text": "AUDITED 2025", "cls": "secondary"}
-        ],
-        "title": "I. Annual Paid Leave & Carry-Forward Limits",
-        "desc": "Section 4.1.2 — Accrual caps, statutory mandatory rollover deadlines, and executive exception waivers.",
-        "footer_stat": "📜 14 Precedents • Statutory Codex",
-        "query": "How many days of paid leave can I carry forward to next year?",
-        "featured": False
-    },
-    {
-        "ref": "REF: ARCH-7300",
-        "badges": [
-            {"text": "ACTIVE CONSULTATION", "cls": "active"},
-            {"text": "AUDITED 2025", "cls": "secondary"}
-        ],
-        "title": "II. Daily Per Diem & Corporate Lodging Caps",
-        "desc": "Section 7.3.0 — Tier-1 metro lodging limits ($380/nt), transatlantic flight tiers, and client entertainment thresholds.",
-        "footer_stat": "📍 Section 7.3.4 In-Scope • Active in Workspace",
-        "query": "What is the daily per diem allowance for domestic business travel?",
-        "featured": True
-    },
-    {
-        "ref": "REF: ARCH-9840",
-        "badges": [
-            {"text": "REMOTE WORK", "cls": ""},
-            {"text": "AUDITED 2025", "cls": "secondary"}
-        ],
-        "title": "III. Home Office Infrastructure Stipend",
-        "desc": "Section 9.8.4 — Annual ergonomic allocation ($1,500), hardware depreciation schedules, and dual-monitor subsidies.",
-        "footer_stat": "🛡️ Verified Q1 • Institutional Grant",
-        "query": "What is the WFH equipment allowance for new employees?",
-        "featured": False
-    }
-]
+    g_col1, g_col2 = st.columns([1, 1])
 
-selected_query = None
-for idx, col in enumerate(preset_cols):
-    q = quick_queries[idx]
-    with col:
-        badges_html = "".join([f'<span class="stitch-dossier-badge {b["cls"]}">{b["text"]}</span>' for b in q["badges"]])
-        featured_card = " featured" if q["featured"] else ""
-        featured_ref = " featured" if q["featured"] else ""
-        
-        st.markdown(f"""
-        <div class="stitch-dossier-card{featured_card}">
-            <div>
-                <div class="stitch-dossier-top">
-                    <span class="stitch-dossier-ref{featured_ref}">{q['ref']}</span>
-                    <div class="stitch-dossier-badges">{badges_html}</div>
-                </div>
-                <div class="stitch-dossier-title">{q['title']}</div>
-                <div class="stitch-dossier-desc">{q['desc']}</div>
-            </div>
-            <div class="stitch-dossier-footer">
-                <span>{q['footer_stat']}</span>
+    with g_col1:
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">1. Document Parsing &amp; Chunking</span>
+            <div class="stitch-guide-title">Multi-PDF Ingestion Engine</div>
+            <div class="stitch-guide-desc">
+                Official policy PDFs (Leave, Travel, Reimbursements) are extracted using <code>pypdf</code>. Text is split into <strong>300-word sliding semantic windows</strong> with <strong>50-word overlaps</strong> to ensure cross-boundary legal context is never clipped. Every chunk retains immutable metadata tags: <code>source</code> filename and <code>page</code> number.
             </div>
         </div>
         """, unsafe_allow_html=True)
-        
-        card_btn = st.button(
-            "⚡ Load Brief & Consult →",
-            use_container_width=True,
-            key=f"dossier_btn_{idx}"
-        )
-        if card_btn:
-            selected_query = q["query"]
 
-# Archival Consultation Divider
-st.markdown("""
-<div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 2rem 0 1.2rem 0;">
-    <div style="height: 1px; background: #e3e2e4; flex: 1;"></div>
-    <span style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #707976;">
-        📜 Consultation Record • Vector-Grounding Vault Active
-    </span>
-    <div style="height: 1px; background: #e3e2e4; flex: 1;"></div>
-</div>
-""", unsafe_allow_html=True)
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">2. High-Dimensional Embeddings</span>
+            <div class="stitch-guide-title">ChromaDB Vector Store</div>
+            <div class="stitch-guide-desc">
+                Chunks are converted into semantic vector embeddings using Google's <code>text-embedding-004</code> and indexed into a local SQLite3-backed ChromaDB collection. This enables instant mathematical similarity calculations across thousands of statutory clauses.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-# ---------------------------------------------------------
-# Consultation Stream
-# ---------------------------------------------------------
-for msg in st.session_state.messages:
-    role_icon = "⚖️" if msg["role"] == "assistant" else "👤"
-    with st.chat_message(msg["role"], avatar=role_icon):
-        st.markdown(msg["content"])
-        if msg.get("sources"):
-            with st.expander("📌 Judicial Precedent & Primary Source Attributions", expanded=False):
-                for s in msg["sources"]:
-                    st.markdown(f"""
-                    <div class="stitch-footnote-card">
-                        <div class="stitch-footnote-header">
-                            <span style="font-size: 0.75rem; font-weight: 700; color: #002e27; text-transform: uppercase;">
-                                📜 {s['source_file']} &bull; PAGE {s['page']}
-                            </span>
-                            <span style="font-size: 0.7rem; color: #707976;">Audited Precedent</span>
-                        </div>
-                        <div class="stitch-footnote-quote">
-                            "{s['content_preview']}"
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">3. Semantic Cosine Retrieval</span>
+            <div class="stitch-guide-title">Top-K Context Retrieval</div>
+            <div class="stitch-guide-desc">
+                When an employee enters an inquiry (e.g. <em>"How many days of paid leave can I carry forward?"</em>), the query is vectorized and compared against ChromaDB using cosine distance. The system retrieves the top-3 most statistically relevant policy clauses.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with g_col2:
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">4. Zero-Hallucination Synthesis</span>
+            <div class="stitch-guide-title">Constrained Gemini Reasoning</div>
+            <div class="stitch-guide-desc">
+                The retrieved clauses and user inquiry are formatted into an audited institutional prompt and passed to Google Gemini (<code>gemini-2.5-flash</code>). Strict systemic guardrails instruct the model: <em>"Answer strictly and exclusively from the provided policy clauses. If an allowance is not mentioned, refuse to fabricate it."</em>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">5. Audited Source Attributions</span>
+            <div class="stitch-guide-title">Verifiable Judicial Footnotes</div>
+            <div class="stitch-guide-desc">
+                Every generated response includes expandable judicial precedent cards citing the exact source PDF and page number (e.g. <code>Leave_Policy.pdf • Page 1</code>) alongside verbatim quote previews, establishing 100% auditability for HR and finance compliance.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="stitch-guide-card" style="border-left: 4px solid #14453d;">
+            <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #14453d; letter-spacing: 0.08em; margin-bottom: 4px;">Compliance &amp; Specs</div>
+            <div class="stitch-guide-title" style="font-size: 1.15rem;">Academic Project Specifications</div>
+            <div style="font-size: 0.82rem; color: #404846; line-height: 1.6;">
+                &bull; <strong>Problem Statement:</strong> PS 34 (Company Policy Assistant)<br/>
+                &bull; <strong>Student Roll No:</strong> 34<br/>
+                &bull; <strong>Vector DB:</strong> ChromaDB (Local SQLite3 Persistence)<br/>
+                &bull; <strong>LLM API:</strong> Google GenAI SDK (v1beta HTTP options)<br/>
+                &bull; <strong>UI System:</strong> Modern Editorial Lexicon (Google Stitch Screen 322cbe1be2274dcbadc0e3286a5b94de)
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
 # Chat Input & Synthesis
