@@ -97,44 +97,45 @@ st.markdown("""
     }
     .stitch-brand-title {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.78rem;
+        font-size: 0.82rem;
         font-weight: 700;
         letter-spacing: 0.1em;
         color: var(--ink);
         text-transform: uppercase;
     }
-    .stitch-brand-bullet {
-        color: var(--hairline);
-        font-size: 0.8rem;
-    }
-    .stitch-brand-vol {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.68rem;
-        letter-spacing: 0.12em;
-        color: var(--muted);
-        text-transform: uppercase;
-    }
     .stitch-nav-links {
         display: flex;
         align-items: center;
-        gap: 22px;
+        gap: 14px;
     }
     .stitch-nav-link {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
-        letter-spacing: 0.06em;
-        color: var(--muted);
-        text-decoration: none;
-        transition: color 0.2s ease;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 0.86rem;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        color: var(--charcoal);
+        text-decoration: none !important;
+        padding: 7px 18px;
+        border-radius: 9999px;
+        transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-block;
     }
     .stitch-nav-link:hover {
         color: var(--cognac);
+        background: rgba(139, 69, 19, 0.08);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 69, 19, 0.08);
     }
     .stitch-nav-link.active {
-        color: var(--cognac) !important;
+        color: #FFFFFF !important;
+        background: var(--cognac) !important;
         font-weight: 700;
-        border-bottom: 2px solid var(--cognac);
-        padding-bottom: 2px;
+        box-shadow: 0 4px 14px rgba(139, 69, 19, 0.28);
+        transform: translateY(0);
+    }
+    .stitch-nav-link.active:hover {
+        background: var(--cognac-hover) !important;
+        transform: translateY(-1px);
     }
     .stitch-actions {
         display: flex;
@@ -481,9 +482,11 @@ if "model_choice" not in st.session_state:
     st.session_state.model_choice = "gemini-2.5-flash"
 
 # Determine active tab from URL query params or session state
-active_tab = st.query_params.get("tab", "architecture")
-if active_tab not in ["architecture", "consultation", "folios", "settings"]:
-    active_tab = "architecture"
+active_tab = st.query_params.get("tab", "home")
+if active_tab == "architecture":
+    active_tab = "home"
+if active_tab not in ["home", "consultation", "folios", "settings"]:
+    active_tab = "home"
 
 # Initialize RAG Pipeline
 if "pipeline" not in st.session_state:
@@ -496,7 +499,7 @@ if "pipeline" not in st.session_state:
 # ---------------------------------------------------------
 # EXACT STITCH FLOATING PILL NAVBAR
 # ---------------------------------------------------------
-act_arch = "active" if active_tab == "architecture" else ""
+act_home = "active" if active_tab == "home" else ""
 act_consult = "active" if active_tab == "consultation" else ""
 act_folios = "active" if active_tab == "folios" else ""
 act_settings = "active" if active_tab == "settings" else ""
@@ -504,23 +507,17 @@ act_settings = "active" if active_tab == "settings" else ""
 st.markdown(f"""
 <div class="stitch-header-wrap">
     <nav class="stitch-nav-pill">
-        <a class="stitch-brand" href="?tab=architecture" target="_self">
-            <span style="font-size: 1.05rem;">⚖️</span>
+        <a class="stitch-brand" href="?tab=home" target="_self">
+            <span style="font-size: 1.15rem;">⚖️</span>
             <span class="stitch-brand-title">LEXICON // CODEX</span>
-            <span class="stitch-brand-bullet">•</span>
-            <span class="stitch-brand-vol">VOL. XXIV</span>
         </a>
         <div class="stitch-nav-links">
-            <a class="stitch-nav-link {act_arch}" href="?tab=architecture" target="_self">01 // Architecture</a>
-            <a class="stitch-nav-link {act_consult}" href="?tab=consultation" target="_self">02 // Consultation</a>
-            <a class="stitch-nav-link {act_folios}" href="?tab=folios" target="_self">03 // Folios</a>
-            <a class="stitch-nav-link {act_settings}" href="?tab=settings" target="_self">04 // Settings</a>
+            <a class="stitch-nav-link {act_home}" href="?tab=home" target="_self">Home</a>
+            <a class="stitch-nav-link {act_consult}" href="?tab=consultation" target="_self">Consultation</a>
+            <a class="stitch-nav-link {act_folios}" href="?tab=folios" target="_self">Folios</a>
+            <a class="stitch-nav-link {act_settings}" href="?tab=settings" target="_self">Settings</a>
         </div>
         <div class="stitch-actions">
-            <div class="stitch-status-badge">
-                <span class="stitch-pulse-dot"></span>
-                <span>ChromaDB Active</span>
-            </div>
             <a class="stitch-cta-btn" href="?tab=consultation" target="_self">
                 CONSULT CODEX ⚡
             </a>
@@ -530,9 +527,9 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# SECTION 1: ARCHITECTURE (Landing & How It Works)
+# SECTION 1: HOME (Landing & How It Works)
 # ---------------------------------------------------------
-if active_tab == "architecture":
+if active_tab == "home":
     # Exact Stitch Hero Section
     st.markdown("""
     <div class="stitch-hero">
