@@ -272,6 +272,20 @@ st.markdown("""
     }
     
     /* INITIATE VECTOR CONSULTATION BUTTON */
+    .stitch-initiate-btn,
+    .stitch-initiate-btn:hover,
+    .stitch-initiate-btn:focus,
+    .stitch-initiate-btn:visited,
+    .stitch-initiate-btn:active,
+    .stitch-initiate-btn span,
+    .stitch-initiate-btn *,
+    div[data-testid="stMarkdownContainer"] a.stitch-initiate-btn,
+    div[data-testid="stMarkdownContainer"] a.stitch-initiate-btn * {
+        text-decoration: none !important;
+        text-decoration-line: none !important;
+        border-bottom: none !important;
+        outline: none !important;
+    }
     .stitch-initiate-btn {
         background: var(--cognac);
         color: #FFFFFF !important;
@@ -282,7 +296,7 @@ st.markdown("""
         text-transform: uppercase;
         padding: 14px 34px;
         border-radius: 9999px;
-        text-decoration: none;
+        text-decoration: none !important;
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -294,6 +308,7 @@ st.markdown("""
         background: var(--cognac-hover);
         transform: scale(1.03);
         box-shadow: 0 14px 30px rgba(139, 69, 19, 0.35);
+        text-decoration: none !important;
     }
 
     .stitch-telemetry {
@@ -580,9 +595,9 @@ if active_tab == "home":
             Directly ground every inquiry in verified enterprise policy folios. Engineered with ChromaDB vectorization and strict non-parametric refusal guardrails for complete statutory auditability.
         </p>
         <div style="text-align: center !important; width: 100% !important; display: flex !important; justify-content: center !important;">
-            <a class="stitch-initiate-btn" href="?tab=consultation" target="_self">
-                <span>INITIATE VECTOR CONSULTATION</span>
-                <span style="font-size: 1.1rem; font-weight: 700;">&rarr;</span>
+            <a class="stitch-initiate-btn" href="?tab=consultation" target="_self" style="text-decoration: none !important; text-decoration-line: none !important; border-bottom: none !important; color: #FFFFFF !important;">
+                <span style="text-decoration: none !important; color: #FFFFFF !important;">INITIATE VECTOR CONSULTATION</span>
+                <span style="font-size: 1.1rem; font-weight: 700; text-decoration: none !important; color: #FFFFFF !important;">&rarr;</span>
             </a>
         </div>
         <div class="stitch-telemetry" style="text-align: center !important; justify-content: center !important; width: 100% !important;">
