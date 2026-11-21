@@ -197,10 +197,14 @@ st.markdown("""
 
     /* EXACT STITCH HERO SECTION */
     .stitch-hero {
-        text-align: center;
+        text-align: center !important;
         padding: 2.2rem 1rem 3rem 1rem;
         max-width: 860px;
-        margin: 0 auto;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     .stitch-eyebrow {
         display: inline-flex;
@@ -243,15 +247,28 @@ st.markdown("""
         font-weight: 400;
     }
     .stitch-lede {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.08rem;
-        font-weight: 400;
-        line-height: 1.7;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        font-size: 1.08rem !important;
+        font-weight: 400 !important;
+        line-height: 1.7 !important;
         color: var(--charcoal) !important;
         -webkit-text-fill-color: var(--charcoal) !important;
-        max-width: 680px;
-        margin: 0 auto 2.2rem auto;
+        max-width: 680px !important;
+        width: 100% !important;
+        margin: 0 auto 2.2rem auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
         text-align: center !important;
+        align-self: center !important;
+        display: block !important;
+    }
+    div[data-testid="stMarkdownContainer"] .stitch-lede,
+    .stitch-hero p,
+    .stitch-hero .stitch-lede {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        align-self: center !important;
     }
     
     /* INITIATE VECTOR CONSULTATION BUTTON */
@@ -551,24 +568,24 @@ st.markdown(f"""
 if active_tab == "home":
     # Exact Stitch Hero Section
     st.markdown("""
-    <div class="stitch-hero">
-        <div class="stitch-eyebrow">
+    <div class="stitch-hero" style="text-align: center !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; margin: 0 auto !important; max-width: 860px !important;">
+        <div class="stitch-eyebrow" style="margin-left: auto !important; margin-right: auto !important;">
             <span class="stitch-pulse-dot"></span>
             <span class="stitch-eyebrow-text">Problem Statement 34 &bull; Zero-Hallucination Policy Engine</span>
         </div>
-        <h1 class="stitch-headline">
+        <h1 class="stitch-headline" style="text-align: center !important; width: 100% !important;">
             Corporate policy intelligence,<br/>codified <span class="stitch-headline-accent">without error.</span>
         </h1>
-        <p class="stitch-lede" style="text-align: center !important;">
+        <p class="stitch-lede" style="text-align: center !important; margin-left: auto !important; margin-right: auto !important; max-width: 680px !important; width: 100% !important; align-self: center !important; display: block !important;">
             Directly ground every inquiry in verified enterprise policy folios. Engineered with ChromaDB vectorization and strict non-parametric refusal guardrails for complete statutory auditability.
         </p>
-        <div>
+        <div style="text-align: center !important; width: 100% !important; display: flex !important; justify-content: center !important;">
             <a class="stitch-initiate-btn" href="?tab=consultation" target="_self">
                 <span>INITIATE VECTOR CONSULTATION</span>
                 <span style="font-size: 1.1rem; font-weight: 700;">&rarr;</span>
             </a>
         </div>
-        <div class="stitch-telemetry">
+        <div class="stitch-telemetry" style="text-align: center !important; justify-content: center !important; width: 100% !important;">
             <span style="color: #24614A; font-weight: 600;">● 3 Verified Folios (HR • Travel • Expense)</span>
             <span style="color: #D8D2C5;">•</span>
             <span>Latency: ≤ 42ms</span>
