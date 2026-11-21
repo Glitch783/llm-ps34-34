@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+import pypdf
 from rag_pipeline import RAGPipeline
 
 # ---------------------------------------------------------
@@ -252,10 +253,13 @@ st.markdown("""
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 250px;
+        height: 310px !important;
+        min-height: 310px !important;
+        max-height: 310px !important;
+        box-sizing: border-box;
         position: relative;
         overflow: hidden;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .stitch-dossier-card:hover {
@@ -272,6 +276,7 @@ st.markdown("""
         justify-content: space-between;
         align-items: center;
         margin-bottom: 12px;
+        height: 24px;
     }
     .stitch-dossier-ref {
         font-size: 0.72rem;
@@ -299,6 +304,7 @@ st.markdown("""
         color: var(--stitch-on-surface-variant) !important;
         -webkit-text-fill-color: var(--stitch-on-surface-variant) !important;
         letter-spacing: 0.04em;
+        white-space: nowrap;
     }
     .stitch-dossier-badge.active {
         background: rgba(20, 69, 61, 0.12) !important;
@@ -318,15 +324,23 @@ st.markdown("""
         color: var(--stitch-on-surface) !important;
         -webkit-text-fill-color: var(--stitch-on-surface) !important;
         margin-bottom: 10px;
+        height: 56px !important;
+        min-height: 56px !important;
+        max-height: 56px !important;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
     .stitch-dossier-desc {
         font-family: 'Inter', sans-serif !important;
-        font-size: 0.85rem !important;
+        font-size: 0.84rem !important;
         line-height: 1.55 !important;
         color: var(--stitch-on-surface-variant) !important;
         -webkit-text-fill-color: var(--stitch-on-surface-variant) !important;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
         flex-grow: 1;
+        overflow: hidden;
     }
     .stitch-dossier-footer {
         display: flex;
@@ -338,6 +352,93 @@ st.markdown("""
         color: var(--stitch-outline) !important;
         -webkit-text-fill-color: var(--stitch-outline) !important;
         font-weight: 600;
+        height: 24px;
+    }
+
+    /* Functional Sidebar Policy Folio Cards */
+    .stitch-folio-box {
+        background: var(--stitch-surface-container-lowest);
+        border: 1px solid var(--stitch-outline-variant);
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+        transition: all 0.2s ease;
+    }
+    .stitch-folio-box:hover {
+        border-color: var(--stitch-primary-container);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .stitch-folio-box-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4px;
+    }
+    .stitch-folio-box-title {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--stitch-on-surface);
+    }
+    .stitch-folio-box-sub {
+        font-size: 0.72rem;
+        color: var(--stitch-outline);
+        margin-bottom: 10px;
+    }
+
+    /* In-App Policy Document Inspector */
+    .stitch-inspector-card {
+        background: #ffffff;
+        border: 1.5px solid var(--stitch-primary-container);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(20, 69, 61, 0.08);
+    }
+    .stitch-inspector-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding-bottom: 12px;
+        margin-bottom: 16px;
+    }
+    .stitch-inspector-body {
+        background: var(--stitch-surface-container-low);
+        border: 1px solid var(--stitch-outline-variant);
+        border-radius: 10px;
+        padding: 20px;
+        font-family: 'Newsreader', serif;
+        font-size: 1.05rem;
+        line-height: 1.65;
+        color: var(--stitch-on-surface);
+        max-height: 420px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+    }
+
+    /* Institutional Auditor Profile */
+    .stitch-auditor-profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: var(--stitch-surface-container);
+        border: 1px solid rgba(0,0,0,0.06);
+        margin-top: 14px;
+    }
+    .stitch-auditor-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--stitch-primary-container);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #ffffff;
+        box-shadow: 0 2px 6px rgba(20,69,61,0.2);
     }
 
     /* Chat Messages - Publication Brief */
@@ -607,25 +708,58 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown("""
-    <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #707976; font-weight: 700; margin-bottom: 8px;">
-        📜 Primary Policy Folios
+    <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #707976; font-weight: 700; margin-bottom: 10px;">
+        📜 Codified Policy Folios
     </div>
     """, unsafe_allow_html=True)
     
     policy_files = [f for f in os.listdir(POLICIES_DIR) if f.lower().endswith(".pdf")]
     if policy_files:
         for idx, pf in enumerate(policy_files):
-            file_size_kb = round(os.path.getsize(os.path.join(POLICIES_DIR, pf)) / 1024, 1)
+            filepath = os.path.join(POLICIES_DIR, pf)
+            file_size_kb = round(os.path.getsize(filepath) / 1024, 1)
             roman_nums = ["I", "II", "III", "IV", "V", "VI"]
             roman = roman_nums[idx] if idx < len(roman_nums) else str(idx+1)
+            clean_name = pf.replace("_Policy.pdf", "").replace("_", " ")
+            
+            with open(filepath, "rb") as f:
+                pdf_bytes = f.read()
+
             st.markdown(f"""
-            <div class="stitch-folio-item">
-                <span><strong>Folio {roman}:</strong> {pf}</span>
-                <span class="stitch-folio-badge">{file_size_kb} KB</span>
+            <div class="stitch-folio-box">
+                <div class="stitch-folio-box-header">
+                    <span class="stitch-folio-box-title">Folio {roman}: {clean_name}</span>
+                    <span class="stitch-folio-badge">{file_size_kb} KB</span>
+                </div>
+                <div class="stitch-folio-box-sub">
+                    File: <code>{pf}</code> &bull; <span style="color: #14453d; font-weight: 600;">Audited</span>
+                </div>
             </div>
             """, unsafe_allow_html=True)
+            
+            b_col1, b_col2 = st.columns([1, 1])
+            with b_col1:
+                st.download_button(
+                    label="📥 Download",
+                    data=pdf_bytes,
+                    file_name=pf,
+                    mime="application/pdf",
+                    key=f"dl_sidebar_{idx}",
+                    use_container_width=True
+                )
+            with b_col2:
+                if st.button("📖 Read", key=f"inspect_sidebar_{idx}", use_container_width=True):
+                    st.session_state.active_doc_preview = pf
+                    st.rerun()
     else:
         st.warning("No PDF policies located in `policies/`.")
+
+    st.markdown("---")
+    st.markdown("""
+    <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #707976; font-weight: 700; margin-bottom: 8px;">
+        ⚡ Folio Ingestion &amp; Sync
+    </div>
+    """, unsafe_allow_html=True)
 
     # Upload new policy PDF
     uploaded_files = st.file_uploader(
@@ -654,9 +788,15 @@ with st.sidebar:
         st.session_state.messages = [st.session_state.messages[0]]
         st.rerun()
 
+    # Institutional Auditor Profile Card (Matching Stitch Sidebar)
     st.markdown("""
-    <div style="margin-top: 1rem; padding: 10px; background: #ffffff; border: 1px solid #efedf0; border-radius: 8px; font-size: 0.72rem; color: #707976; font-family: 'JetBrains Mono', monospace; text-align: center;">
-        ROLL NO: 34 &bull; PS 34<br/>POLICY RAG CODEX
+    <div class="stitch-auditor-profile">
+        <div class="stitch-auditor-avatar">⚖️</div>
+        <div style="flex-grow: 1; min-width: 0;">
+            <div style="font-size: 0.82rem; font-weight: 700; color: #1b1c1e;">Compliance Officer</div>
+            <div style="font-size: 0.7rem; color: #707976;">Roll No: 34 &bull; Codex PS 34</div>
+        </div>
+        <span style="font-size: 0.65rem; font-weight: 700; color: #14453d; background: rgba(20,69,61,0.12); padding: 2px 6px; border-radius: 4px;">ACTIVE</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -731,6 +871,64 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
+# In-App Folio Document Inspector (Activated via Sidebar "Read")
+# ---------------------------------------------------------
+if st.session_state.get("active_doc_preview"):
+    doc_name = st.session_state.active_doc_preview
+    doc_path = os.path.join(POLICIES_DIR, doc_name)
+    if os.path.exists(doc_path):
+        try:
+            reader = pypdf.PdfReader(doc_path)
+            total_pages = len(reader.pages)
+            pages_text = [page.extract_text() for page in reader.pages]
+            full_text = "\n\n--- PAGE BREAK ---\n\n".join(pages_text)
+            
+            with open(doc_path, "rb") as f:
+                doc_bytes = f.read()
+
+            st.markdown(f"""
+            <div class="stitch-inspector-card">
+                <div class="stitch-inspector-header">
+                    <div>
+                        <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #14453d; font-weight: 700;">
+                            📖 Official Institutional Folio Inspector
+                        </span>
+                        <h2 style="font-family: 'Newsreader', serif; font-size: 1.6rem; margin: 4px 0; color: #1b1c1e;">
+                            {doc_name.replace('_Policy.pdf', '').replace('_', ' ')} Policy Manual
+                        </h2>
+                        <span style="font-size: 0.78rem; color: #707976;">
+                            Source File: <code>{doc_name}</code> &bull; {total_pages} Page(s) &bull; Audited Statutory Copy
+                        </span>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Action controls inside inspector
+            c_close, c_dl = st.columns([1, 1])
+            with c_close:
+                if st.button("❌ Close Document Inspector", key="close_inspector", use_container_width=True):
+                    st.session_state.active_doc_preview = None
+                    st.rerun()
+            with c_dl:
+                st.download_button(
+                    label=f"📥 Download PDF ({doc_name})",
+                    data=doc_bytes,
+                    file_name=doc_name,
+                    mime="application/pdf",
+                    key="dl_from_inspector",
+                    use_container_width=True
+                )
+            
+            # Formatted text viewer
+            st.markdown(f"""
+            <div class="stitch-inspector-body">{full_text}</div>
+            <div style="margin-bottom: 2rem;"></div>
+            """, unsafe_allow_html=True)
+        except Exception as e:
+            st.error(f"Error inspecting document: {e}")
+
+# ---------------------------------------------------------
 # Curated Inquiries & Active Dossiers (Stitch Card I, II, III)
 # ---------------------------------------------------------
 st.markdown("""
@@ -744,7 +942,10 @@ preset_cols = st.columns(3)
 quick_queries = [
     {
         "ref": "REF: ARCH-4011",
-        "badges": [{"text": "HR FOLIO", "cls": ""}],
+        "badges": [
+            {"text": "HR FOLIO", "cls": ""},
+            {"text": "AUDITED 2025", "cls": "secondary"}
+        ],
         "title": "I. Annual Paid Leave & Carry-Forward Limits",
         "desc": "Section 4.1.2 — Accrual caps, statutory mandatory rollover deadlines, and executive exception waivers.",
         "footer_stat": "📜 14 Precedents • Statutory Codex",
@@ -765,7 +966,10 @@ quick_queries = [
     },
     {
         "ref": "REF: ARCH-9840",
-        "badges": [{"text": "REMOTE WORK", "cls": ""}],
+        "badges": [
+            {"text": "REMOTE WORK", "cls": ""},
+            {"text": "AUDITED 2025", "cls": "secondary"}
+        ],
         "title": "III. Home Office Infrastructure Stipend",
         "desc": "Section 9.8.4 — Annual ergonomic allocation ($1,500), hardware depreciation schedules, and dual-monitor subsidies.",
         "footer_stat": "🛡️ Verified Q1 • Institutional Grant",
