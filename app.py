@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------
-# Styling: Floating Capsule Header + Serein & Konk Luxury Aesthetics
+# Styling: Floating Capsule Header + Serein Luxury Aesthetics
 # ---------------------------------------------------------
 st.markdown("""
 <style>
@@ -44,7 +44,7 @@ st.markdown("""
         height: 0 !important;
     }
 
-    /* Main Container Padding & Body Background */
+    /* Canvas Reset */
     html, body, [data-testid="stAppViewContainer"], .stApp {
         background-color: var(--konk-ink) !important;
         background: var(--konk-ink) !important;
@@ -54,8 +54,8 @@ st.markdown("""
     }
 
     .main .block-container {
-        max-width: 1180px !important;
-        padding-top: 1.5rem !important;
+        max-width: 1140px !important;
+        padding-top: 1rem !important;
         padding-bottom: 6rem !important;
         margin: 0 auto !important;
     }
@@ -64,156 +64,209 @@ st.markdown("""
         background: transparent !important;
     }
 
-    /* FLOATING PILL NAVBAR (SEREIN AESTHETIC) */
-    .serein-nav-pill {
-        background: rgba(18, 18, 20, 0.85);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid var(--konk-border);
-        border-radius: 9999px;
-        padding: 10px 24px;
+    /* TOP BRAND BAR */
+    .top-brand-bar {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        margin: 0 auto 2.5rem auto;
-        max-width: 860px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        align-items: center;
+        padding: 8px 0 16px 0;
+        margin-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .serein-logo {
+    .top-brand-title {
         font-family: 'Newsreader', Georgia, serif;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         font-weight: 500;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.12em;
         color: var(--konk-bone);
         text-transform: uppercase;
     }
-    .serein-nav-links {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-    .serein-nav-item {
-        font-family: 'Archivo', sans-serif;
-        font-size: 0.82rem;
-        font-weight: 600;
-        color: var(--konk-steel);
-        text-decoration: none;
-        letter-spacing: 0.04em;
-        transition: color 0.2s ease;
-    }
-    .serein-nav-item:hover {
-        color: var(--konk-bone);
-    }
-    .serein-nav-cta {
-        background: var(--konk-bronze);
-        color: #ffffff !important;
-        font-family: 'Archivo', sans-serif;
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        padding: 8px 18px;
-        border-radius: 9999px;
-        border: none;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        box-shadow: 0 2px 8px rgba(200, 148, 70, 0.3);
-    }
-
-    /* HERO SECTION (SEREIN INSPIRED) */
-    .serein-hero {
-        text-align: center;
-        padding: 2.5rem 1rem 3.5rem 1rem;
-        max-width: 860px;
-        margin: 0 auto;
-    }
-    .serein-hero-tracker {
+    .top-brand-badge {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.72rem;
         font-weight: 600;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--konk-gold);
-        margin-bottom: 1.2rem;
-        display: inline-block;
-    }
-    .serein-hero-headline {
-        font-family: 'Newsreader', Georgia, serif !important;
-        font-size: 3.8rem !important;
-        font-weight: 400 !important;
-        line-height: 1.12 !important;
-        letter-spacing: -0.015em !important;
-        color: var(--konk-bone) !important;
-        -webkit-text-fill-color: var(--konk-bone) !important;
-        margin-bottom: 1.4rem;
-    }
-    .serein-hero-lede {
-        font-family: 'Archivo', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 400;
-        line-height: 1.7;
-        color: var(--konk-steel) !important;
-        -webkit-text-fill-color: var(--konk-steel) !important;
-        max-width: 680px;
-        margin: 0 auto 2.2rem auto;
-    }
-    .serein-hero-btn {
-        background: var(--konk-bronze);
-        color: #ffffff;
-        font-family: 'Archivo', sans-serif;
-        font-size: 0.92rem;
-        font-weight: 600;
-        font-style: italic;
-        padding: 12px 28px;
+        padding: 4px 12px;
         border-radius: 9999px;
-        display: inline-block;
-        box-shadow: 0 4px 16px rgba(200, 148, 70, 0.35);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(231, 185, 111, 0.1);
+        border: 1px solid rgba(231, 185, 111, 0.3);
+        color: var(--konk-gold);
+        letter-spacing: 0.08em;
     }
 
-    /* SECTION NAVIGATION BAR (TOP TABS) */
+    /* FUNCTIONAL TOP CAPSULE TABS */
     [data-testid="stTabs"] {
-        margin-top: 1rem !important;
-        margin-bottom: 2.5rem !important;
+        margin-top: 0.4rem !important;
+        margin-bottom: 2rem !important;
     }
     [role="tablist"] {
-        background: var(--konk-surface) !important;
+        background: rgba(18, 18, 20, 0.95) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
         border: 1px solid var(--konk-border) !important;
         border-radius: 9999px !important;
         padding: 6px !important;
         gap: 6px !important;
-        max-width: 920px !important;
+        max-width: 780px !important;
         margin: 0 auto !important;
         display: flex !important;
         justify-content: center !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
     }
     button[role="tab"] {
         font-family: 'Archivo', sans-serif !important;
         font-size: 0.88rem !important;
         font-weight: 700 !important;
+        letter-spacing: 0.04em !important;
         color: var(--konk-steel) !important;
         -webkit-text-fill-color: var(--konk-steel) !important;
-        padding: 10px 22px !important;
+        padding: 9px 24px !important;
         border-radius: 9999px !important;
         background: transparent !important;
         border: none !important;
         transition: all 0.2s ease !important;
         margin: 0 !important;
+        cursor: pointer !important;
     }
     button[role="tab"]:hover {
         color: var(--konk-bone) !important;
         -webkit-text-fill-color: var(--konk-bone) !important;
-        background: rgba(255, 255, 255, 0.04) !important;
+        background: rgba(255, 255, 255, 0.06) !important;
     }
     button[role="tab"][aria-selected="true"] {
         color: #0B0B0C !important;
         -webkit-text-fill-color: #0B0B0C !important;
         background: var(--konk-gold) !important;
-        box-shadow: 0 2px 10px rgba(231, 185, 111, 0.3) !important;
+        box-shadow: 0 2px 10px rgba(231, 185, 111, 0.35) !important;
     }
     div[data-baseweb="tab-highlight"] {
         display: none !important;
+    }
+
+    /* HERO SECTION */
+    .serein-hero {
+        text-align: center;
+        padding: 2rem 1rem 2.8rem 1rem;
+        max-width: 840px;
+        margin: 0 auto;
+    }
+    .serein-hero-tracker {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.70rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--konk-gold);
+        margin-bottom: 1rem;
+        display: inline-block;
+    }
+    .serein-hero-headline {
+        font-family: 'Newsreader', Georgia, serif !important;
+        font-size: 3.4rem !important;
+        font-weight: 400 !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.015em !important;
+        color: var(--konk-bone) !important;
+        -webkit-text-fill-color: var(--konk-bone) !important;
+        margin-bottom: 1.2rem;
+    }
+    .serein-hero-lede {
+        font-family: 'Archivo', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 400;
+        line-height: 1.65;
+        color: var(--konk-steel) !important;
+        -webkit-text-fill-color: var(--konk-steel) !important;
+        max-width: 660px;
+        margin: 0 auto 1.8rem auto;
+    }
+
+    /* PICTORIAL HOW-IT-WORKS STEP CARDS */
+    .step-card {
+        background: var(--konk-surface);
+        border: 1px solid var(--konk-border);
+        border-radius: 14px;
+        padding: 22px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        transition: all 0.25s ease;
+        position: relative;
+    }
+    .step-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--konk-gold);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+    .step-icon-badge {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        background: var(--konk-surface-elevated);
+        border: 1px solid rgba(231, 185, 111, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 14px;
+    }
+    .step-number {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.70rem;
+        font-weight: 700;
+        color: var(--konk-gold);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+    .step-title {
+        font-family: 'Archivo', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--konk-bone);
+        margin-bottom: 8px;
+    }
+    .step-desc {
+        font-family: 'Archivo', sans-serif;
+        font-size: 0.86rem;
+        line-height: 1.6;
+        color: var(--konk-steel);
+    }
+
+    /* VISUAL CONNECTOR ARROWS */
+    .flow-diagram-strip {
+        background: var(--konk-surface);
+        border: 1px solid var(--konk-border);
+        border-radius: 14px;
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        gap: 12px;
+        overflow-x: auto;
+    }
+    .flow-node {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        white-space: nowrap;
+    }
+    .flow-node-icon {
+        font-size: 22px;
+    }
+    .flow-node-text {
+        font-family: 'Archivo', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--konk-bone);
+    }
+    .flow-arrow {
+        color: var(--konk-gold);
+        font-size: 18px;
+        font-weight: 700;
+        opacity: 0.7;
     }
 
     /* CARDS & CONTAINERS */
@@ -224,10 +277,6 @@ st.markdown("""
         padding: 24px;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
         margin-bottom: 20px;
-        transition: all 0.2s ease;
-    }
-    .konk-card:hover {
-        border-color: var(--konk-gold);
     }
 
     /* DOSSIER CARDS (3-COLUMN EQUAL HEIGHT) */
@@ -269,11 +318,9 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 0.1em;
         color: var(--konk-steel) !important;
-        -webkit-text-fill-color: var(--konk-steel) !important;
     }
     .konk-dossier-ref.featured {
         color: var(--konk-gold) !important;
-        -webkit-text-fill-color: var(--konk-gold) !important;
     }
     .konk-dossier-badge {
         font-family: 'JetBrains Mono', monospace;
@@ -284,19 +331,16 @@ st.markdown("""
         background: var(--konk-surface-elevated);
         border: 1px solid var(--konk-border);
         color: var(--konk-steel) !important;
-        -webkit-text-fill-color: var(--konk-steel) !important;
     }
     .konk-dossier-badge.active {
         background: rgba(231, 185, 111, 0.12) !important;
         border-color: rgba(231, 185, 111, 0.4) !important;
         color: var(--konk-gold) !important;
-        -webkit-text-fill-color: var(--konk-gold) !important;
     }
     .konk-dossier-badge.secondary {
         background: rgba(200, 148, 70, 0.12) !important;
         border-color: rgba(200, 148, 70, 0.4) !important;
         color: var(--konk-bronze) !important;
-        -webkit-text-fill-color: var(--konk-bronze) !important;
     }
     .konk-dossier-title {
         font-family: 'Archivo', sans-serif !important;
@@ -304,7 +348,6 @@ st.markdown("""
         font-weight: 700 !important;
         line-height: 1.3 !important;
         color: var(--konk-bone) !important;
-        -webkit-text-fill-color: var(--konk-bone) !important;
         margin-bottom: 10px;
         height: 56px !important;
         min-height: 56px !important;
@@ -319,7 +362,6 @@ st.markdown("""
         font-size: 0.86rem !important;
         line-height: 1.55 !important;
         color: var(--konk-steel) !important;
-        -webkit-text-fill-color: var(--konk-steel) !important;
         margin-bottom: 12px;
         flex-grow: 1;
         overflow: hidden;
@@ -333,7 +375,6 @@ st.markdown("""
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.72rem;
         color: var(--konk-steel) !important;
-        -webkit-text-fill-color: var(--konk-steel) !important;
         font-weight: 500;
         height: 24px;
     }
@@ -379,7 +420,6 @@ st.markdown("""
     /* CHAT STREAM */
     div[data-testid="stChatMessage"] {
         background-color: var(--konk-surface) !important;
-        background: var(--konk-surface) !important;
         border: 1px solid var(--konk-border) !important;
         border-radius: 12px !important;
         padding: 1.6rem !important;
@@ -388,7 +428,6 @@ st.markdown("""
     }
     div[data-testid="stChatMessage"]:has([aria-label="Chat message from user"]) {
         background-color: var(--konk-surface-elevated) !important;
-        background: var(--konk-surface-elevated) !important;
     }
     div[data-testid="stChatMessage"]:has([aria-label="Chat message from assistant"]) {
         border-left: 3px solid var(--konk-gold) !important;
@@ -398,7 +437,6 @@ st.markdown("""
     .stMarkdown,
     .stMarkdown * {
         color: var(--konk-bone) !important;
-        -webkit-text-fill-color: var(--konk-bone) !important;
     }
 
     /* CITATION FOOTNOTE */
@@ -425,7 +463,6 @@ st.markdown("""
         font-size: 0.88rem;
         line-height: 1.55;
         color: var(--konk-bone-muted) !important;
-        -webkit-text-fill-color: var(--konk-bone-muted) !important;
     }
 
     /* CHAT FLOATING DOCK */
@@ -435,17 +472,15 @@ st.markdown("""
     footer,
     footer * {
         background: transparent !important;
-        background-color: transparent !important;
         border: none !important;
     }
     div[data-testid="stChatInput"] {
         background-color: var(--konk-surface) !important;
-        background: var(--konk-surface) !important;
         border: 1.5px solid var(--konk-border) !important;
         border-radius: 14px !important;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
         padding: 6px 12px !important;
-        max-width: 920px !important;
+        max-width: 900px !important;
         margin: 0 auto !important;
     }
     div[data-testid="stChatInput"]:focus-within {
@@ -454,15 +489,12 @@ st.markdown("""
     }
     div[data-testid="stChatInput"] textarea {
         background-color: var(--konk-surface) !important;
-        background: var(--konk-surface) !important;
         color: var(--konk-bone) !important;
-        -webkit-text-fill-color: var(--konk-bone) !important;
         font-family: 'Archivo', sans-serif !important;
     }
     div[data-testid="stChatInput"] button {
         background-color: var(--konk-gold) !important;
         color: #0B0B0C !important;
-        -webkit-text-fill-color: #0B0B0C !important;
         border-radius: 8px !important;
     }
 
@@ -479,7 +511,6 @@ st.markdown("""
     .stButton button:hover {
         background: var(--konk-gold) !important;
         color: #0B0B0C !important;
-        -webkit-text-fill-color: #0B0B0C !important;
         border-color: var(--konk-gold) !important;
     }
     div[data-testid="stDownloadButton"] button {
@@ -492,7 +523,6 @@ st.markdown("""
     div[data-testid="stDownloadButton"] button:hover {
         background: var(--konk-gold) !important;
         color: #0B0B0C !important;
-        -webkit-text-fill-color: #0B0B0C !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -509,12 +539,11 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "assistant",
-            "content": "Welcome to **Lexicon: Corporate Policy Intelligence**. Inquire regarding codified statutory findings over **Leave**, **Business Travel**, and **Expense Reimbursement** guidelines.\n\nEvery response is backed by zero-hallucination vector grounding and primary source attributions.",
+            "content": "Welcome to **Lexicon: Corporate Policy Intelligence**. Inquire regarding statutory findings over **Leave**, **Business Travel**, and **Expense Reimbursement** guidelines.\n\nEvery response is backed by zero-hallucination vector grounding and primary source attributions.",
             "sources": []
         }
     ]
 
-# Default API Key from environment or session
 if "api_key" not in st.session_state:
     st.session_state.api_key = os.getenv("GEMINI_API_KEY", "")
 
@@ -530,150 +559,190 @@ if "pipeline" not in st.session_state:
         st.session_state.pipeline = pipeline
 
 # ---------------------------------------------------------
-# FLOATING CAPSULE HEADER (Serein Nav Style)
+# TOP BRAND BAR
 # ---------------------------------------------------------
 st.markdown("""
-<div class="serein-nav-pill">
-    <div class="serein-logo">LEXICON</div>
-    <div class="serein-nav-links">
-        <span class="serein-nav-item">How It Works</span>
-        <span class="serein-nav-item">Policy Dashboard</span>
-        <span class="serein-nav-item">Document Library</span>
-        <span class="serein-nav-item">Credentials</span>
-    </div>
-    <a href="#consultation-stream" class="serein-nav-cta">Consult Assistant &rarr;</a>
+<div class="top-brand-bar">
+    <div class="top-brand-title">L E X I C O N</div>
+    <div class="top-brand-badge">PS 34 &bull; ZERO-HALLUCINATION &bull; ROLL NO: 34</div>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# LANDING HERO SECTION (Serein Inspired)
-# ---------------------------------------------------------
-st.markdown("""
-<div class="serein-hero">
-    <div class="serein-hero-tracker">
-        INDEPENDENT &bull; STATUTORY FIDUCIARY &bull; ZERO-HALLUCINATION
-    </div>
-    <h1 class="serein-hero-headline">
-        Corporate policy intelligence, built around you.
-    </h1>
-    <p class="serein-hero-lede">
-        We synthesize employee leave rules, business travel per diem caps, and expense reimbursement guidelines into one audited, zero-hallucination statutory consultation platform.
-    </p>
-    <div>
-        <span class="serein-hero-btn">Where Details Matter &bull; PS 34</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-# ---------------------------------------------------------
-# TOP SECTION NAVIGATION (Streamlit Pill Tabs)
+# FUNCTIONAL FLOATING TOP HEADER TABS (Short Abbreviations)
 # ---------------------------------------------------------
 tab_guide, tab_dashboard, tab_library, tab_settings = st.tabs([
-    "⚙️ How It Works & System Guide",
-    "🏛️ Policy Dashboard & Consultation",
-    "📚 Policy PDF Folios & Document Library",
-    "🔧 System & API Credentials"
+    "⚙️ Guide",
+    "🏛️ Consult",
+    "📚 Library",
+    "🔧 Settings"
 ])
 
 # ---------------------------------------------------------
-# SECTION 1: HOW THE SYSTEM WORKS (Landing Walkthrough)
+# TAB 1: HOW IT WORKS (Simple, Pictorial & Client-Centric)
 # ---------------------------------------------------------
 with tab_guide:
+    # Centered Serein-Style Hero
     st.markdown("""
-    <div style="background: rgba(231, 185, 111, 0.08); border-left: 3px solid #E7B96F; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;">
-        <span style="font-family: 'Archivo'; font-weight: 800; color: #E7B96F; font-size: 0.95rem;">🚀 ARCHITECTURAL ONBOARDING:</span>
-        <span style="font-family: 'Archivo'; color: #D1CFCA; font-size: 0.92rem;"> Review how our zero-hallucination statutory engine operates below, then switch to the <strong>🏛️ Policy Dashboard &amp; Consultation</strong> section above to query live guidelines!</span>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div style="margin-bottom: 1.8rem;">
-        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #E7B96F; font-weight: 700; margin-bottom: 4px;">
-            // SYSTEM ARCHITECTURE &amp; METHODOLOGY
+    <div class="serein-hero">
+        <div class="serein-hero-tracker">
+            INSTITUTIONAL AI POLICY ASSISTANT &bull; HOW IT WORKS
         </div>
-        <h2 style="font-family: 'Newsreader', serif; font-size: 2.2rem; font-weight: 400; color: #F2F0EB; margin: 0 0 8px 0;">
-            How the Zero-Hallucination Policy Assistant Works
-        </h2>
-        <p style="font-family: 'Archivo'; font-size: 0.95rem; color: #8C8A84; line-height: 1.6; margin: 0;">
-            Complete architectural implementation of Problem Statement 34 (Company Policy Assistant) built with Multi-PDF Ingestion, ChromaDB, and Google Gemini.
+        <h1 class="serein-hero-headline">
+            Corporate policy intelligence, built around you.
+        </h1>
+        <p class="serein-hero-lede">
+            Here is how you use the platform: upload or browse official company manuals, let our vector engine index every clause, and receive instant, audited answers with verbatim page citations.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-    g_col1, g_col2 = st.columns([1, 1])
+    # Visual Flow Diagram Strip (Pictorial Overview)
+    st.markdown("""
+    <div class="flow-diagram-strip">
+        <div class="flow-node">
+            <span class="flow-node-icon">📄</span>
+            <div>
+                <div class="flow-node-text">1. Upload Policy PDFs</div>
+                <div style="font-size: 0.70rem; color: #8C8A84;">Official Company Manuals</div>
+            </div>
+        </div>
+        <span class="flow-arrow">&rarr;</span>
+        <div class="flow-node">
+            <span class="flow-node-icon">⚙️</span>
+            <div>
+                <div class="flow-node-text">2. AI Vector Indexing</div>
+                <div style="font-size: 0.70rem; color: #8C8A84;">ChromaDB Semantic Memory</div>
+            </div>
+        </div>
+        <span class="flow-arrow">&rarr;</span>
+        <div class="flow-node">
+            <span class="flow-node-icon">💬</span>
+            <div>
+                <div class="flow-node-text">3. Inquire in Plain English</div>
+                <div style="font-size: 0.70rem; color: #8C8A84;">Ask About Leave &amp; Per Diems</div>
+            </div>
+        </div>
+        <span class="flow-arrow">&rarr;</span>
+        <div class="flow-node">
+            <span class="flow-node-icon">⚖️</span>
+            <div>
+                <div class="flow-node-text">4. Audited Findings</div>
+                <div style="font-size: 0.70rem; color: #8C8A84;">Zero-Hallucination Citations</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    with g_col1:
+    # 4 Simple Step Cards (How the Client Uses the Site)
+    step_col1, step_col2 = st.columns([1, 1])
+
+    with step_col1:
         st.markdown("""
-        <div class="konk-card">
-            <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #E7B96F; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px;">01 // INGESTION &amp; CHUNKING</span>
-            <div style="font-family: 'Archivo'; font-size: 1.35rem; font-weight: 800; color: #F2F0EB; margin-bottom: 8px;">Multi-PDF Ingestion Engine</div>
-            <div style="font-family: 'Archivo'; font-size: 0.88rem; line-height: 1.65; color: #8C8A84;">
-                Official policy PDFs (Leave, Travel, Reimbursements) are extracted using <code>pypdf</code>. Text is split into <strong>300-word sliding semantic windows</strong> with <strong>50-word overlaps</strong> to ensure cross-boundary legal context is never clipped. Every chunk retains immutable metadata tags: <code>source</code> filename and <code>page</code> number.
+        <div class="step-card">
+            <div>
+                <div class="step-icon-badge">📤</div>
+                <div class="step-number">STEP 01 // CLIENT ACTION</div>
+                <div class="step-title">Upload or Browse Policy Manuals</div>
+                <div class="step-desc">
+                    As a user or HR administrator, you provide the policy PDF (e.g. Leave, Business Travel, Reimbursement). The application accepts official manuals and stores them securely in the policy repository.
+                </div>
+            </div>
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #26262A; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #E7B96F;">
+                📁 Supported Formats: Multi-page PDF
             </div>
         </div>
         """, unsafe_allow_html=True)
 
+        st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
+
         st.markdown("""
-        <div class="konk-card">
-            <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #E7B96F; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px;">02 // VECTORIZATION</span>
-            <div style="font-family: 'Archivo'; font-size: 1.35rem; font-weight: 800; color: #F2F0EB; margin-bottom: 8px;">ChromaDB Vector Repository</div>
-            <div style="font-family: 'Archivo'; font-size: 0.88rem; line-height: 1.65; color: #8C8A84;">
-                Chunks are converted into high-dimensional semantic embeddings using Google's <code>text-embedding-004</code> and indexed into a local SQLite3-backed ChromaDB collection. This enables instant mathematical similarity calculations across thousands of statutory clauses.
+        <div class="step-card">
+            <div>
+                <div class="step-icon-badge">💬</div>
+                <div class="step-number">STEP 03 // CLIENT ACTION</div>
+                <div class="step-title">Ask Inquiries in Plain English</div>
+                <div class="step-desc">
+                    Type your question naturally—such as <em>"How many days of paid leave can I carry forward?"</em> or <em>"What is the daily meal per diem for domestic travel?"</em> The system finds the exact statutory section automatically.
+                </div>
+            </div>
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #26262A; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #E7B96F;">
+                🔍 Cosine Semantic Search: Top-3 relevant chunks
             </div>
         </div>
         """, unsafe_allow_html=True)
 
+    with step_col2:
         st.markdown("""
-        <div class="konk-card">
-            <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #E7B96F; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px;">03 // SIMILARITY RETRIEVAL</span>
-            <div style="font-family: 'Archivo'; font-size: 1.35rem; font-weight: 800; color: #F2F0EB; margin-bottom: 8px;">Top-K Context Retrieval</div>
-            <div style="font-family: 'Archivo'; font-size: 0.88rem; line-height: 1.65; color: #8C8A84;">
-                When an employee enters an inquiry (e.g. <em>"How many days of paid leave can I carry forward?"</em>), the query is vectorized and compared against ChromaDB using cosine distance. The system retrieves the top-3 most statistically relevant policy clauses.
+        <div class="step-card">
+            <div>
+                <div class="step-icon-badge">🧠</div>
+                <div class="step-number">STEP 02 // SYSTEM WORKFLOW</div>
+                <div class="step-title">AI Reads &amp; Understands the Clauses</div>
+                <div class="step-desc">
+                    The model extracts text using <code>pypdf</code>, splits it into 300-word sliding semantic windows, and generates high-dimensional embeddings via Google <code>text-embedding-004</code>. Every clause is indexed in local ChromaDB memory.
+                </div>
+            </div>
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #26262A; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #E7B96F;">
+                ⚡ Vector Engine: ChromaDB (Local SQLite3)
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-    with g_col2:
+        st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
+
         st.markdown("""
-        <div class="konk-card">
-            <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #E7B96F; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px;">04 // REASONING ENGINE</span>
-            <div style="font-family: 'Archivo'; font-size: 1.35rem; font-weight: 800; color: #F2F0EB; margin-bottom: 8px;">Constrained Gemini Reasoning</div>
-            <div style="font-family: 'Archivo'; font-size: 0.88rem; line-height: 1.65; color: #8C8A84;">
-                The retrieved clauses and user inquiry are formatted into an audited institutional prompt and passed to Google Gemini (<code>gemini-2.5-flash</code>). Strict systemic guardrails instruct the model: <em>"Answer strictly and exclusively from the provided policy clauses. If an allowance is not mentioned, refuse to fabricate it."</em>
+        <div class="step-card">
+            <div>
+                <div class="step-icon-badge">⚖️</div>
+                <div class="step-number">STEP 04 // FINAL OUTPUT</div>
+                <div class="step-title">Get Audited Answers with Citations</div>
+                <div class="step-desc">
+                    Google Gemini synthesizes a direct answer restricted strictly to the verified document text. Every answer includes expandable <strong>Judicial Precedent Footnotes</strong> displaying the source PDF name, page number, and quote preview.
+                </div>
+            </div>
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #26262A; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #E7B96F;">
+                🛡️ Zero Hallucinations: 100% Verifiable Source Links
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-        st.markdown("""
-        <div class="konk-card">
-            <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #E7B96F; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px;">05 // AUDITABILITY</span>
-            <div style="font-family: 'Archivo'; font-size: 1.35rem; font-weight: 800; color: #F2F0EB; margin-bottom: 8px;">Verifiable Judicial Footnotes</div>
-            <div style="font-family: 'Archivo'; font-size: 0.88rem; line-height: 1.65; color: #8C8A84;">
-                Every generated response includes expandable judicial precedent cards citing the exact source PDF and page number (e.g. <code>Leave_Policy.pdf • Page 1</code>) alongside verbatim quote previews, establishing 100% auditability for HR and finance compliance.
-            </div>
+    # Interactive Client PDF Uploader Section
+    st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="konk-card" style="border-left: 3px solid #E7B96F;">
+        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: #E7B96F; letter-spacing: 0.08em; margin-bottom: 6px;">
+            // TRY IT OUT: UPLOAD A NEW POLICY PDF
         </div>
-        """, unsafe_allow_html=True)
+        <div style="font-family: 'Archivo'; font-size: 1.2rem; font-weight: 800; color: #F2F0EB; margin-bottom: 6px;">
+            Add Your Company Policy Manual
+        </div>
+        <div style="font-family: 'Archivo'; font-size: 0.88rem; color: #8C8A84; line-height: 1.5; margin-bottom: 14px;">
+            Upload a company policy PDF to test the workflow live. The system will parse its clauses, vectorize the text, and make it instantly queryable in the <strong>🏛️ Consult</strong> tab.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-        st.markdown("""
-        <div class="konk-card" style="border-top: 3px solid #E7B96F;">
-            <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; text-transform: uppercase; color: #E7B96F; letter-spacing: 0.08em; margin-bottom: 6px;">// SPECIFICATIONS</div>
-            <div style="font-family: 'Archivo'; font-size: 1.2rem; font-weight: 800; color: #F2F0EB; margin-bottom: 8px;">Academic Project Specifications</div>
-            <div style="font-family: 'Archivo'; font-size: 0.86rem; color: #D1CFCA; line-height: 1.7;">
-                &bull; <strong>Problem Statement:</strong> PS 34 (Company Policy Assistant)<br/>
-                &bull; <strong>Student Roll No:</strong> 34<br/>
-                &bull; <strong>Vector DB:</strong> ChromaDB (Local SQLite3 Persistence)<br/>
-                &bull; <strong>LLM API:</strong> Google GenAI SDK (v1beta HTTP options)<br/>
-                &bull; <strong>Design Template:</strong> Serein &amp; Konk Clean Floating Header Architecture
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+    uploaded_pdf = st.file_uploader(
+        "Upload PDF Manual to Ingest into ChromaDB",
+        type=["pdf"],
+        help="Upload an official company PDF to index into the vector store.",
+        key="guide_pdf_uploader"
+    )
+    if uploaded_pdf is not None:
+        save_path = os.path.join(POLICIES_DIR, uploaded_pdf.name)
+        with open(save_path, "wb") as f:
+            f.write(uploaded_pdf.getbuffer())
+        with st.spinner(f"Ingesting {uploaded_pdf.name} into ChromaDB vector index..."):
+            chunks_indexed = st.session_state.pipeline.index_pdf(save_path)
+            st.success(f"Successfully ingested '{uploaded_pdf.name}' ({chunks_indexed} semantic chunks indexed)! Switch to the **🏛️ Consult** tab to inquire on it.")
 
 # ---------------------------------------------------------
-# SECTION 2: POLICY DASHBOARD & CONSULTATION
+# TAB 2: CONSULT (Policy Dashboard & Live Consultation)
 # ---------------------------------------------------------
 with tab_dashboard:
     # Statutory Ledger Metrics Strip
-    total_policies = len(policy_files)
+    total_policies = len([f for f in os.listdir(POLICIES_DIR) if f.endswith(".pdf")])
     status_label = "100% Certified" if st.session_state.api_key else "Key Configured"
     status_color = "#E7B96F" if st.session_state.api_key else "#C89446"
 
@@ -847,7 +916,6 @@ with tab_dashboard:
                 selected_query = q["query"]
 
     # Consultation Stream Anchor
-    st.markdown('<div id="consultation-stream"></div>', unsafe_allow_html=True)
     st.markdown("""
     <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin: 2.2rem 0 1.4rem 0;">
         <div style="height: 1px; background: #26262A; flex: 1;"></div>
@@ -882,7 +950,7 @@ with tab_dashboard:
 
     c_clear, _ = st.columns([1, 3])
     with c_clear:
-        if st.button("🧹 Clear Consultation Stream", key="clear_chat_dash"):
+        if st.button("🧹 Clear Consultation Record", key="clear_chat_dash"):
             st.session_state.messages = [
                 {
                     "role": "assistant",
@@ -893,7 +961,7 @@ with tab_dashboard:
             st.rerun()
 
 # ---------------------------------------------------------
-# SECTION 3: POLICY PDF FOLIOS & DOCUMENT LIBRARY
+# TAB 3: LIBRARY (Policy PDF Folios & Document Repository)
 # ---------------------------------------------------------
 with tab_library:
     st.markdown("""
@@ -931,11 +999,12 @@ with tab_library:
         }
     }
 
-    if policy_files:
-        for p_idx, pf in enumerate(policy_files):
+    current_policy_files = [f for f in os.listdir(POLICIES_DIR) if f.endswith(".pdf")]
+    if current_policy_files:
+        for p_idx, pf in enumerate(current_policy_files):
             filepath = os.path.join(POLICIES_DIR, pf)
             file_size_kb = round(os.path.getsize(filepath) / 1024, 1)
-            roman_nums = ["I", "II", "III", "IV", "V", "VI"]
+            roman_nums = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
             roman = roman_nums[p_idx] if p_idx < len(roman_nums) else str(p_idx+1)
             
             p_info = policy_summaries.get(pf, {
@@ -997,7 +1066,7 @@ with tab_library:
             st.markdown("<div style='margin-bottom: 1.5rem;'></div>", unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# SECTION 4: SYSTEM & API CREDENTIALS (Replaces Sidebar)
+# TAB 4: SETTINGS (Vector Engine Credentials & Model Selection)
 # ---------------------------------------------------------
 with tab_settings:
     st.markdown("""
@@ -1009,7 +1078,7 @@ with tab_settings:
             Vector Engine Credentials &amp; Model Selection
         </h2>
         <p style="font-family: 'Archivo'; font-size: 0.95rem; color: #8C8A84; line-height: 1.6; margin: 0;">
-            Configure your institutional Google Gemini API credentials and select the reasoning model for statutory synthesis without needing a sidebar.
+            Configure your institutional Google Gemini API credentials and select the reasoning model for statutory synthesis.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -1017,7 +1086,7 @@ with tab_settings:
     set_col1, set_col2 = st.columns([1, 1])
     with set_col1:
         st.markdown('<div class="konk-card">', unsafe_allow_html=True)
-        st.markdown("<div style=\"font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; color: #E7B96F; font-weight: 700; margin-bottom: 8px;\">API KEY SETTINGS</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-family: monospace; font-size: 0.75rem; text-transform: uppercase; color: #E7B96F; font-weight: 700; margin-bottom: 8px;'>API KEY SETTINGS</div>", unsafe_allow_html=True)
         new_key = st.text_input(
             "Google Gemini API Key",
             value=st.session_state.api_key,
