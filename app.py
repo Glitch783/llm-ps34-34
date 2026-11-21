@@ -943,14 +943,110 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Top Navigation Tabs
+# Top Navigation Tabs (Starting with How It Works, then Dashboard & Library)
 # ---------------------------------------------------------
-tab_dashboard, tab_library, tab_guide = st.tabs([
+tab_guide, tab_dashboard, tab_library = st.tabs([
+    "⚙️ How It Works & System Guide",
     "🏛️ Policy Dashboard & Consultation",
-    "📚 Policy PDF Folios & Document Library",
-    "⚙️ How It Works & Architecture Guide"
+    "📚 Policy PDF Folios & Document Library"
 ])
 
+# ---------------------------------------------------------
+# Tab 1: How It Works & System Guide (Landing & Architecture)
+# ---------------------------------------------------------
+with tab_guide:
+    st.markdown("""
+    <div style="background: rgba(20, 69, 61, 0.08); border-left: 4px solid #14453d; padding: 14px 18px; border-radius: 8px; margin-bottom: 20px;">
+        <span style="font-weight: 700; color: #14453d; font-size: 0.95rem;">🚀 System Onboarding &amp; Architecture:</span>
+        <span style="color: #404846; font-size: 0.9rem;"> Review how our zero-hallucination policy engine operates below, then click the <strong>🏛️ Policy Dashboard &amp; Consultation</strong> tab above to query live guidelines!</span>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #14453d; font-weight: 700; margin-bottom: 4px;">
+            System Architecture &amp; Methodology
+        </div>
+        <h2 style="font-family: 'Newsreader', serif; font-size: 2rem; color: #1b1c1e; margin: 0 0 8px 0;">
+            How the Zero-Hallucination Policy Assistant Works
+        </h2>
+        <p style="font-size: 0.95rem; color: #5f6368; line-height: 1.6; margin: 0;">
+            Technical implementation overview of Problem Statement 34 (Company Policy Assistant) built with Multi-PDF Ingestion, ChromaDB, and Google Gemini.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    g_col1, g_col2 = st.columns([1, 1])
+
+    with g_col1:
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">1. Document Parsing &amp; Chunking</span>
+            <div class="stitch-guide-title">Multi-PDF Ingestion Engine</div>
+            <div class="stitch-guide-desc">
+                Official policy PDFs (Leave, Travel, Reimbursements) are extracted using <code>pypdf</code>. Text is split into <strong>300-word sliding semantic windows</strong> with <strong>50-word overlaps</strong> to ensure cross-boundary legal context is never clipped. Every chunk retains immutable metadata tags: <code>source</code> filename and <code>page</code> number.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">2. High-Dimensional Embeddings</span>
+            <div class="stitch-guide-title">ChromaDB Vector Store</div>
+            <div class="stitch-guide-desc">
+                Chunks are converted into semantic vector embeddings using Google's <code>text-embedding-004</code> and indexed into a local SQLite3-backed ChromaDB collection. This enables instant mathematical similarity calculations across thousands of statutory clauses.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">3. Semantic Cosine Retrieval</span>
+            <div class="stitch-guide-title">Top-K Context Retrieval</div>
+            <div class="stitch-guide-desc">
+                When an employee enters an inquiry (e.g. <em>"How many days of paid leave can I carry forward?"</em>), the query is vectorized and compared against ChromaDB using cosine distance. The system retrieves the top-3 most statistically relevant policy clauses.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with g_col2:
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">4. Zero-Hallucination Synthesis</span>
+            <div class="stitch-guide-title">Constrained Gemini Reasoning</div>
+            <div class="stitch-guide-desc">
+                The retrieved clauses and user inquiry are formatted into an audited institutional prompt and passed to Google Gemini (<code>gemini-2.5-flash</code>). Strict systemic guardrails instruct the model: <em>"Answer strictly and exclusively from the provided policy clauses. If an allowance is not mentioned, refuse to fabricate it."</em>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="stitch-guide-card">
+            <span class="stitch-guide-step-pill">5. Audited Source Attributions</span>
+            <div class="stitch-guide-title">Verifiable Judicial Footnotes</div>
+            <div class="stitch-guide-desc">
+                Every generated response includes expandable judicial precedent cards citing the exact source PDF and page number (e.g. <code>Leave_Policy.pdf • Page 1</code>) alongside verbatim quote previews, establishing 100% auditability for HR and finance compliance.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="stitch-guide-card" style="border-left: 4px solid #14453d;">
+            <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #14453d; letter-spacing: 0.08em; margin-bottom: 4px;">Compliance &amp; Specs</div>
+            <div class="stitch-guide-title" style="font-size: 1.15rem;">Academic Project Specifications</div>
+            <div style="font-size: 0.82rem; color: #404846; line-height: 1.6;">
+                &bull; <strong>Problem Statement:</strong> PS 34 (Company Policy Assistant)<br/>
+                &bull; <strong>Student Roll No:</strong> 34<br/>
+                &bull; <strong>Vector DB:</strong> ChromaDB (Local SQLite3 Persistence)<br/>
+                &bull; <strong>LLM API:</strong> Google GenAI SDK (v1beta HTTP options)<br/>
+                &bull; <strong>UI System:</strong> Modern Editorial Lexicon (Google Stitch Screen 322cbe1be2274dcbadc0e3286a5b94de)
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# Tab 2: Policy Dashboard & Consultation
+# ---------------------------------------------------------
 with tab_dashboard:
     # Live Metadata Ledger (Stitch 4-column Strip)
     total_policies = len(policy_files)
@@ -1158,7 +1254,7 @@ with tab_dashboard:
                         """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Tab 2: Policy PDF Folios & Document Library
+# Tab 3: Policy PDF Folios & Document Library
 # ---------------------------------------------------------
 with tab_library:
     st.markdown("""
@@ -1262,92 +1358,6 @@ with tab_library:
             st.markdown("<div style='margin-bottom: 1.5rem;'></div>", unsafe_allow_html=True)
     else:
         st.warning("No policy folios found in repository.")
-
-# ---------------------------------------------------------
-# Tab 3: How It Works & Architecture Guide
-# ---------------------------------------------------------
-with tab_guide:
-    st.markdown("""
-    <div style="margin-bottom: 1.5rem;">
-        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #14453d; font-weight: 700; margin-bottom: 4px;">
-            System Architecture &amp; Methodology
-        </div>
-        <h2 style="font-family: 'Newsreader', serif; font-size: 2rem; color: #1b1c1e; margin: 0 0 8px 0;">
-            How the Zero-Hallucination Policy Assistant Works
-        </h2>
-        <p style="font-size: 0.95rem; color: #5f6368; line-height: 1.6; margin: 0;">
-            Technical implementation overview of Problem Statement 34 (Company Policy Assistant) built with Multi-PDF Ingestion, ChromaDB, and Google Gemini.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    g_col1, g_col2 = st.columns([1, 1])
-
-    with g_col1:
-        st.markdown("""
-        <div class="stitch-guide-card">
-            <span class="stitch-guide-step-pill">1. Document Parsing &amp; Chunking</span>
-            <div class="stitch-guide-title">Multi-PDF Ingestion Engine</div>
-            <div class="stitch-guide-desc">
-                Official policy PDFs (Leave, Travel, Reimbursements) are extracted using <code>pypdf</code>. Text is split into <strong>300-word sliding semantic windows</strong> with <strong>50-word overlaps</strong> to ensure cross-boundary legal context is never clipped. Every chunk retains immutable metadata tags: <code>source</code> filename and <code>page</code> number.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("""
-        <div class="stitch-guide-card">
-            <span class="stitch-guide-step-pill">2. High-Dimensional Embeddings</span>
-            <div class="stitch-guide-title">ChromaDB Vector Store</div>
-            <div class="stitch-guide-desc">
-                Chunks are converted into semantic vector embeddings using Google's <code>text-embedding-004</code> and indexed into a local SQLite3-backed ChromaDB collection. This enables instant mathematical similarity calculations across thousands of statutory clauses.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("""
-        <div class="stitch-guide-card">
-            <span class="stitch-guide-step-pill">3. Semantic Cosine Retrieval</span>
-            <div class="stitch-guide-title">Top-K Context Retrieval</div>
-            <div class="stitch-guide-desc">
-                When an employee enters an inquiry (e.g. <em>"How many days of paid leave can I carry forward?"</em>), the query is vectorized and compared against ChromaDB using cosine distance. The system retrieves the top-3 most statistically relevant policy clauses.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with g_col2:
-        st.markdown("""
-        <div class="stitch-guide-card">
-            <span class="stitch-guide-step-pill">4. Zero-Hallucination Synthesis</span>
-            <div class="stitch-guide-title">Constrained Gemini Reasoning</div>
-            <div class="stitch-guide-desc">
-                The retrieved clauses and user inquiry are formatted into an audited institutional prompt and passed to Google Gemini (<code>gemini-2.5-flash</code>). Strict systemic guardrails instruct the model: <em>"Answer strictly and exclusively from the provided policy clauses. If an allowance is not mentioned, refuse to fabricate it."</em>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("""
-        <div class="stitch-guide-card">
-            <span class="stitch-guide-step-pill">5. Audited Source Attributions</span>
-            <div class="stitch-guide-title">Verifiable Judicial Footnotes</div>
-            <div class="stitch-guide-desc">
-                Every generated response includes expandable judicial precedent cards citing the exact source PDF and page number (e.g. <code>Leave_Policy.pdf • Page 1</code>) alongside verbatim quote previews, establishing 100% auditability for HR and finance compliance.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("""
-        <div class="stitch-guide-card" style="border-left: 4px solid #14453d;">
-            <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #14453d; letter-spacing: 0.08em; margin-bottom: 4px;">Compliance &amp; Specs</div>
-            <div class="stitch-guide-title" style="font-size: 1.15rem;">Academic Project Specifications</div>
-            <div style="font-size: 0.82rem; color: #404846; line-height: 1.6;">
-                &bull; <strong>Problem Statement:</strong> PS 34 (Company Policy Assistant)<br/>
-                &bull; <strong>Student Roll No:</strong> 34<br/>
-                &bull; <strong>Vector DB:</strong> ChromaDB (Local SQLite3 Persistence)<br/>
-                &bull; <strong>LLM API:</strong> Google GenAI SDK (v1beta HTTP options)<br/>
-                &bull; <strong>UI System:</strong> Modern Editorial Lexicon (Google Stitch Screen 322cbe1be2274dcbadc0e3286a5b94de)
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
 # Chat Input & Synthesis
