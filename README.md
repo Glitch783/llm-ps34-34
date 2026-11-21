@@ -52,27 +52,30 @@ streamlit run app.py
 ```
 
 ### 5. Using the App
-1. Enter your **Google Gemini API Key** in the sidebar (get a free key at [Google AI Studio](https://aistudio.google.com/)).
-2. Ask questions using the chat input or click one of the preset quick queries.
-3. Review answers along with cited source files and page numbers!
+1. Paste your **Google Gemini API Key** directly in the activation dock on the **Consultation** tab (or **Settings** tab). It is securely persisted to `.env`.
+2. Inquire using natural language in the chat bar or click one of the preset statutory dossiers.
+3. Review verified findings along with cited source policy names and page numbers!
 
 ---
 
 ## 📂 Project Structure
 ```text
 llm-ps34-34/
-├── app.py                   # Streamlit web application & Lexicon consultation UI
+├── app.py                   # Streamlit web application & Warm Alabaster consultation UI
 ├── rag_pipeline.py          # ChromaDB indexing, embedding & RAG retrieval engine
-├── generate_policies.py     # Script to generate official sample policy PDFs
+├── generate_policies.py     # Script to generate official corporate policy PDFs
+├── create_report_pdf.py     # Academic project report generator
 ├── requirements.txt         # Project dependencies
 ├── .gitignore               # Excludes secrets (.env), venv/, and build artifacts
-├── README.md                # Project documentation
-├── assets/                  # Application interface screenshots for documentation
-│   ├── screenshot_1_leave_carryforward.png
-│   ├── screenshot_2_travel_perdiem.png
-│   ├── screenshot_3_wfh_reimbursement.png
-│   ├── screenshot_4_maternity_paternity.png
-│   └── screenshot_5_expense_deadlines.png
+├── README.md                # Complete project documentation & screenshots
+├── screenshots/             # Live application interface screenshots
+│   ├── 01_home_hero_landing.png
+│   ├── 02_how_it_works_workflow.png
+│   ├── 03_consultation_dashboard.png
+│   ├── 04_curated_inquiries.png
+│   ├── 05_live_ai_consultation.png
+│   ├── 06_policy_folios_reader.png
+│   └── 07_settings_credentials.png
 └── policies/                # Official corporate policy PDFs
     ├── Leave_Policy.pdf
     ├── Travel_Policy.pdf
@@ -81,47 +84,51 @@ llm-ps34-34/
 
 ---
 
-## 📸 Screenshots & Live System Interface
+## 📸 Live System Interface & Visual Showcase
 
-### 1. Annual Paid Leave & Carry-Forward Limit
-*Query: "How many days of paid leave can I carry forward to next year?"*
-* **Grounding:** Vectors retrieved from `Leave_Policy.pdf` (Section 2, Page 1).
-* **Finding:** Employees can carry forward a maximum of 10 unused paid leaves to the next calendar year. Any excess automatically lapses on December 31.
+### 1. Home Portal & Executive Hero
+The landing interface showcases the **LEXICON CODEX** architectural design, featuring the floating pill navbar, live operational telemetry (`Latency ≤ 42ms`, `3 Verified Folios`), and 1-click consultation jump.
 
-![Paid Leave Carry-Forward](assets/screenshot_1_leave_carryforward.png)
+![Home Landing Portal](screenshots/01_home_hero_landing.png)
 
 ---
 
-### 2. Business Travel Daily Per Diem & Lodging Caps
-*Query: "What is the daily per diem allowance for domestic business travel?"*
-* **Grounding:** Vectors retrieved from `Travel_Policy.pdf` (Section 4, Page 1).
-* **Finding:** Domestic per diem is \$45 (INR 1,800)/day for meals and incidentals without itemized receipts. Domestic lodging is capped at \$150/night for Metro Tier-1 cities.
+### 2. Friendly 4-Step Client Workflow
+A visual, client-friendly explanation of how the policy intelligence engine works—from PDF upload and ChromaDB indexing to plain-English natural language queries and certified citations. Includes a live drag-and-drop PDF uploader.
 
-![Travel Per Diem](assets/screenshot_2_travel_perdiem.png)
+![How It Works Workflow](screenshots/02_how_it_works_workflow.png)
 
 ---
 
-### 3. Work From Home (WFH) Equipment Grant
-*Query: "What is the WFH equipment allowance for new employees?"*
-* **Grounding:** Vectors retrieved from `Reimbursement_Policy.pdf` (Section 4, Page 1).
-* **Finding:** Eligible remote/hybrid employees receive a one-time reimbursement of up to \$400 (INR 25,000) for ergonomic office equipment.
+### 3. Statutory Consultation Ledger
+Real-time audit telemetry displaying active policy folios, local ChromaDB persistence status, non-parametric zero-hallucination mode, and the inline Gemini API connection dock.
 
-![WFH Equipment Allowance](assets/screenshot_3_wfh_reimbursement.png)
+![Consultation Dashboard & Ledger](screenshots/03_consultation_dashboard.png)
 
 ---
 
-### 4. Statutory Maternity & Paternity Provisions
-*Query: "What are the provisions for maternity and paternity leave?"*
-* **Grounding:** Vectors retrieved from `Leave_Policy.pdf` (Section 4, Page 1).
-* **Finding:** Female employees receive 26 weeks of fully paid maternity leave; fathers receive 2 weeks of paid paternity leave.
+### 4. Curated Statutory Inquiries & Dossiers
+Pre-configured rapid inquiry cards allowing employees to instantly inspect statutory rules for Annual Leave Rollover, Domestic Travel Per Diem, and Remote Work Infrastructure Grants.
 
-![Maternity & Paternity Leave](assets/screenshot_4_maternity_paternity.png)
+![Curated Inquiries & Active Dossiers](screenshots/04_curated_inquiries.png)
 
 ---
 
-### 5. Travel Expense Claim Submission Deadlines
-*Query: "What is the deadline for submitting business travel expense claims?"*
-* **Grounding:** Vectors retrieved from `Travel_Policy.pdf` (Section 6, Page 1).
-* **Finding:** All expense reports must be submitted within 30 calendar days of trip completion via Oracle ERP.
+### 5. Live AI Policy Consultation & Audited Citations
+Demonstration of an active employee query (*"how many paid leaves can i take in a year"*). Google Gemini synthesizes an exact finding grounded strictly in `Leave_Policy.pdf (Page 1)` with collapsible source proof.
 
-![Expense Submission Deadlines](assets/screenshot_5_expense_deadlines.png)
+![Live AI Consultation with Citations](screenshots/05_live_ai_consultation.png)
+
+---
+
+### 6. Official Policy Folios & In-App Reader
+Direct access to company policy folios (`Leave_Policy.pdf`, `Travel_Policy.pdf`, `Reimbursement_Policy.pdf`), displaying key statutory clauses, direct PDF download options, and an in-app page-by-page manuscript reader.
+
+![Policy Document Repository](screenshots/06_policy_folios_reader.png)
+
+---
+
+### 7. Vector Engine Credentials & Model Selection
+Administrative panel allowing users to configure Google Gemini credentials, switch reasoning kernels (`gemini-2.5-flash`, `gemini-1.5-pro`), and audit repository health.
+
+![Settings & Engine Credentials](screenshots/07_settings_credentials.png)

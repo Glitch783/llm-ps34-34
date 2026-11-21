@@ -19,6 +19,7 @@ scratch/
 
 # Submission deliverables (managed separately for evaluation / Google Drive)
 submission/
+llm-ps34-34_submission/
 Code.zip
 *.zip
 demo_video.mp4
@@ -26,7 +27,6 @@ demo_video.mp4
 *.webm
 Report.pdf
 github_link.txt
-screenshots/
 stitch_design/
 
 # Submission / automation helper scripts
