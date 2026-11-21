@@ -89,11 +89,40 @@ st.markdown("""
         box-shadow: 0 16px 40px rgba(28, 26, 24, 0.06);
         transition: all 0.2s ease;
     }
+    /* REMOVE ALL UNDERLINES IN HEADER PILL ACROSS ALL STATES */
+    .stitch-header-wrap a,
+    .stitch-header-wrap a:hover,
+    .stitch-header-wrap a:focus,
+    .stitch-header-wrap a:visited,
+    .stitch-header-wrap a:active,
+    .stitch-header-wrap span,
+    .stitch-nav-pill a,
+    .stitch-nav-pill a:hover,
+    .stitch-nav-pill a:focus,
+    .stitch-nav-pill a:visited,
+    .stitch-brand,
+    .stitch-brand:hover,
+    .stitch-brand *,
+    .stitch-cta-btn,
+    .stitch-cta-btn:hover,
+    .stitch-cta-btn:focus,
+    .stitch-cta-btn:visited,
+    .stitch-cta-btn *,
+    .stitch-nav-link,
+    .stitch-nav-link:hover,
+    .stitch-nav-link.active,
+    .stitch-nav-link * {
+        text-decoration: none !important;
+        text-decoration-line: none !important;
+        border-bottom: none !important;
+        box-shadow: none;
+    }
+
     .stitch-brand {
         display: flex;
         align-items: center;
         gap: 8px;
-        text-decoration: none;
+        text-decoration: none !important;
     }
     .stitch-brand-title {
         font-family: 'JetBrains Mono', monospace;
@@ -102,6 +131,7 @@ st.markdown("""
         letter-spacing: 0.1em;
         color: var(--ink);
         text-transform: uppercase;
+        text-decoration: none !important;
     }
     .stitch-nav-links {
         display: flex;
@@ -124,13 +154,13 @@ st.markdown("""
         color: var(--cognac);
         background: rgba(139, 69, 19, 0.08);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(139, 69, 19, 0.08);
+        box-shadow: 0 4px 12px rgba(139, 69, 19, 0.08) !important;
     }
     .stitch-nav-link.active {
         color: #FFFFFF !important;
         background: var(--cognac) !important;
         font-weight: 700;
-        box-shadow: 0 4px 14px rgba(139, 69, 19, 0.28);
+        box-shadow: 0 4px 14px rgba(139, 69, 19, 0.28) !important;
         transform: translateY(0);
     }
     .stitch-nav-link.active:hover {
@@ -142,26 +172,6 @@ st.markdown("""
         align-items: center;
         gap: 12px;
     }
-    .stitch-status-badge {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        background: #EFECE4;
-        border: 1px solid var(--hairline);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.70rem;
-        color: var(--charcoal);
-    }
-    .stitch-pulse-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: var(--spruce);
-        box-shadow: 0 0 6px var(--spruce);
-        display: inline-block;
-    }
     .stitch-cta-btn {
         background: var(--cognac);
         color: #FFFFFF !important;
@@ -172,8 +182,8 @@ st.markdown("""
         text-transform: uppercase;
         padding: 7px 16px;
         border-radius: 9999px;
-        text-decoration: none;
-        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.22);
+        text-decoration: none !important;
+        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.22) !important;
         transition: background 0.2s ease, transform 0.2s ease;
         display: inline-flex;
         align-items: center;
@@ -182,6 +192,7 @@ st.markdown("""
     .stitch-cta-btn:hover {
         background: var(--cognac-hover);
         transform: translateY(-1px);
+        text-decoration: none !important;
     }
 
     /* EXACT STITCH HERO SECTION */
@@ -485,7 +496,9 @@ if "model_choice" not in st.session_state:
 active_tab = st.query_params.get("tab", "home")
 if active_tab == "architecture":
     active_tab = "home"
-if active_tab not in ["home", "consultation", "folios", "settings"]:
+if active_tab == "folios":
+    active_tab = "policy"
+if active_tab not in ["home", "consultation", "policy", "settings"]:
     active_tab = "home"
 
 # Initialize RAG Pipeline
@@ -501,7 +514,7 @@ if "pipeline" not in st.session_state:
 # ---------------------------------------------------------
 act_home = "active" if active_tab == "home" else ""
 act_consult = "active" if active_tab == "consultation" else ""
-act_folios = "active" if active_tab == "folios" else ""
+act_policy = "active" if active_tab == "policy" else ""
 act_settings = "active" if active_tab == "settings" else ""
 
 st.markdown(f"""
@@ -509,12 +522,12 @@ st.markdown(f"""
     <nav class="stitch-nav-pill">
         <a class="stitch-brand" href="?tab=home" target="_self">
             <span style="font-size: 1.15rem;">⚖️</span>
-            <span class="stitch-brand-title">LEXICON // CODEX</span>
+            <span class="stitch-brand-title">LEXICON CODEX</span>
         </a>
         <div class="stitch-nav-links">
             <a class="stitch-nav-link {act_home}" href="?tab=home" target="_self">Home</a>
             <a class="stitch-nav-link {act_consult}" href="?tab=consultation" target="_self">Consultation</a>
-            <a class="stitch-nav-link {act_folios}" href="?tab=folios" target="_self">Folios</a>
+            <a class="stitch-nav-link {act_policy}" href="?tab=policy" target="_self">Policy</a>
             <a class="stitch-nav-link {act_settings}" href="?tab=settings" target="_self">Settings</a>
         </div>
         <div class="stitch-actions">
@@ -1012,9 +1025,9 @@ elif active_tab == "consultation":
                 })
 
 # ---------------------------------------------------------
-# SECTION 3: FOLIOS (Document Library & Original PDF Downloads)
+# SECTION 3: POLICY (Document Library & Original PDF Downloads)
 # ---------------------------------------------------------
-elif active_tab == "folios":
+elif active_tab in ["policy", "folios"]:
     st.markdown("""
     <div style="margin-bottom: 1.8rem;">
         <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #8B4513; font-weight: 700; margin-bottom: 4px;">
