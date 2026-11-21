@@ -7,16 +7,14 @@ from rag_pipeline import RAGPipeline
 # Page Configuration - Full Width, No Sidebar
 # ---------------------------------------------------------
 st.set_page_config(
-    page_title="LEXICON // CODEX — Zero-Hallucination Policy Engine",
+    page_title="LEXICON // CODEX — Architectural Zero-Hallucination Policy Engine",
     page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
 # ---------------------------------------------------------
-# Stitch Warm Alabaster Design System (Screen ID: 60a56b78165a45ffb092e733f39b23cb)
-# Palette: Parchment (#F5F2EB), Vellum White (#FFFFFF), Cognac (#8B4513), Hairline (#D8D2C5), Spruce (#24614A)
-# Typography: 'Newsreader' Serif, 'Plus Jakarta Sans', 'JetBrains Mono'
+# Exact Stitch CSS Tokens & Layout (Screen ID: 60a56b78165a45ffb092e733f39b23cb)
 # ---------------------------------------------------------
 st.markdown("""
 <style>
@@ -28,7 +26,6 @@ st.markdown("""
         --charcoal: #3D3A36;
         --cognac: #8B4513;
         --cognac-hover: #73380F;
-        --cognac-accent: #9E5A38;
         --cognac-light: #F8EFEA;
         --vellum: #FFFFFF;
         --hairline: #D8D2C5;
@@ -48,7 +45,7 @@ st.markdown("""
         height: 0 !important;
     }
 
-    /* Canvas Reset & Subtle Architectural Grid */
+    /* Ambient Warm Glow & Subtle Architectural Grid */
     html, body, [data-testid="stAppViewContainer"], .stApp {
         background-color: var(--parchment) !important;
         background: var(--parchment) !important;
@@ -62,8 +59,8 @@ st.markdown("""
     }
 
     .main .block-container {
-        max-width: 1120px !important;
-        padding-top: 1.5rem !important;
+        max-width: 1080px !important;
+        padding-top: 1.8rem !important;
         padding-bottom: 6rem !important;
         margin: 0 auto !important;
     }
@@ -72,41 +69,83 @@ st.markdown("""
         background: transparent !important;
     }
 
-    /* TOP BRAND BAR */
-    .stitch-top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 6px 0 16px 0;
-        margin-bottom: 10px;
-        border-bottom: 1px solid var(--hairline);
+    /* EXACT STITCH FLOATING PILL NAVBAR */
+    .stitch-header-wrap {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto 2.5rem auto;
+        padding: 0 10px;
     }
-    .stitch-brand-logo {
+    .stitch-nav-pill {
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--hairline);
+        border-radius: 9999px;
+        padding: 10px 22px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        justify-content: space-between;
+        box-shadow: 0 16px 40px rgba(28, 26, 24, 0.06);
+        transition: all 0.2s ease;
+    }
+    .stitch-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         text-decoration: none;
     }
     .stitch-brand-title {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.85rem;
+        font-size: 0.78rem;
         font-weight: 700;
         letter-spacing: 0.1em;
         color: var(--ink);
         text-transform: uppercase;
     }
-    .stitch-brand-sub {
+    .stitch-brand-bullet {
+        color: var(--hairline);
+        font-size: 0.8rem;
+    }
+    .stitch-brand-vol {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.70rem;
+        font-size: 0.68rem;
         letter-spacing: 0.12em;
         color: var(--muted);
         text-transform: uppercase;
     }
-    .stitch-status-pill {
-        display: inline-flex;
+    .stitch-nav-links {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+    }
+    .stitch-nav-link {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .stitch-nav-link:hover {
+        color: var(--cognac);
+    }
+    .stitch-nav-link.active {
+        color: var(--cognac) !important;
+        font-weight: 700;
+        border-bottom: 2px solid var(--cognac);
+        padding-bottom: 2px;
+    }
+    .stitch-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .stitch-status-badge {
+        display: flex;
         align-items: center;
         gap: 6px;
-        padding: 4px 12px;
+        padding: 4px 10px;
         border-radius: 9999px;
         background: #EFECE4;
         border: 1px solid var(--hairline);
@@ -122,60 +161,32 @@ st.markdown("""
         box-shadow: 0 0 6px var(--spruce);
         display: inline-block;
     }
-
-    /* FUNCTIONAL FLOATING TOP TABS CAPSULE */
-    [data-testid="stTabs"] {
-        margin-top: 0.5rem !important;
-        margin-bottom: 2.2rem !important;
-    }
-    [role="tablist"] {
-        background: rgba(255, 255, 255, 0.90) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        border: 1px solid var(--hairline) !important;
-        border-radius: 9999px !important;
-        padding: 6px !important;
-        gap: 8px !important;
-        max-width: 780px !important;
-        margin: 0 auto !important;
-        display: flex !important;
-        justify-content: center !important;
-        box-shadow: 0 16px 40px rgba(28, 26, 24, 0.06) !important;
-    }
-    button[role="tab"] {
-        font-family: 'JetBrains Mono', monospace !important;
-        font-size: 0.82rem !important;
-        font-weight: 600 !important;
-        letter-spacing: 0.06em !important;
-        color: var(--muted) !important;
-        -webkit-text-fill-color: var(--muted) !important;
-        padding: 9px 24px !important;
-        border-radius: 9999px !important;
-        background: transparent !important;
-        border: none !important;
-        transition: all 0.2s ease !important;
-        margin: 0 !important;
-        cursor: pointer !important;
-    }
-    button[role="tab"]:hover {
-        color: var(--cognac) !important;
-        -webkit-text-fill-color: var(--cognac) !important;
-        background: var(--cognac-light) !important;
-    }
-    button[role="tab"][aria-selected="true"] {
+    .stitch-cta-btn {
+        background: var(--cognac);
         color: #FFFFFF !important;
-        -webkit-text-fill-color: #FFFFFF !important;
-        background: var(--cognac) !important;
-        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.25) !important;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 7px 16px;
+        border-radius: 9999px;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.22);
+        transition: background 0.2s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
     }
-    div[data-baseweb="tab-highlight"] {
-        display: none !important;
+    .stitch-cta-btn:hover {
+        background: var(--cognac-hover);
+        transform: translateY(-1px);
     }
 
-    /* HERO SECTION (STITCH WARM ALABASTER EDITION) */
+    /* EXACT STITCH HERO SECTION */
     .stitch-hero {
         text-align: center;
-        padding: 2.5rem 1rem 3rem 1rem;
+        padding: 2.2rem 1rem 3rem 1rem;
         max-width: 860px;
         margin: 0 auto;
     }
@@ -201,8 +212,8 @@ st.markdown("""
     .stitch-headline {
         font-family: 'Newsreader', Georgia, serif !important;
         font-size: 3.8rem !important;
-        font-weight: 500 !important;
-        line-height: 1.1 !important;
+        font-weight: 400 !important;
+        line-height: 1.08 !important;
         letter-spacing: -0.02em !important;
         color: var(--ink) !important;
         -webkit-text-fill-color: var(--ink) !important;
@@ -222,8 +233,34 @@ st.markdown("""
         color: var(--charcoal) !important;
         -webkit-text-fill-color: var(--charcoal) !important;
         max-width: 680px;
-        margin: 0 auto 2rem auto;
+        margin: 0 auto 2.2rem auto;
     }
+    
+    /* INITIATE VECTOR CONSULTATION BUTTON */
+    .stitch-initiate-btn {
+        background: var(--cognac);
+        color: #FFFFFF !important;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.84rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 14px 34px;
+        border-radius: 9999px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 10px 25px rgba(139, 69, 19, 0.25);
+        transition: all 0.25s ease;
+        margin-bottom: 1.5rem;
+    }
+    .stitch-initiate-btn:hover {
+        background: var(--cognac-hover);
+        transform: scale(1.03);
+        box-shadow: 0 14px 30px rgba(139, 69, 19, 0.35);
+    }
+
     .stitch-telemetry {
         display: flex;
         flex-wrap: wrap;
@@ -235,7 +272,7 @@ st.markdown("""
         color: var(--muted);
     }
 
-    /* PICTORIAL STEP FLOW CARDS */
+    /* STEP CARDS & FLOW STRIP */
     .flow-strip {
         background: var(--vellum);
         border: 1px solid var(--hairline);
@@ -249,18 +286,6 @@ st.markdown("""
         box-shadow: 0 4px 16px rgba(28, 26, 24, 0.03);
         overflow-x: auto;
     }
-    .flow-node {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        white-space: nowrap;
-    }
-    .flow-arrow {
-        color: var(--cognac);
-        font-size: 18px;
-        font-weight: 700;
-    }
-
     .step-card {
         background: var(--vellum);
         border: 1px solid var(--hairline);
@@ -278,42 +303,8 @@ st.markdown("""
         border-color: var(--cognac);
         box-shadow: 0 8px 25px rgba(28, 26, 24, 0.08);
     }
-    .step-badge-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 10px;
-        background: var(--cognac-light);
-        border: 1px solid var(--hairline);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        margin-bottom: 14px;
-    }
-    .step-tag {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.70rem;
-        font-weight: 700;
-        color: var(--cognac);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        margin-bottom: 6px;
-    }
-    .step-title {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.22rem;
-        font-weight: 700;
-        color: var(--ink);
-        margin-bottom: 8px;
-    }
-    .step-desc {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 0.88rem;
-        line-height: 1.6;
-        color: var(--charcoal);
-    }
 
-    /* PREVIEW PRECEDENT CARDS */
+    /* STITCH ARCHITECTURAL PREVIEW CARDS */
     .stitch-preview-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -328,42 +319,9 @@ st.markdown("""
         border-radius: 12px;
         padding: 20px;
         box-shadow: 0 4px 20px rgba(28, 26, 24, 0.04);
-        transition: all 0.2s ease;
-    }
-    .stitch-preview-card:hover {
-        border-color: rgba(139, 69, 19, 0.4);
-        box-shadow: 0 8px 25px rgba(28, 26, 24, 0.08);
-    }
-    .stitch-preview-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-    }
-    .stitch-preview-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.72rem;
-        font-weight: 700;
-        color: var(--cognac);
-        letter-spacing: 0.08em;
-    }
-    .stitch-preview-pill {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.65rem;
-        background: #F5F2EB;
-        border: 1px solid var(--hairline);
-        padding: 2px 6px;
-        border-radius: 4px;
-        color: var(--muted);
-    }
-    .stitch-preview-desc {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 0.82rem;
-        color: var(--charcoal);
-        line-height: 1.55;
     }
 
-    /* DOSSIER CARDS (CONSULTATION) */
+    /* DOSSIER CARDS (EQUAL HEIGHT) */
     .dossier-card {
         background: var(--vellum);
         border: 1px solid var(--hairline);
@@ -383,13 +341,12 @@ st.markdown("""
     .dossier-card:hover {
         transform: translateY(-2px);
         border-color: var(--cognac);
-        box-shadow: 0 8px 25px rgba(28, 26, 24, 0.08);
     }
     .dossier-card.featured {
         border-top: 3px solid var(--cognac);
     }
 
-    /* LEDGER STRIP */
+    /* LEDGER GRID */
     .ledger-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -405,25 +362,6 @@ st.markdown("""
         display: flex;
         justify-content: space-between;
         align-items: center;
-        transition: all 0.2s ease;
-    }
-    .ledger-card:hover {
-        border-color: var(--cognac);
-    }
-    .ledger-label {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.68rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--muted);
-        font-weight: 600;
-        margin-bottom: 4px;
-    }
-    .ledger-value {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: var(--cognac);
     }
 
     /* CHAT STREAM */
@@ -448,34 +386,7 @@ st.markdown("""
         color: var(--ink) !important;
     }
 
-    /* CITATION FOOTNOTE */
-    .footnote-card {
-        padding: 16px 20px;
-        border-radius: 8px;
-        background: #FAF8F5;
-        margin-top: 14px;
-        border: 1px solid var(--hairline);
-    }
-    .footnote-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 8px;
-        border-bottom: 1px solid var(--hairline);
-        margin-bottom: 10px;
-    }
-    .footnote-quote {
-        border-left: 3px solid var(--cognac);
-        padding-left: 14px;
-        margin: 8px 0;
-        font-family: 'Newsreader', serif;
-        font-style: italic;
-        font-size: 0.95rem;
-        line-height: 1.55;
-        color: var(--ink) !important;
-    }
-
-    /* CHAT FLOATING DOCK */
+    /* CHAT INPUT FLOATING DOCK */
     [data-testid="stBottom"],
     [data-testid="stBottom"] > div,
     .stBottom,
@@ -535,7 +446,6 @@ st.markdown("""
         color: #FFFFFF !important;
     }
 
-    /* FOLIO LIBRARY CARD */
     .folio-card {
         background: var(--vellum);
         border: 1px solid var(--hairline);
@@ -543,10 +453,6 @@ st.markdown("""
         padding: 24px;
         margin-bottom: 20px;
         box-shadow: 0 4px 16px rgba(28, 26, 24, 0.04);
-        transition: all 0.2s ease;
-    }
-    .folio-card:hover {
-        border-color: var(--cognac);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -574,6 +480,11 @@ if "api_key" not in st.session_state:
 if "model_choice" not in st.session_state:
     st.session_state.model_choice = "gemini-2.5-flash"
 
+# Determine active tab from URL query params or session state
+active_tab = st.query_params.get("tab", "architecture")
+if active_tab not in ["architecture", "consultation", "folios", "settings"]:
+    active_tab = "architecture"
+
 # Initialize RAG Pipeline
 if "pipeline" not in st.session_state:
     with st.spinner("Initializing ChromaDB Vector Repository..."):
@@ -583,40 +494,46 @@ if "pipeline" not in st.session_state:
         st.session_state.pipeline = pipeline
 
 # ---------------------------------------------------------
-# TOP BRAND BAR (Stitch Style)
+# EXACT STITCH FLOATING PILL NAVBAR
 # ---------------------------------------------------------
-st.markdown("""
-<div class="stitch-top-bar">
-    <div class="stitch-brand-logo">
-        <span style="font-size: 1.2rem;">⚖️</span>
-        <div>
+act_arch = "active" if active_tab == "architecture" else ""
+act_consult = "active" if active_tab == "consultation" else ""
+act_folios = "active" if active_tab == "folios" else ""
+act_settings = "active" if active_tab == "settings" else ""
+
+st.markdown(f"""
+<div class="stitch-header-wrap">
+    <nav class="stitch-nav-pill">
+        <a class="stitch-brand" href="?tab=architecture" target="_self">
+            <span style="font-size: 1.05rem;">⚖️</span>
             <span class="stitch-brand-title">LEXICON // CODEX</span>
-            <span style="color: #D8D2C5; margin: 0 4px;">•</span>
-            <span class="stitch-brand-sub">VOL. XXIV</span>
+            <span class="stitch-brand-bullet">•</span>
+            <span class="stitch-brand-vol">VOL. XXIV</span>
+        </a>
+        <div class="stitch-nav-links">
+            <a class="stitch-nav-link {act_arch}" href="?tab=architecture" target="_self">01 // Architecture</a>
+            <a class="stitch-nav-link {act_consult}" href="?tab=consultation" target="_self">02 // Consultation</a>
+            <a class="stitch-nav-link {act_folios}" href="?tab=folios" target="_self">03 // Folios</a>
+            <a class="stitch-nav-link {act_settings}" href="?tab=settings" target="_self">04 // Settings</a>
         </div>
-    </div>
-    <div class="stitch-status-pill">
-        <span class="stitch-pulse-dot"></span>
-        <span>ChromaDB Active &bull; PS 34 &bull; Roll No: 34</span>
-    </div>
+        <div class="stitch-actions">
+            <div class="stitch-status-badge">
+                <span class="stitch-pulse-dot"></span>
+                <span>ChromaDB Active</span>
+            </div>
+            <a class="stitch-cta-btn" href="?tab=consultation" target="_self">
+                CONSULT CODEX ⚡
+            </a>
+        </div>
+    </nav>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# FUNCTIONAL FLOATING TOP TABS CAPSULE (Short Abbreviations)
+# SECTION 1: ARCHITECTURE (Landing & How It Works)
 # ---------------------------------------------------------
-tab_guide, tab_dashboard, tab_library, tab_settings = st.tabs([
-    "01 // Architecture",
-    "02 // Consultation",
-    "03 // Folios",
-    "04 // Settings"
-])
-
-# ---------------------------------------------------------
-# TAB 1: 01 // ARCHITECTURE (How It Works - Simple, Pictorial & Client Workflow)
-# ---------------------------------------------------------
-with tab_guide:
-    # Stitch Hero Section
+if active_tab == "architecture":
+    # Exact Stitch Hero Section
     st.markdown("""
     <div class="stitch-hero">
         <div class="stitch-eyebrow">
@@ -624,13 +541,19 @@ with tab_guide:
             <span class="stitch-eyebrow-text">Problem Statement 34 &bull; Zero-Hallucination Policy Engine</span>
         </div>
         <h1 class="stitch-headline">
-            Corporate policy intelligence, codified <span class="stitch-headline-accent">without error.</span>
+            Corporate policy intelligence,<br/>codified <span class="stitch-headline-accent">without error.</span>
         </h1>
         <p class="stitch-lede">
-            Here is how you use the platform: upload your official policy manuals, let our vector engine index every clause, and receive instant, audited findings with primary source citations.
+            Directly ground every inquiry in verified enterprise policy folios. Engineered with ChromaDB vectorization and strict non-parametric refusal guardrails for complete statutory auditability.
         </p>
+        <div>
+            <a class="stitch-initiate-btn" href="?tab=consultation" target="_self">
+                <span>INITIATE VECTOR CONSULTATION</span>
+                <span style="font-size: 1.1rem; font-weight: 700;">&rarr;</span>
+            </a>
+        </div>
         <div class="stitch-telemetry">
-            <span style="color: #24614A; font-weight: 600;">🟢 3 Verified Folios (HR • Travel • Expense)</span>
+            <span style="color: #24614A; font-weight: 600;">● 3 Verified Folios (HR • Travel • Expense)</span>
             <span style="color: #D8D2C5;">•</span>
             <span>Latency: ≤ 42ms</span>
             <span style="color: #D8D2C5;">•</span>
@@ -642,31 +565,31 @@ with tab_guide:
     # Pictorial Flowchart Strip (Client Workflow)
     st.markdown("""
     <div class="flow-strip">
-        <div class="flow-node">
+        <div style="display: flex; align-items: center; gap: 10px; white-space: nowrap;">
             <span style="font-size: 24px;">📄</span>
             <div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">1. Upload Policy PDFs</div>
                 <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">Official Company Manuals</div>
             </div>
         </div>
-        <span class="flow-arrow">&rarr;</span>
-        <div class="flow-node">
+        <span style="color: #8B4513; font-size: 18px; font-weight: 700;">&rarr;</span>
+        <div style="display: flex; align-items: center; gap: 10px; white-space: nowrap;">
             <span style="font-size: 24px;">⚙️</span>
             <div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">2. AI Vector Indexing</div>
                 <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">ChromaDB Semantic Memory</div>
             </div>
         </div>
-        <span class="flow-arrow">&rarr;</span>
-        <div class="flow-node">
+        <span style="color: #8B4513; font-size: 18px; font-weight: 700;">&rarr;</span>
+        <div style="display: flex; align-items: center; gap: 10px; white-space: nowrap;">
             <span style="font-size: 24px;">💬</span>
             <div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">3. Inquire in Plain English</div>
                 <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">Ask About Leave &amp; Allowances</div>
             </div>
         </div>
-        <span class="flow-arrow">&rarr;</span>
-        <div class="flow-node">
+        <span style="color: #8B4513; font-size: 18px; font-weight: 700;">&rarr;</span>
+        <div style="display: flex; align-items: center; gap: 10px; white-space: nowrap;">
             <span style="font-size: 24px;">⚖️</span>
             <div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">4. Audited Findings</div>
@@ -683,10 +606,10 @@ with tab_guide:
         st.markdown("""
         <div class="step-card">
             <div>
-                <div class="step-badge-icon">📤</div>
-                <div class="step-tag">STEP 01 // CLIENT ACTION</div>
-                <div class="step-title">Upload or Browse Policy Manuals</div>
-                <div class="step-desc">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">📤</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 01 // CLIENT ACTION</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">Upload or Browse Policy Manuals</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
                     As an employee or HR officer, you supply your official company policy PDFs (Leave, Business Travel, or Reimbursement). The system safely reads and validates every manuscript.
                 </div>
             </div>
@@ -701,10 +624,10 @@ with tab_guide:
         st.markdown("""
         <div class="step-card">
             <div>
-                <div class="step-badge-icon">💬</div>
-                <div class="step-tag">STEP 03 // CLIENT ACTION</div>
-                <div class="step-title">Ask Inquiries in Plain English</div>
-                <div class="step-desc">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">💬</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 03 // CLIENT ACTION</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">Ask Inquiries in Plain English</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
                     Enter any statutory question naturally—such as <em>"How many days of paid leave can I carry forward?"</em> or <em>"What is the daily meal allowance?"</em> Semantic cosine matching finds the exact clause in milliseconds.
                 </div>
             </div>
@@ -718,10 +641,10 @@ with tab_guide:
         st.markdown("""
         <div class="step-card">
             <div>
-                <div class="step-badge-icon">🧠</div>
-                <div class="step-tag">STEP 02 // SYSTEM WORKFLOW</div>
-                <div class="step-title">AI Reads &amp; Understands the Clauses</div>
-                <div class="step-desc">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">🧠</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 02 // SYSTEM WORKFLOW</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">AI Reads &amp; Understands the Clauses</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
                     The model extracts text using <code>pypdf</code>, splits it into 300-word sliding semantic windows, and generates high-dimensional embeddings via Google <code>text-embedding-004</code>. Every clause is indexed in local ChromaDB memory.
                 </div>
             </div>
@@ -736,10 +659,10 @@ with tab_guide:
         st.markdown("""
         <div class="step-card">
             <div>
-                <div class="step-badge-icon">⚖️</div>
-                <div class="step-tag">STEP 04 // FINAL OUTPUT</div>
-                <div class="step-title">Get Audited Answers with Citations</div>
-                <div class="step-desc">
+                <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">⚖️</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 04 // FINAL OUTPUT</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">Get Audited Answers with Citations</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
                     Google Gemini synthesizes a direct finding restricted strictly to the verified document text. Every answer includes expandable <strong>Judicial Precedent Footnotes</strong> displaying the source PDF name, page number, and quote preview.
                 </div>
             </div>
@@ -777,35 +700,35 @@ with tab_guide:
             f.write(uploaded_pdf.getbuffer())
         with st.spinner(f"Ingesting {uploaded_pdf.name} into ChromaDB vector index..."):
             chunks_indexed = st.session_state.pipeline.index_pdf(save_path)
-            st.success(f"Successfully ingested '{uploaded_pdf.name}' ({chunks_indexed} semantic chunks indexed)! Switch to the **02 // Consultation** tab to query it.")
+            st.success(f"Successfully ingested '{uploaded_pdf.name}' ({chunks_indexed} semantic chunks indexed)! Click **02 // Consultation** in the top navbar to query it.")
 
     # 3 Architectural Preview Cards (From Stitch Screen)
     st.markdown("""
     <div class="stitch-preview-grid">
         <div class="stitch-preview-card">
-            <div class="stitch-preview-header">
-                <span class="stitch-preview-title">01 // STATUTORY CORPUS</span>
-                <span class="stitch-preview-pill">FOLIO</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em;">01 // STATUTORY CORPUS</span>
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #F5F2EB; border: 1px solid #D8D2C5; padding: 2px 6px; border-radius: 4px; color: #6E6961;">FOLIO</span>
             </div>
-            <p class="stitch-preview-desc">
+            <p style="font-family: 'Plus Jakarta Sans'; font-size: 0.82rem; color: #3D3A36; line-height: 1.55;">
                 3 Master Folios ingested: HR Leave, Travel &amp; Per Diem, Discretionary Reimbursement.
             </p>
         </div>
         <div class="stitch-preview-card">
-            <div class="stitch-preview-header">
-                <span class="stitch-preview-title">02 // VECTORIZATION ENGINE</span>
-                <span class="stitch-preview-pill">CHROMA</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em;">02 // VECTORIZATION ENGINE</span>
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #F5F2EB; border: 1px solid #D8D2C5; padding: 2px 6px; border-radius: 4px; color: #6E6961;">CHROMA</span>
             </div>
-            <p class="stitch-preview-desc">
+            <p style="font-family: 'Plus Jakarta Sans'; font-size: 0.82rem; color: #3D3A36; line-height: 1.55;">
                 text-embedding-004 indexed in ChromaDB SQLite3 persistence tier.
             </p>
         </div>
         <div class="stitch-preview-card">
-            <div class="stitch-preview-header">
-                <span class="stitch-preview-title">03 // DUAL-HASH INTEGRITY</span>
-                <span class="stitch-preview-pill" style="color: #24614A; background: #E8F3EE; border-color: #B8D7C9;">SHA-256</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em;">03 // DUAL-HASH INTEGRITY</span>
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #E8F3EE; border: 1px solid #B8D7C9; padding: 2px 6px; border-radius: 4px; color: #24614A;">SHA-256</span>
             </div>
-            <p class="stitch-preview-desc">
+            <p style="font-family: 'Plus Jakarta Sans'; font-size: 0.82rem; color: #3D3A36; line-height: 1.55;">
                 SHA-256 cryptographic parity ensuring zero parametric fabrication.
             </p>
         </div>
@@ -813,9 +736,23 @@ with tab_guide:
     """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# TAB 2: 02 // CONSULTATION (Dashboard & Live Consultation Stream)
+# SECTION 2: CONSULTATION (Dashboard & Live Consultation Stream)
 # ---------------------------------------------------------
-with tab_dashboard:
+elif active_tab == "consultation":
+    st.markdown("""
+    <div style="margin-bottom: 1.8rem;">
+        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #8B4513; font-weight: 700; margin-bottom: 4px;">
+            // STATUTORY CONSULTATION LEDGER
+        </div>
+        <h2 style="font-family: 'Newsreader', serif; font-size: 2.2rem; font-weight: 500; color: #1C1A18; margin: 0 0 8px 0;">
+            Policy Consultation &amp; Vector Reasoning
+        </h2>
+        <p style="font-family: 'Plus Jakarta Sans'; font-size: 0.95rem; color: #3D3A36; line-height: 1.6; margin: 0;">
+            Execute natural language inquiries grounded strictly in verified policy folios with 100% auditable source citations.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
     # Statutory Ledger Metrics Strip
     total_policies = len([f for f in os.listdir(POLICIES_DIR) if f.endswith(".pdf")])
     status_label = "100% Certified" if st.session_state.api_key else "Key Configured"
@@ -825,29 +762,29 @@ with tab_dashboard:
     <div class="ledger-grid">
         <div class="ledger-card">
             <div>
-                <div class="ledger-label">Statutory Corpus</div>
-                <div class="ledger-value">{total_policies} Active Folios</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6E6961; font-weight: 600; margin-bottom: 4px;">Statutory Corpus</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.35rem; font-weight: 700; color: #8B4513;">{total_policies} Active Folios</div>
             </div>
             <div style="font-size: 24px; opacity: 0.6;">📖</div>
         </div>
         <div class="ledger-card">
             <div>
-                <div class="ledger-label">Vector Repository</div>
-                <div class="ledger-value">ChromaDB</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6E6961; font-weight: 600; margin-bottom: 4px;">Vector Repository</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.35rem; font-weight: 700; color: #8B4513;">ChromaDB</div>
             </div>
             <div style="font-size: 24px; opacity: 0.6;">⚡</div>
         </div>
         <div class="ledger-card">
             <div>
-                <div class="ledger-label">Governance Mode</div>
-                <div class="ledger-value">Zero-Hallucination</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6E6961; font-weight: 600; margin-bottom: 4px;">Governance Mode</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.35rem; font-weight: 700; color: #8B4513;">Zero-Hallucination</div>
             </div>
             <div style="font-size: 24px; opacity: 0.6;">⚖️</div>
         </div>
         <div class="ledger-card">
             <div>
-                <div class="ledger-label">Audit Integrity</div>
-                <div class="ledger-value" style="color: {status_color};">{status_label}</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6E6961; font-weight: 600; margin-bottom: 4px;">Audit Integrity</div>
+                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.35rem; font-weight: 700; color: {status_color};">{status_label}</div>
             </div>
             <div style="font-size: 24px; opacity: 0.6;">🛡️</div>
         </div>
@@ -1008,14 +945,14 @@ with tab_dashboard:
                 with st.expander("📌 Judicial Precedent & Primary Source Attributions", expanded=False):
                     for s in msg["sources"]:
                         st.markdown(f"""
-                        <div class="footnote-card">
-                            <div class="footnote-header">
+                        <div style="padding: 16px 20px; border-radius: 8px; background: #FAF8F5; margin-top: 14px; border: 1px solid #D8D2C5;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #D8D2C5; margin-bottom: 10px;">
                                 <span style="font-family: 'JetBrains Mono'; font-size: 0.76rem; font-weight: 700; color: #8B4513; text-transform: uppercase;">
                                     📜 {s['source_file']} &bull; PAGE {s['page']}
                                 </span>
                                 <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; color: #6E6961;">Audited Precedent</span>
                             </div>
-                            <div class="footnote-quote">
+                            <div style="border-left: 3px solid #8B4513; padding-left: 14px; margin: 8px 0; font-family: 'Newsreader', serif; font-style: italic; font-size: 0.95rem; line-height: 1.55; color: #1C1A18;">
                                 "{s['content_preview']}"
                             </div>
                         </div>
@@ -1033,10 +970,54 @@ with tab_dashboard:
             ]
             st.rerun()
 
+    # Chat Input & Synthesis
+    user_input = st.chat_input("Consult policy guidelines or query specific per diem allowances...")
+    final_query = selected_query or user_input
+
+    if final_query:
+        st.session_state.messages.append({"role": "user", "content": final_query, "sources": []})
+        with st.chat_message("user", avatar="👤"):
+            st.markdown(final_query)
+
+        with st.chat_message("assistant", avatar="⚖️"):
+            with st.spinner("Reviewing codified policy folios in ChromaDB..."):
+                if st.session_state.api_key:
+                    st.session_state.pipeline.set_api_key(st.session_state.api_key)
+                result = st.session_state.pipeline.generate_answer(
+                    query=final_query,
+                    top_k=3,
+                    model=st.session_state.model_choice
+                )
+                
+                st.markdown(result["answer"])
+                
+                if result.get("sources"):
+                    with st.expander("📌 Judicial Precedent & Primary Source Attributions", expanded=True):
+                        for s in result["sources"]:
+                            st.markdown(f"""
+                            <div style="padding: 16px 20px; border-radius: 8px; background: #FAF8F5; margin-top: 14px; border: 1px solid #D8D2C5;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #D8D2C5; margin-bottom: 10px;">
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.76rem; font-weight: 700; color: #8B4513; text-transform: uppercase;">
+                                        📜 {s['source_file']} &bull; PAGE {s['page']}
+                                    </span>
+                                    <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; color: #6E6961;">Audited Precedent</span>
+                                </div>
+                                <div style="border-left: 3px solid #8B4513; padding-left: 14px; margin: 8px 0; font-family: 'Newsreader', serif; font-style: italic; font-size: 0.95rem; line-height: 1.55; color: #1C1A18;">
+                                    "{s['content_preview']}"
+                                </div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                
+                st.session_state.messages.append({
+                    "role": "assistant",
+                    "content": result["answer"],
+                    "sources": result.get("sources", [])
+                })
+
 # ---------------------------------------------------------
-# TAB 3: 03 // FOLIOS (Document Library & Original PDF Downloads)
+# SECTION 3: FOLIOS (Document Library & Original PDF Downloads)
 # ---------------------------------------------------------
-with tab_library:
+elif active_tab == "folios":
     st.markdown("""
     <div style="margin-bottom: 1.8rem;">
         <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #8B4513; font-weight: 700; margin-bottom: 4px;">
@@ -1139,9 +1120,9 @@ with tab_library:
             st.markdown("<div style='margin-bottom: 1.5rem;'></div>", unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# TAB 4: 04 // SETTINGS (Credentials, Reasoning Model & Health)
+# SECTION 4: SETTINGS (Credentials & Engine Configuration)
 # ---------------------------------------------------------
-with tab_settings:
+elif active_tab == "settings":
     st.markdown("""
     <div style="margin-bottom: 1.8rem;">
         <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #8B4513; font-weight: 700; margin-bottom: 4px;">
@@ -1205,49 +1186,12 @@ with tab_settings:
         </div>
         """, unsafe_allow_html=True)
 
-# ---------------------------------------------------------
-# Chat Input & Synthesis (Docked at Container Bottom)
-# ---------------------------------------------------------
-user_input = st.chat_input("Consult policy guidelines or query specific per diem allowances...")
-
-final_query = selected_query or user_input
-
-if final_query:
-    st.session_state.messages.append({"role": "user", "content": final_query, "sources": []})
-    with st.chat_message("user", avatar="👤"):
-        st.markdown(final_query)
-
-    with st.chat_message("assistant", avatar="⚖️"):
-        with st.spinner("Reviewing codified policy folios in ChromaDB..."):
-            if st.session_state.api_key:
-                st.session_state.pipeline.set_api_key(st.session_state.api_key)
-            result = st.session_state.pipeline.generate_answer(
-                query=final_query,
-                top_k=3,
-                model=st.session_state.model_choice
-            )
-            
-            st.markdown(result["answer"])
-            
-            if result.get("sources"):
-                with st.expander("📌 Judicial Precedent & Primary Source Attributions", expanded=True):
-                    for s in result["sources"]:
-                        st.markdown(f"""
-                        <div class="footnote-card">
-                            <div class="footnote-header">
-                                <span style="font-family: 'JetBrains Mono'; font-size: 0.76rem; font-weight: 700; color: #8B4513; text-transform: uppercase;">
-                                    📜 {s['source_file']} &bull; PAGE {s['page']}
-                                </span>
-                                <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; color: #6E6961;">Audited Precedent</span>
-                            </div>
-                            <div class="footnote-quote">
-                                "{s['content_preview']}"
-                            </div>
-                        </div>
-                        """, unsafe_allow_html=True)
-            
-            st.session_state.messages.append({
-                "role": "assistant",
-                "content": result["answer"],
-                "sources": result.get("sources", [])
-            })
+# Footer Imprint
+st.markdown("""
+<div style="width: 100%; border-top: 1px solid #D8D2C5; padding: 24px 0 10px 0; margin-top: 3rem; text-align: center;">
+    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem; color: #6E6961;">
+        <span>LEXICON ARCHITECTURAL CODEX // ENTERPRISE RUNTIME</span>
+        <span style="color: #8B4513; font-weight: 600;">STRICT NON-PARAMETRIC REFUSAL MODE ACTIVE</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
