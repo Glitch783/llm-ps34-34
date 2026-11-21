@@ -230,6 +230,11 @@ st.markdown("""
         color: var(--ink) !important;
         -webkit-text-fill-color: var(--ink) !important;
         margin-bottom: 1.4rem;
+        text-align: center !important;
+    }
+    .stitch-headline a,
+    a.header-anchor {
+        display: none !important;
     }
     .stitch-headline-accent {
         font-style: italic;
@@ -246,6 +251,7 @@ st.markdown("""
         -webkit-text-fill-color: var(--charcoal) !important;
         max-width: 680px;
         margin: 0 auto 2.2rem auto;
+        text-align: center !important;
     }
     
     /* INITIATE VECTOR CONSULTATION BUTTON */
@@ -553,7 +559,7 @@ if active_tab == "home":
         <h1 class="stitch-headline">
             Corporate policy intelligence,<br/>codified <span class="stitch-headline-accent">without error.</span>
         </h1>
-        <p class="stitch-lede">
+        <p class="stitch-lede" style="text-align: center !important;">
             Directly ground every inquiry in verified enterprise policy folios. Engineered with ChromaDB vectorization and strict non-parametric refusal guardrails for complete statutory auditability.
         </p>
         <div>
