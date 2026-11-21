@@ -7,7 +7,7 @@ from rag_pipeline import RAGPipeline
 # Page Configuration - Full Width, No Sidebar
 # ---------------------------------------------------------
 st.set_page_config(
-    page_title="LEXICON // CODEX — Architectural Zero-Hallucination Policy Engine",
+    page_title="LEXICON CODEX — Zero-Hallucination Policy Engine",
     page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -504,7 +504,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "assistant",
-            "content": "Welcome to **LEXICON // CODEX**. I provide verified statutory findings over corporate **Leave**, **Business Travel**, and **Expense Reimbursement** guidelines.\n\nEvery response is backed by zero-hallucination vector grounding and primary source attributions.",
+            "content": "Welcome to **LEXICON CODEX**. I provide verified statutory findings over corporate **Leave**, **Business Travel**, and **Expense Reimbursement** guidelines.\n\nEvery response is backed by zero-hallucination vector grounding and primary source attributions.",
             "sources": []
         }
     ]
@@ -640,7 +640,7 @@ if active_tab == "home":
         <div class="step-card">
             <div>
                 <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">📤</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 01 // CLIENT ACTION</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 01: CLIENT ACTION</div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">Upload or Browse Policy Manuals</div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
                     As an employee or HR officer, you supply your official company policy PDFs (Leave, Business Travel, or Reimbursement). The system safely reads and validates every manuscript.
@@ -658,7 +658,7 @@ if active_tab == "home":
         <div class="step-card">
             <div>
                 <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">💬</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 03 // CLIENT ACTION</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 03: CLIENT ACTION</div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">Ask Inquiries in Plain English</div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
                     Enter any statutory question naturally—such as <em>"How many days of paid leave can I carry forward?"</em> or <em>"What is the daily meal allowance?"</em> Semantic cosine matching finds the exact clause in milliseconds.
@@ -675,7 +675,7 @@ if active_tab == "home":
         <div class="step-card">
             <div>
                 <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">🧠</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 02 // SYSTEM WORKFLOW</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 02: SYSTEM WORKFLOW</div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">AI Reads &amp; Understands the Clauses</div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
                     The model extracts text using <code>pypdf</code>, splits it into 300-word sliding semantic windows, and generates high-dimensional embeddings via Google <code>text-embedding-004</code>. Every clause is indexed in local ChromaDB memory.
@@ -693,7 +693,7 @@ if active_tab == "home":
         <div class="step-card">
             <div>
                 <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">⚖️</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 04 // FINAL OUTPUT</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 04: FINAL OUTPUT</div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">Get Audited Answers with Citations</div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
                     Google Gemini synthesizes a direct finding restricted strictly to the verified document text. Every answer includes expandable <strong>Judicial Precedent Footnotes</strong> displaying the source PDF name, page number, and quote preview.
@@ -710,13 +710,13 @@ if active_tab == "home":
     st.markdown("""
     <div style="background: #FFFFFF; border: 1px solid #D8D2C5; border-left: 4px solid #8B4513; border-radius: 12px; padding: 20px; box-shadow: 0 4px 16px rgba(28,26,24,0.04); margin-bottom: 20px;">
         <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: #8B4513; letter-spacing: 0.08em; margin-bottom: 4px;">
-            // TEST LIVE: UPLOAD A NEW POLICY PDF
+            TEST LIVE: UPLOAD A NEW POLICY PDF
         </div>
         <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.15rem; font-weight: 700; color: #1C1A18; margin-bottom: 4px;">
             Ingest Your Custom Company Manual
         </div>
         <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; color: #3D3A36; line-height: 1.5; margin-bottom: 12px;">
-            Upload an official company policy PDF to test the workflow live. The system will parse its clauses, vectorize the text, and make it instantly queryable in the <strong>02 // Consultation</strong> tab.
+            Upload an official company policy PDF to test the workflow live. The system will parse its clauses, vectorize the text, and make it instantly queryable in the <strong>Consultation</strong> tab.
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -733,40 +733,7 @@ if active_tab == "home":
             f.write(uploaded_pdf.getbuffer())
         with st.spinner(f"Ingesting {uploaded_pdf.name} into ChromaDB vector index..."):
             chunks_indexed = st.session_state.pipeline.index_pdf(save_path)
-            st.success(f"Successfully ingested '{uploaded_pdf.name}' ({chunks_indexed} semantic chunks indexed)! Click **02 // Consultation** in the top navbar to query it.")
-
-    # 3 Architectural Preview Cards (From Stitch Screen)
-    st.markdown("""
-    <div class="stitch-preview-grid">
-        <div class="stitch-preview-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em;">01 // STATUTORY CORPUS</span>
-                <span style="font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #F5F2EB; border: 1px solid #D8D2C5; padding: 2px 6px; border-radius: 4px; color: #6E6961;">FOLIO</span>
-            </div>
-            <p style="font-family: 'Plus Jakarta Sans'; font-size: 0.82rem; color: #3D3A36; line-height: 1.55;">
-                3 Master Folios ingested: HR Leave, Travel &amp; Per Diem, Discretionary Reimbursement.
-            </p>
-        </div>
-        <div class="stitch-preview-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em;">02 // VECTORIZATION ENGINE</span>
-                <span style="font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #F5F2EB; border: 1px solid #D8D2C5; padding: 2px 6px; border-radius: 4px; color: #6E6961;">CHROMA</span>
-            </div>
-            <p style="font-family: 'Plus Jakarta Sans'; font-size: 0.82rem; color: #3D3A36; line-height: 1.55;">
-                text-embedding-004 indexed in ChromaDB SQLite3 persistence tier.
-            </p>
-        </div>
-        <div class="stitch-preview-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em;">03 // DUAL-HASH INTEGRITY</span>
-                <span style="font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #E8F3EE; border: 1px solid #B8D7C9; padding: 2px 6px; border-radius: 4px; color: #24614A;">SHA-256</span>
-            </div>
-            <p style="font-family: 'Plus Jakarta Sans'; font-size: 0.82rem; color: #3D3A36; line-height: 1.55;">
-                SHA-256 cryptographic parity ensuring zero parametric fabrication.
-            </p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+            st.success(f"Successfully ingested '{uploaded_pdf.name}' ({chunks_indexed} semantic chunks indexed)! Click **Consultation** in the top navbar to query it.")
 
 # ---------------------------------------------------------
 # SECTION 2: CONSULTATION (Dashboard & Live Consultation Stream)
@@ -775,7 +742,7 @@ elif active_tab == "consultation":
     st.markdown("""
     <div style="margin-bottom: 1.8rem;">
         <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #8B4513; font-weight: 700; margin-bottom: 4px;">
-            // STATUTORY CONSULTATION LEDGER
+            STATUTORY CONSULTATION LEDGER
         </div>
         <h2 style="font-family: 'Newsreader', serif; font-size: 2.2rem; font-weight: 500; color: #1C1A18; margin: 0 0 8px 0;">
             Policy Consultation &amp; Vector Reasoning
@@ -843,7 +810,7 @@ elif active_tab == "consultation":
                     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #D8D2C5; padding-bottom: 12px; margin-bottom: 14px;">
                         <div>
                             <span style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8B4513; font-weight: 700;">
-                                // OFFICIAL INSTITUTIONAL FOLIO INSPECTOR
+                                OFFICIAL INSTITUTIONAL FOLIO INSPECTOR
                             </span>
                             <h2 style="font-family: 'Newsreader', serif; font-size: 1.6rem; font-weight: 500; margin: 4px 0; color: #1C1A18;">
                                 {doc_name.replace('_Policy.pdf', '').replace('_', ' ')} Policy Manual
@@ -1054,7 +1021,7 @@ elif active_tab in ["policy", "folios"]:
     st.markdown("""
     <div style="margin-bottom: 1.8rem;">
         <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #8B4513; font-weight: 700; margin-bottom: 4px;">
-            // STATUTORY DOCUMENT REPOSITORY
+            STATUTORY DOCUMENT REPOSITORY
         </div>
         <h2 style="font-family: 'Newsreader', serif; font-size: 2.2rem; font-weight: 500; color: #1C1A18; margin: 0 0 8px 0;">
             Official Policy PDF Folios &amp; Regulatory Manuals
@@ -1130,7 +1097,7 @@ elif active_tab in ["policy", "folios"]:
                 </div>
                 <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.90rem; line-height: 1.6; color: #3D3A36; margin-bottom: 16px;">{p_info['desc']}</div>
                 <div style="margin-bottom: 16px;">
-                    <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; text-transform: uppercase; font-weight: 700; color: #6E6961; letter-spacing: 0.08em; display: block; margin-bottom: 6px;">// Key Statutory Clauses:</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.70rem; text-transform: uppercase; font-weight: 700; color: #6E6961; letter-spacing: 0.08em; display: block; margin-bottom: 6px;">Key Statutory Clauses:</span>
                     <div>{clauses_html}</div>
                 </div>
             </div>
@@ -1159,7 +1126,7 @@ elif active_tab == "settings":
     st.markdown("""
     <div style="margin-bottom: 1.8rem;">
         <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: #8B4513; font-weight: 700; margin-bottom: 4px;">
-            // SYSTEM CONFIGURATION &amp; AUDIT SETTINGS
+            SYSTEM CONFIGURATION &amp; AUDIT SETTINGS
         </div>
         <h2 style="font-family: 'Newsreader', serif; font-size: 2.2rem; font-weight: 500; color: #1C1A18; margin: 0 0 8px 0;">
             Vector Engine Credentials &amp; Model Selection
@@ -1223,7 +1190,7 @@ elif active_tab == "settings":
 st.markdown("""
 <div style="width: 100%; border-top: 1px solid #D8D2C5; padding: 24px 0 10px 0; margin-top: 3rem; text-align: center;">
     <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 0.70rem; color: #6E6961;">
-        <span>LEXICON ARCHITECTURAL CODEX // ENTERPRISE RUNTIME</span>
+        <span>LEXICON ARCHITECTURAL CODEX &bull; ENTERPRISE RUNTIME</span>
         <span style="color: #8B4513; font-weight: 600;">STRICT NON-PARAMETRIC REFUSAL MODE ACTIVE</span>
     </div>
 </div>
