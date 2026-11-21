@@ -354,6 +354,135 @@ st.markdown("""
         box-shadow: 0 8px 25px rgba(28, 26, 24, 0.08);
     }
 
+    /* FRIENDLY VISUAL WORKFLOW CARDS */
+    .workflow-header {
+        text-align: center !important;
+        margin-top: 2rem;
+        margin-bottom: 1.8rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .workflow-eyebrow {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--cognac);
+        margin-bottom: 6px;
+        text-align: center !important;
+    }
+    .workflow-title {
+        font-family: 'Newsreader', serif;
+        font-size: 2.1rem;
+        font-weight: 500;
+        color: var(--ink);
+        margin: 0 0 6px 0;
+        text-align: center !important;
+    }
+    .workflow-subtitle {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.92rem;
+        color: var(--muted);
+        max-width: 580px;
+        margin: 0 auto !important;
+        line-height: 1.5;
+        text-align: center !important;
+    }
+    .friendly-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 2rem;
+    }
+    @media (max-width: 960px) {
+        .friendly-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 560px) {
+        .friendly-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .friendly-card {
+        background: var(--vellum);
+        border: 1px solid var(--hairline);
+        border-radius: 16px;
+        padding: 22px 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 3px 14px rgba(28, 26, 24, 0.03);
+    }
+    .friendly-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--cognac);
+        box-shadow: 0 10px 25px rgba(139, 69, 19, 0.09);
+    }
+    .friendly-step-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        font-weight: 700;
+        color: var(--cognac);
+        background: #F8EFEA;
+        border: 1px solid rgba(139, 69, 19, 0.18);
+        padding: 3px 9px;
+        border-radius: 9999px;
+        width: fit-content;
+        margin-bottom: 12px;
+    }
+    .friendly-figure-box {
+        background: linear-gradient(135deg, #FAF7F2 0%, #F3EEE4 100%);
+        border: 1px dashed #D8D2C5;
+        border-radius: 12px;
+        padding: 14px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+        min-height: 92px;
+        text-align: center;
+    }
+    .friendly-card-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 6px;
+        line-height: 1.3;
+    }
+    .friendly-card-desc {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.84rem;
+        color: #4A4640;
+        line-height: 1.45;
+        margin-bottom: 14px;
+    }
+    .friendly-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.70rem;
+        font-weight: 600;
+        color: var(--cognac);
+        background: #FFFFFF;
+        border: 1px solid var(--hairline);
+        padding: 4px 9px;
+        border-radius: 6px;
+        margin-top: auto;
+        width: fit-content;
+    }
+
     /* STITCH ARCHITECTURAL PREVIEW CARDS */
     .stitch-preview-grid {
         display: grid;
@@ -628,131 +757,114 @@ if active_tab == "home":
     </div>
     """, unsafe_allow_html=True)
 
-    # Pictorial Flowchart Strip (Client Workflow)
-    st.markdown("""
-    <div class="flow-strip">
-        <div style="display: flex; align-items: center; gap: 10px; white-space: nowrap;">
-            <span style="font-size: 24px;">📄</span>
-            <div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">1. Upload Policy PDFs</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">Official Company Manuals</div>
-            </div>
-        </div>
-        <span style="color: #8B4513; font-size: 18px; font-weight: 700;">&rarr;</span>
-        <div style="display: flex; align-items: center; gap: 10px; white-space: nowrap;">
-            <span style="font-size: 24px;">⚙️</span>
-            <div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">2. AI Vector Indexing</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">ChromaDB Semantic Memory</div>
-            </div>
-        </div>
-        <span style="color: #8B4513; font-size: 18px; font-weight: 700;">&rarr;</span>
-        <div style="display: flex; align-items: center; gap: 10px; white-space: nowrap;">
-            <span style="font-size: 24px;">💬</span>
-            <div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">3. Inquire in Plain English</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">Ask About Leave &amp; Allowances</div>
-            </div>
-        </div>
-        <span style="color: #8B4513; font-size: 18px; font-weight: 700;">&rarr;</span>
-        <div style="display: flex; align-items: center; gap: 10px; white-space: nowrap;">
-            <span style="font-size: 24px;">⚖️</span>
-            <div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.84rem; font-weight: 700; color: #1C1A18;">4. Audited Findings</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.68rem; color: #6E6961;">Zero-Hallucination Citations</div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    # Friendly Visual 4-Step Client Workflow
+    st.markdown("""<div class="workflow-header">
+<div class="workflow-eyebrow">HOW IT WORKS</div>
+<h2 class="workflow-title">4 Simple Steps to Verified Policy Answers</h2>
+<p class="workflow-subtitle">No legal jargon to decode. Just clear, trusted guidance with exact proof in seconds.</p>
+</div>
+<div class="friendly-grid">
+<div class="friendly-card">
+<div>
+<div class="friendly-step-badge">STEP 01 &bull; UPLOAD</div>
+<div class="friendly-figure-box">
+<div style="font-size: 32px; margin-bottom: 4px;">📂</div>
+<div style="display: flex; gap: 4px; justify-content: center; flex-wrap: wrap;">
+<span style="font-size: 0.65rem; background: #FFFFFF; border: 1px solid #D8D2C5; border-radius: 4px; padding: 2px 6px; font-weight: 600; color: #1C1A18;">HR Leave</span>
+<span style="font-size: 0.65rem; background: #FFFFFF; border: 1px solid #D8D2C5; border-radius: 4px; padding: 2px 6px; font-weight: 600; color: #1C1A18;">Travel</span>
+<span style="font-size: 0.65rem; background: #FFFFFF; border: 1px solid #D8D2C5; border-radius: 4px; padding: 2px 6px; font-weight: 600; color: #1C1A18;">Expense</span>
+</div>
+</div>
+<div class="friendly-card-title">Drop in Policies</div>
+<div class="friendly-card-desc">
+Upload your official company PDF handbooks and guidelines.
+</div>
+</div>
+<div class="friendly-pill">📄 Any PDF Manual</div>
+</div>
 
-    # 4 Simple Step Cards (How the Client Uses the Site)
-    step_col1, step_col2 = st.columns([1, 1])
+<div class="friendly-card">
+<div>
+<div class="friendly-step-badge">STEP 02 &bull; ORGANIZE</div>
+<div class="friendly-figure-box">
+<div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 20px; margin-bottom: 6px;">
+<span>📄</span>
+<span style="color: #8B4513; font-size: 14px; font-weight: 700;">&rarr;</span>
+<span style="background: #F8EFEA; border: 1px solid #8B4513; border-radius: 6px; padding: 2px 6px; font-size: 18px;">⚡</span>
+<span style="color: #8B4513; font-size: 14px; font-weight: 700;">&rarr;</span>
+<span>🧠</span>
+</div>
+<div style="font-size: 0.68rem; color: #24614A; font-weight: 700; background: #E8F5E9; border-radius: 4px; padding: 2px 8px;">
+● Instant Memory Ready
+</div>
+</div>
+<div class="friendly-card-title">AI Reads Every Rule</div>
+<div class="friendly-card-desc">
+Smart AI indexes every clause so nothing is missed or overlooked.
+</div>
+</div>
+<div class="friendly-pill">⚡ 1-Click Fast Index</div>
+</div>
 
-    with step_col1:
-        st.markdown("""
-        <div class="step-card">
-            <div>
-                <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">📤</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 01: CLIENT ACTION</div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">Upload or Browse Policy Manuals</div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
-                    As an employee or HR officer, you supply your official company policy PDFs (Leave, Business Travel, or Reimbursement). The system safely reads and validates every manuscript.
-                </div>
-            </div>
-            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #D8D2C5; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8B4513;">
-                📁 Supported Formats: Multi-page PDF
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+<div class="friendly-card">
+<div>
+<div class="friendly-step-badge">STEP 03 &bull; ASK</div>
+<div class="friendly-figure-box" style="padding: 10px 8px;">
+<div style="width: 100%; display: flex; flex-direction: column; gap: 4px;">
+<div style="background: #FFFFFF; border: 1px solid #D8D2C5; border-radius: 8px 8px 8px 2px; padding: 3px 7px; font-size: 0.68rem; color: #1C1A18; font-weight: 600; text-align: left; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+💬 "Can I claim meals?"
+</div>
+<div style="background: #8B4513; color: #FFFFFF; border-radius: 8px 8px 2px 8px; padding: 3px 7px; font-size: 0.68rem; font-weight: 600; text-align: right; align-self: flex-end;">
+"How many leave days?"
+</div>
+</div>
+</div>
+<div class="friendly-card-title">Ask in Plain English</div>
+<div class="friendly-card-desc">
+Ask questions naturally just like chatting with HR. No special syntax.
+</div>
+</div>
+<div class="friendly-pill">🗣️ Natural Language</div>
+</div>
 
-        st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
-
-        st.markdown("""
-        <div class="step-card">
-            <div>
-                <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">💬</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 03: CLIENT ACTION</div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">Ask Inquiries in Plain English</div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
-                    Enter any statutory question naturally—such as <em>"How many days of paid leave can I carry forward?"</em> or <em>"What is the daily meal allowance?"</em> Semantic cosine matching finds the exact clause in milliseconds.
-                </div>
-            </div>
-            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #D8D2C5; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8B4513;">
-                🔍 Cosine Distance Search: Top-3 relevant context chunks
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with step_col2:
-        st.markdown("""
-        <div class="step-card">
-            <div>
-                <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">🧠</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 02: SYSTEM WORKFLOW</div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">AI Reads &amp; Understands the Clauses</div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
-                    The model extracts text using <code>pypdf</code>, splits it into 300-word sliding semantic windows, and generates high-dimensional embeddings via Google <code>text-embedding-004</code>. Every clause is indexed in local ChromaDB memory.
-                </div>
-            </div>
-            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #D8D2C5; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8B4513;">
-                ⚡ Vector Engine: ChromaDB (Local SQLite3 Persistence)
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
-
-        st.markdown("""
-        <div class="step-card">
-            <div>
-                <div style="width: 48px; height: 48px; border-radius: 10px; background: #F8EFEA; border: 1px solid #D8D2C5; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px;">⚖️</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.70rem; font-weight: 700; color: #8B4513; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">STEP 04: FINAL OUTPUT</div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.22rem; font-weight: 700; color: #1C1A18; margin-bottom: 8px;">Get Audited Answers with Citations</div>
-                <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; line-height: 1.6; color: #3D3A36;">
-                    Google Gemini synthesizes a direct finding restricted strictly to the verified document text. Every answer includes expandable <strong>Judicial Precedent Footnotes</strong> displaying the source PDF name, page number, and quote preview.
-                </div>
-            </div>
-            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #D8D2C5; font-family: 'JetBrains Mono'; font-size: 0.72rem; color: #8B4513;">
-                🛡️ Zero Hallucinations: 100% Verifiable Source Links
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+<div class="friendly-card">
+<div>
+<div class="friendly-step-badge">STEP 04 &bull; VERIFY</div>
+<div class="friendly-figure-box" style="padding: 8px 8px;">
+<div style="background: #FFFFFF; border: 1px solid #D8D2C5; border-radius: 8px; padding: 5px 8px; width: 100%; box-shadow: 0 1px 4px rgba(0,0,0,0.04); text-align: left;">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+<span style="color: #24614A; font-weight: 700; font-size: 0.68rem; display: flex; align-items: center; gap: 3px;">
+<span>✅</span> Verified
+</span>
+<span style="color: #8B4513; font-size: 0.64rem; font-family: 'JetBrains Mono', monospace; font-weight: 600;">Folio II • Page 4</span>
+</div>
+<div style="color: #6E6961; font-size: 0.64rem; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+"Meals covered up to $75/day..."
+</div>
+</div>
+</div>
+<div class="friendly-card-title">Verified Answers</div>
+<div class="friendly-card-desc">
+Receive direct answers with exact page numbers and quotes attached.
+</div>
+</div>
+<div class="friendly-pill">🛡️ 100% Verifiable Proof</div>
+</div>
+</div>
+""", unsafe_allow_html=True)
 
     # Interactive Client PDF Uploader Section
-    st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
-    st.markdown("""
-    <div style="background: #FFFFFF; border: 1px solid #D8D2C5; border-left: 4px solid #8B4513; border-radius: 12px; padding: 20px; box-shadow: 0 4px 16px rgba(28,26,24,0.04); margin-bottom: 20px;">
-        <div style="font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: #8B4513; letter-spacing: 0.08em; margin-bottom: 4px;">
-            TEST LIVE: UPLOAD A NEW POLICY PDF
-        </div>
-        <div style="font-family: 'Plus Jakarta Sans'; font-size: 1.15rem; font-weight: 700; color: #1C1A18; margin-bottom: 4px;">
-            Ingest Your Custom Company Manual
-        </div>
-        <div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; color: #3D3A36; line-height: 1.5; margin-bottom: 12px;">
-            Upload an official company policy PDF to test the workflow live. The system will parse its clauses, vectorize the text, and make it instantly queryable in the <strong>Consultation</strong> tab.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("""<div style="background: #FFFFFF; border: 1px solid #D8D2C5; border-left: 4px solid #8B4513; border-radius: 14px; padding: 22px 24px; box-shadow: 0 4px 16px rgba(28,26,24,0.04); margin-bottom: 20px;">
+<div style="display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: #8B4513; letter-spacing: 0.08em; margin-bottom: 6px;">
+<span>🚀</span> TRY IT LIVE WITH YOUR OWN POLICY
+</div>
+<div style="font-family: 'Newsreader', serif; font-size: 1.35rem; font-weight: 600; color: #1C1A18; margin-bottom: 6px;">
+Ingest Any Company Manual in 1 Click
+</div>
+<div style="font-family: 'Plus Jakarta Sans'; font-size: 0.88rem; color: #4A4640; line-height: 1.5; margin-bottom: 14px;">
+Drag and drop any official company PDF here. The engine will parse it, map its rules, and let you query it right away in the <strong>Consultation</strong> tab.
+</div>
+</div>""", unsafe_allow_html=True)
 
     uploaded_pdf = st.file_uploader(
         "Upload PDF Manual to Ingest into ChromaDB",
